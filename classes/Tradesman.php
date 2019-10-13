@@ -28,15 +28,15 @@ class Tradesman{
     // create a tradesman object and return it otherwise return false;
     $uid=0;
     $sql = sprintf("select * from userdetails where email='%s'", $email);
-    echo $sql;
+    
     $qresult = $mysqli->query($sql);
     if ($qresult){
       if ($qresult->num_rows == 1){
         $row = $qresult->fetch_assoc();
         $uid = $row['UId'];
-        echo $uid;
-      }
+        }
     }
+    $password=md5($password);
     $result = false;
     $sql = sprintf("insert into tradesmandetails(firstname, lastname, email, phone,password,uid) values('%s', '%s', '%s', '%s', '%s', '%s')",  $fname, $lname, $email, $phone,$password,$uid);
     $qresult = $mysqli->query($sql);
@@ -48,17 +48,21 @@ class Tradesman{
     return $result;
   }
 
-  public static function find($mysqli, $tid){
+  public static function find($mysqli, $email,$pasword){
     // search tradesmandetails table and locate record with id
     // get that record and create tradesman object 
     // return tradesman object OR false if we cannot find it
     $result = false;
-    $sql = sprintf("select * from tradesmandetails where tid=%s", $tid);
+    $password=md5($password);
+    $sql = sprintf("select * from tradesmandetails where email='%s' and password='%s'", $email,$pssword);
     $qresult = $mysqli->query($sql);
     if ($qresult){
       if ($qresult->num_rows == 1){
         $row = $qresult->fetch_assoc();
         $tradesman = new Tradesman($row['TId'], $row['FirstName'], $row['LastName'], $row['Email'], $row['Phone'], $row['Password'], $row['UId']);
+        $_SESSION['username']=$email;//initialising session
+        $_SESSION['firstname']=$row['FirstName'];
+        $_SESSION['lastname']=$row['LastName'];
         $result = $tradesman;
       }
     }
