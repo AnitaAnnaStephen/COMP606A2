@@ -48,8 +48,8 @@ class Tradesman{
     return $result;
   }
 
-  public static function find($mysqli, $email,$pasword){
-    // search tradesmandetails table and locate record with id
+  public static function find($mysqli, $email,$password){
+    // search tradesmandetails table and locate record 
     // get that record and create tradesman object 
     // return tradesman object OR false if we cannot find it
     $result = false;
