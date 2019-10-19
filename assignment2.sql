@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2019 at 02:56 AM
+-- Generation Time: Oct 19, 2019 at 02:35 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -21,6 +21,37 @@ SET time_zone = "+00:00";
 --
 -- Database: `assignment2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `estimatedetails`
+--
+
+CREATE TABLE `estimatedetails` (
+  `EstimateId` int(11) NOT NULL,
+  `JobId` int(11) NOT NULL,
+  `LabourCost` double NOT NULL,
+  `MaterialCost` double NOT NULL,
+  `TotalCost` double NOT NULL,
+  `ExpirationDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobdetails`
+--
+
+CREATE TABLE `jobdetails` (
+  `JobId` int(11) NOT NULL,
+  `JobType` varchar(255) NOT NULL,
+  `JobDescription` varchar(255) NOT NULL,
+  `Location` varchar(50) NOT NULL,
+  `CostRange` double NOT NULL,
+  `ActiveDate` datetime NOT NULL,
+  `EstimateDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -76,6 +107,18 @@ INSERT INTO `userdetails` (`UId`, `FirstName`, `LastName`, `Address`, `Suburb`, 
 --
 
 --
+-- Indexes for table `estimatedetails`
+--
+ALTER TABLE `estimatedetails`
+  ADD PRIMARY KEY (`EstimateId`);
+
+--
+-- Indexes for table `jobdetails`
+--
+ALTER TABLE `jobdetails`
+  ADD PRIMARY KEY (`JobId`);
+
+--
 -- Indexes for table `tradesmandetails`
 --
 ALTER TABLE `tradesmandetails`
@@ -92,6 +135,18 @@ ALTER TABLE `userdetails`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `estimatedetails`
+--
+ALTER TABLE `estimatedetails`
+  MODIFY `EstimateId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `jobdetails`
+--
+ALTER TABLE `jobdetails`
+  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tradesmandetails`
