@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2019 at 02:35 AM
+-- Generation Time: Oct 20, 2019 at 10:35 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -31,11 +31,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `estimatedetails` (
   `EstimateId` int(11) NOT NULL,
   `JobId` int(11) NOT NULL,
+  `TId` int(11) NOT NULL,
   `LabourCost` double NOT NULL,
   `MaterialCost` double NOT NULL,
   `TotalCost` double NOT NULL,
   `ExpirationDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `estimatedetails`
+--
+
+INSERT INTO `estimatedetails` (`EstimateId`, `JobId`, `TId`, `LabourCost`, `MaterialCost`, `TotalCost`, `ExpirationDate`) VALUES
+(12, 1, 12, 50, 90, 140, '2020-03-12 00:00:00'),
+(13, 2, 12, 80, 65, 145, '2019-11-25 00:00:00'),
+(14, 2, 12, 80, 65, 145, '2019-11-25 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -45,13 +55,23 @@ CREATE TABLE `estimatedetails` (
 
 CREATE TABLE `jobdetails` (
   `JobId` int(11) NOT NULL,
+  `UId` int(11) NOT NULL,
   `JobType` varchar(255) NOT NULL,
   `JobDescription` varchar(255) NOT NULL,
   `Location` varchar(50) NOT NULL,
   `CostRange` double NOT NULL,
   `ActiveDate` datetime NOT NULL,
-  `EstimateDate` datetime NOT NULL
+  `EstimateDate` datetime NOT NULL,
+  `IsClosed` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jobdetails`
+--
+
+INSERT INTO `jobdetails` (`JobId`, `UId`, `JobType`, `JobDescription`, `Location`, `CostRange`, `ActiveDate`, `EstimateDate`, `IsClosed`) VALUES
+(1, 0, 'Plumbing', 'Repair the water pipes in kitchen and bathroom with new ones', 'Hamilton', 120, '2019-10-21 00:00:00', '2019-10-31 00:00:00', 0),
+(2, 0, 'Electrical', 'Landscape lighting', 'Frankton', 75, '2019-10-21 00:00:00', '2019-10-29 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -140,13 +160,13 @@ ALTER TABLE `userdetails`
 -- AUTO_INCREMENT for table `estimatedetails`
 --
 ALTER TABLE `estimatedetails`
-  MODIFY `EstimateId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `EstimateId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `jobdetails`
 --
 ALTER TABLE `jobdetails`
-  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tradesmandetails`
