@@ -4,35 +4,39 @@ class Job{
 
   // private properties of this class 
   private $jid = null;
+  private $uid = null;
   private $jdescription = "";
   private $jtype = "";
   private $cost = null;
   private $activedate = "";
   private $estimationdate = null;
   private $location = null;
+  private $isclosed="";
   
   
   // constructor to create new job object
-  public function __construct($jid, $jdescription, $jtype, $cost, $activedate,$estimationdate,$location){
+  public function __construct($jid,$uid, $jtype,$jdescription,$location,   $cost, $activedate,$estimationdate,$isclosed){
     $this->jid = $jid;
+    $this->uid = $uid;
     $this->jdescription = $jdescription;
     $this->jtype = $jtype;
     $this->cost = $cost;
     $this->activedate = $activedate;
     $this->estimationdate = $estimationdate;
     $this->location = $location;
+    $this->isclosed = $isclosed;
   }
 
-  public static function create($mysqli, $jdescription, $jtype, $cost, $activedate,$estimationdate,$location){
+  public static function create($mysqli, $uid, $jtype,$jdescription,$location,   $cost, $activedate,$estimationdate,$isclosed){
     // create a new job record in jobdetails table and if successful 
     // create a job object and return it otherwise return false;
     $jid=0;
     $result = false;
-    $sql = sprintf("insert into jobdetails(jobtype, jobdescription, location, costrange,activedate,estimatedate) values('%s', '%s', '%s', '%s', '%s', '%s')",  $jtype,$jdescription,$location ,$cost, $activedate,$estimationdate);
+    $sql = sprintf("insert into jobdetails(uid,jobtype, jobdescription, location, costrange,activedate,estimatedate,isclosed) values('%s','%s', '%s', '%s', '%s', '%s', '%s', '%s')", $uid, $jtype,$jdescription,$location ,$cost, $activedate,$estimationdate,$isclosed);
     $qresult = $mysqli->query($sql);
     if ($qresult){
       $jid = $mysqli->insert_id;
-      $job = new Job($jid, $jdescription, $jtype, $cost, $activedate,$estimationdate,$location);
+      $job = new Job($jid,$uid,$jtype,$jdescription,$location,   $cost, $activedate,$estimationdate,$isclosed);
       $result = $job;
     }
     return $result;
@@ -43,12 +47,12 @@ class Job{
     // get that record and create job object 
     // return job object OR false if we cannot find it
     $result = false;
-    $sql = sprintf("select * from jobdetails where jid=%s", $jid);
+    $sql = sprintf("select * from jobdetails where jobid=%s", $jid);
     $qresult = $mysqli->query($sql);
     if ($qresult){
       if ($qresult->num_rows == 1){
         $row = $qresult->fetch_assoc();
-        $job = new Job($row['JobId'], $row['JobType'], $row['JobDescription'], $row['Location'], $row['CostRange'], $row['ActiveDate'], $row['EstimateDate']);
+        $job = new Job($row['JobId'],$row['UId'], $row['JobType'], $row['JobDescription'], $row['Location'], $row['CostRange'], $row['ActiveDate'], $row['EstimateDate'],$row['IsClosed']);
         $result = $job;
       }
     }
@@ -58,17 +62,17 @@ class Job{
   public static function getAll($mysqli){
     // get all jobs and return as a collection of job objects
     // returns false or a collection of job objects
-    $sql = "select * from jobdetails";
+    $sql = "select * from jobdetails where IsClosed=0";
     $result = $mysqli->query($sql);    
     $job = false;
     if ($result){
-      $job = new Collection();
+      $jobs = new Collection();
       while($row = $result->fetch_assoc()){
-        $job =  new Job($row['JobId'], $row['JobType'], $row['JobDescription'], $row['Location'], $row['CostRange'], $row['ActiveDate'], $row['EstimateDate']);
-        $job->Add($row['JobId'], $job);      
+        $job =  new Job($row['JobId'],$row['UId'], $row['JobType'], $row['JobDescription'], $row['Location'], $row['CostRange'], $row['ActiveDate'], $row['EstimateDate'],$row['IsClosed']);
+        $jobs->Add($row['JobId'], $job);      
       }    
     }
-    return $job;    
+    return $jobs;    
   }
 
 
@@ -77,10 +81,19 @@ class Job{
     $this->$jid = $jid;
   }
 
+  public function setUid($uid){
+    $this->$uid = $uid;
+  }
+
   public function setCost($cost){
     $this->$cost = $cost;
   }
   
+  public function setIsClosed($isclosed){
+    $this->$isclosed = $isclosed;
+  }
+  
+
   public function setJDescription($jdescription){
     $result = true;
     if (is_string($jdescription)){
@@ -123,7 +136,12 @@ class Job{
   public function getJobId(){    
     return $this->jid;
   }
-
+  public function getUserId(){    
+    return $this->uid;
+  }
+  public function getIsClosed(){    
+    return $this->isclosed;
+  }
   public function getJobDescription(){    
     return $this->jdescription;
   }

@@ -72,10 +72,10 @@ class User{
     $result = $mysqli->query($sql);    
     $user = false;
     if ($result){
-      $user = new Collection();
+      $users = new Collection();
       while($row = $result->fetch_assoc()){
         $user = new User($row['UId'], $row['FirstName'], $row['LastName'], $row['Address'], $row['Suburb'], $row['City'], $row['PO'], $row['Phone'],$row['Email'], $row['Password']);
-        $user->Add($row['uid'], $user);      
+        $users->Add($row['uid'], $user);      
       }    
     }
     return $user;    

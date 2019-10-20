@@ -54,7 +54,7 @@ class Tradesman{
     // return tradesman object OR false if we cannot find it
     $result = false;
     $password=md5($password);
-    $sql = sprintf("select * from tradesmandetails where email='%s' and password='%s'", $email,$pssword);
+    $sql = sprintf("select * from tradesmandetails where email='%s' and password='%s'", $email,$password);
     $qresult = $mysqli->query($sql);
     if ($qresult){
       if ($qresult->num_rows == 1){
@@ -76,10 +76,10 @@ class Tradesman{
     $result = $mysqli->query($sql);    
     $tradesman = false;
     if ($result){
-      $tradesman = new Collection();
+      $tradesmans = new Collection();
       while($row = $result->fetch_assoc()){
         $tradesman = new Tradesman($row['TId'], $row['FirstName'], $row['LastName'], $row['Email'], $row['Phone'], $row['Password'], $row['UId']);
-        $tradesman->Add($row['TId'], $tradesman);      
+        $tradesmans->Add($row['TId'], $tradesman);      
       }    
     }
     return $tradesman;    

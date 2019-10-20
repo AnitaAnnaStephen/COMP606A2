@@ -5,6 +5,7 @@ class Estimate{
   // private properties of this class 
   private $eid = null;
   private $jid = null;
+  private $tid = null;
   private $mcost = "";
   private $lcost = "";
   private $tcost = "";
@@ -12,25 +13,28 @@ class Estimate{
   
   
   // constructor to create new estimate object
-  public function __construct($eid, $jid,$mcost, $lcost, $tcost, $expdate){
+  public function __construct($eid, $jid,$tid,$mcost, $lcost, $tcost, $expdate){
     $this->eid = $eid;
     $this->jid = $jid;
+    $this->tid = $tid;
     $this->mcost = $mcost;
     $this->lcost = $lcost;
     $this->tcost = $tcost;
     $this->expdate = $expdate;
   }
 
-  public static function create($mysqli,$jid, $mcost, $lcost, $tcost, $expdate){
+  public static function create($mysqli,$jid,$tid, $mcost, $lcost, $expdate){
     // create a new estimate record in estimatedetails table and if successful 
     // create a estimate object and return it otherwise return false;
     $eid=0;
     $result = false;
-    $sql = sprintf("insert into estimatedetails(jobid,materialcost, labourcost, totalcost, expirationdate) values('%s', '%s', '%s', '%s', '%s')",  $jid,$mcost,$lcost ,$tcost, $expdate);
+    $tcost=$lcost+$mcost;
+    
+    $sql = sprintf("insert into estimatedetails(jobid,tid,materialcost, labourcost, totalcost, expirationdate) values('%s', '%s','%s', '%s', '%s', '%s')",  $jid,$tid,$mcost,$lcost ,$tcost, $expdate);
     $qresult = $mysqli->query($sql);
     if ($qresult){
       $eid = $mysqli->insert_id;
-      $estimate = new Estimate($eid,$jid, $mcost, $lcost, $tcost, $expdate);
+      $estimate = new Estimate($eid,$jid,$tid, $mcost, $lcost, $tcost, $expdate);
       $result = $estimate;
     }
     return $result;
@@ -46,7 +50,7 @@ class Estimate{
     if ($qresult){
       if ($qresult->num_rows == 1){
         $row = $qresult->fetch_assoc();
-        $estimate = new Estimate($row['EstimateId'], $row['JobId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate']);
+        $estimate = new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate']);
         $result = $estimate;
       }
     }
@@ -60,10 +64,10 @@ class Estimate{
     $result = $mysqli->query($sql);    
     $estimate = false;
     if ($result){
-      $estimate = new Collection();
+      $estimates = new Collection();
       while($row = $result->fetch_assoc()){
-        $estimate =  new Estimate($row['EstimateId'], $row['JobId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate']);
-        $estimate->Add($row['EstimateId'], $estimate);      
+        $estimate =  new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate']);
+        $estimates->Add($row['EstimateId'], $estimate);      
       }    
     }
     return $estimate;    
@@ -78,6 +82,11 @@ class Estimate{
   public function setEstimateid($eid){
     $this->$eid = $eid;
   }
+
+  public function setTradesmanid($tid){
+    $this->$tid = $tid;
+  }
+
   public function setTotalCost($tcost){
     $this->$tcost = $tcost;
   }
@@ -98,6 +107,9 @@ class Estimate{
   // ------- getter methods ----------
   public function getJobId(){    
     return $this->jid;
+  }
+  public function getTradesmanId(){    
+    return $this->tid;
   }
 
   public function getExpirationDate(){    
