@@ -57,10 +57,26 @@ class Estimate{
     return $result;
   } 
 
-  public static function getAll($mysqli,$jid){
+  public static function getAllJob($mysqli,$jid){
     // get all estimates based on jobid and return as a collection of estimate objects
     // returns false or a collection of estimate objects
     $sql = sprintf("select * from estimatedetails where jobid=%s",$jid);
+    $result = $mysqli->query($sql);    
+    $estimate = false;
+    if ($result){
+      $estimates = new Collection();
+      while($row = $result->fetch_assoc()){
+        $estimate =  new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate']);
+        $estimates->Add($row['EstimateId'], $estimate);      
+      }    
+    }
+    return $estimates;    
+  }
+
+  public static function getAll($mysqli){
+    // get all estimates based on jobid and return as a collection of estimate objects
+    // returns false or a collection of estimate objects
+    $sql = sprintf("select * from estimatedetails ");
     $result = $mysqli->query($sql);    
     $estimate = false;
     if ($result){

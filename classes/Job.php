@@ -36,7 +36,7 @@ class Job{
     $qresult = $mysqli->query($sql);
     if ($qresult){
       $jid = $mysqli->insert_id;
-      $job = new Job($jid,$uid,$jtype,$jdescription,$location,   $cost, $activedate,$estimationdate,$isclosed);
+      $job = new Job($jid,$uid,$jtype,$jdescription,$location,$cost, $activedate,$estimationdate,$isclosed);
       $result = $job;
     }
     return $result;
