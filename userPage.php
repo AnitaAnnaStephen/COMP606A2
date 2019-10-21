@@ -2,7 +2,7 @@
 
 require_once("headers.php");
 
-$jobs = Estimate::getAll($mysqli);
+$jobs = Job::getAll($mysqli);
 //$jobs->debug();
 echo "<table>";
 foreach($jobs->getRecords() as $id => $job){
@@ -13,12 +13,11 @@ foreach($jobs->getRecords() as $id => $job){
     echo "<td>".$job->getLocation()."</td>";
     echo "<td>".$job->getCost()."</td>";
     echo "<td>".$job->getActiveDate()."</td>";
-    echo "<td>".$job->geEstimateDate()."</td>";
-    echo "<td><a href=\"showStudentDetail.php?id=".$job->getId()."\">View</a></td>";
+    echo "<td>".$job->getEstimateDate()."</td>";
+    echo "<td><a href=\"showEstimate.php?id=".$job->getJobId()."\">View</a></td>";
     echo "</tr>";
 }
 echo "</table>";
-
 
 require_once("footer.php");
 
