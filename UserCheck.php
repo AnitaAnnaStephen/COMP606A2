@@ -11,7 +11,10 @@ if (is_null($loggedUser)){
     "<h2>Invalid username or password</h2>";
 } else {
     echo "<h2>Login Success</h2>";
-   header("Location: UserPage.php");//redirecting to user profile
+//    header("Location: UserPage.php");//redirecting to user profile
+    $_SESSION['uid'] = $loggedUser->getUId();
+    $_SESSION['tid'] = '';
+   header("Location: UserPage.php?uid=".$loggedUser->getUId());//redirecting to user profile
     //echo "<p><a href=\"tradesmanHome.php\">show all Users</a></p>";
 }
 

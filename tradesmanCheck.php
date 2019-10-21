@@ -11,6 +11,8 @@ if (is_null($loggedTradesman)){
     "<h2>Invalid username or password</h2>";
 } else {
     echo "<h2>Login Success</h2>";
+    $_SESSION['uid'] = '';
+    $_SESSION['tid'] = $loggedTradesman->getTId();
    header("Location: TradesmanPage.php?tid=".$loggedTradesman->getTId());//redirecting to user profile
     //echo "<p><a href=\"tradesmanHome.php\">show all Users</a></p>";
 }
