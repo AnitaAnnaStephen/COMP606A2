@@ -25,6 +25,5 @@
 <input type="hidden" name="uid" value="<?php echo $_SESSION['uid'];?>">
 <p><input type="submit" value="Post Job"></p>
 </form>
-
 </body>
 </html>
