@@ -2,10 +2,10 @@
 
 class Tradesman{
 
-  // private properties of this class 
-  private $tid = null;
-  private $fname = "";
-  private $lname = "";
+  //  properties of this class 
+  public $tid = null;
+  public $fname = "";
+  public $lname = "";
   private $uId = null;
   private $email = "";
   private $phone = null;
@@ -61,6 +61,26 @@ class Tradesman{
         $row = $qresult->fetch_assoc();
         $tradesman = new Tradesman($row['TId'], $row['FirstName'], $row['LastName'], $row['Email'], $row['Phone'], $row['Password'], $row['UId']);
         $_SESSION['username']=$email;//initialising session
+        $_SESSION['firstname']=$row['FirstName'];
+        $_SESSION['lastname']=$row['LastName'];
+        $result = $tradesman;
+      }
+    }
+    return $result;
+  } 
+
+  public static function findById($mysqli, $tid){
+    // search tradesmandetails table and locate record 
+    // get that record and create tradesman object 
+    // return tradesman object OR false if we cannot find it
+    $result = false;
+    $sql = sprintf("select * from tradesmandetails where tid='%s'", $tid);
+    $qresult = $mysqli->query($sql);
+    if ($qresult){
+      if ($qresult->num_rows == 1){
+        $row = $qresult->fetch_assoc();
+        $tradesman = new Tradesman($row['TId'], $row['FirstName'], $row['LastName'], $row['Email'], $row['Phone'], $row['Password'], $row['UId']);
+        //$_SESSION['username']=$email;//initialising session
         $_SESSION['firstname']=$row['FirstName'];
         $_SESSION['lastname']=$row['LastName'];
         $result = $tradesman;
