@@ -58,14 +58,15 @@ session_start();
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="text-align:center;background-color:#337ab7;">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h2 class="modal-title">Post a Job</h2>
       </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
+      <div class="modal-body" style="text-align:center;background-color:white;">
+        <p>Enter Job Details</p>
         <form method="post" action="addJob.php" enctype="application/x-www-form-urlencoded">
 <p><label>Job Type</label><input name="jtype" type="text" ></p>
+<!-- <p><label>Job Description</label><textarea rows="2"name="jdescription"  cols="20"></p> -->
 <p><label>Job Description</label><input name="jdescription" type="text" ></p>
 <p><label>Location</label><input name="jlocation" type="text" ></p>
 <p><label>Cost Range</label><input name="crange" type="number" ></p>
