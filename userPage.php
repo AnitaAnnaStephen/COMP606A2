@@ -50,23 +50,38 @@ require_once("footer.php");
                 <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h2 class="modal-title"><b>View Estimates</b></h2>
                 </div>
                 <div class="modal-body">
-                    <p>Estimates</p>
+                    <!-- <p>Estimates</p> -->
                     <?php
+                    echo "<table>";
+                    echo '<tr style="font-weight:bold;">';
+                    // echo "<td>Job Id</td>";
+                    echo "<td>Tradesman Id</td>";
+                    echo "<td>Tradesman Name</td>";
+                    echo "<td>Material Cost</td>";
+                    echo "<td>Labour Cost</td>";
+                    echo "<td>Total Cost</td>";
+                    echo "<td>Expiration Date</td>";
+                    echo "</tr>";
                         foreach($estimates->getRecords() as $id => $estimate){
+                          $tradesman=  Tradesman ::findById($mysqli,$estimate->getTradesmanId());
+                          
                             echo "<tr>";
-                            echo "<td>ID".$estimate->getJobId()."</td>";
-                            echo "<td>TID".$estimate->getTradesmanId()."</td>";
-                            echo "<td>EXPDATE".$estimate->getExpirationDate()."</td>";
-                            echo "<td>ESTID".$estimate->getEstimateId()."</td>";
-                            echo "<td>COST".$estimate->getTotalCost()."</td>";
-                            echo "<td>MCOST".$estimate->getMaterialCost()."</td>";
-                            echo "<td>LCOST".$estimate->getLabourCost()."</td>";
+                            // echo "<td>".$estimate->getJobId()."</td>";
+                            echo "<td>".$estimate->getTradesmanId()."</td>";
+                            echo "<td>".$tradesman->getFName().'  '.$tradesman->getLName()."</td>";
+                            // echo "<td>ESTID".$estimate->getEstimateId()."</td>";
+                            
+                            echo "<td>$".$estimate->getMaterialCost()."</td>";
+                            echo "<td>$".$estimate->getLabourCost()."</td>";
+                            echo "<td>$".$estimate->getTotalCost()."</td>";
+                            echo "<td>".$estimate->getExpirationDate()."</td>";
                             // echo "<td><a href=\"showEstimate.php?id=".$job->getId()."\">View</a></td>";
                             echo "</tr>";
                         }
+                        echo "</table>";
                     ?>
                     
                 </div>
