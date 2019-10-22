@@ -21,45 +21,6 @@ session_start();
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body style="height:1500px">
-
-<!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-  <a class="navbar-brand" href="#"><img src="logo.jpg" alt="logo" style="width:40px;"></a>
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="userPage.php">View Jobs</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="logout.php">logout</a>
-    </li>
-    <li class="nav-item">
-   
-    
-    <?php 
-                    //toggle to show login, signup and logout button
-                    if($_SESSION['uid']<>''){ 
-                    
-                    echo "<a class=\"nav-link\" href=\"postJob.php\">Post Job</a>";
-                    
-                 }else{
-                       
-                 } 
-                 ?> 
-
-
-</li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Dropdown link
-      </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a>
-      </div>
-    </li>
-  </ul>
-
-</nav> -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -71,7 +32,7 @@ session_start();
                     //toggle to show login, signup and logout button
                     if($_SESSION['uid']<>''){ 
                     
-                    echo "<a class=\"nav-link\" href=\"postJob.php\">Post Job</a>";
+                    echo "<a data-toggle=\"modal\" data-target=\"#myModal\">Post Job</a>";
                     
                  }else{
                        
@@ -84,10 +45,40 @@ session_start();
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       
     </ul>
   </div>
 </nav>
 <div class="container" style="margin-top:80px">
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+        <form method="post" action="addJob.php" enctype="application/x-www-form-urlencoded">
+<p><label>Job Type</label><input name="jtype" type="text" ></p>
+<p><label>Job Description</label><input name="jdescription" type="text" ></p>
+<p><label>Location</label><input name="jlocation" type="text" ></p>
+<p><label>Cost Range</label><input name="crange" type="number" ></p>
+<p><label>Active Date</label><input name="actdate" type="date"></p>
+<p><label>Estimate End Date</label><input name="estenddate" type="date">
+<input type="hidden" name="uid" value="<?php echo $_SESSION['uid'];?>">
+<p><input type="submit" value="Post Job"></p>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
