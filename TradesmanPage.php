@@ -1,7 +1,9 @@
 <?php
 
 require_once("headers.php");
-
+$data = $_GET["param"];
+//var_dump($data);
+//echo $data;
 $jobs = Job::getAll($mysqli);
 //$jobs->debug();
 echo "<table>";
@@ -25,7 +27,7 @@ foreach($jobs->getRecords() as $id => $job){
     echo "<td>".$job->getCost()."</td>";
     echo "<td>".$job->getActiveDate()."</td>";
     echo "<td>".$job->getEstimateDate()."</td>";
-    echo "<td><a href=\"postEstimate.php?jid=".$job->getJobId()."&tid=".$_GET['tid']."\">Post Estimate</a></td>";
+    echo "<td><a href=\"postEstimate.php?jid=".$job->getJobId()."&tid=".$data."\">Post Estimate</a></td>";
     echo "</tr>";
 }
 echo "</table>";
