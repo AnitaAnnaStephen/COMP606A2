@@ -39,9 +39,9 @@ require_once("footer.php");
         <div class="panel-footer pviewestimate">
             <!-- <a href="showEstimate.php?id=<?php echo $job->getJobId(); ?>" class="btn btn-primary">View Estimates</a> -->
             <input type="hidden" value="<?php echo $job->getJobId(); ?>" >
-            <?php $estimates = Estimate::getAllJob($mysqli, $job->getJobId()); ?>
+            <?php $estimates = Estimate::getAllEstimatePerJob($mysqli, $job->getJobId()); ?>
             <a data-toggle="modal" data-target="" class="btn btn-primary viewestimate" name="viewestimate">View Estimates</a>
-            
+
             <!-- Modal -->
             <div id="" class="modal fade estimate" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -53,37 +53,39 @@ require_once("footer.php");
                     <h2 class="modal-title"><b>View Estimates</b></h2>
                 </div>
                 <div class="modal-body">
-                    <!-- <p>Estimates</p> -->
+                    
                     <?php
                     echo "<table>";
                     echo '<tr style="font-weight:bold;">';
-                    // echo "<td>Job Id</td>";
+                    echo "<td>Job Id</td>";
                     echo "<td>Tradesman Id</td>";
-                    echo "<td>Tradesman Name</td>";
+                   // echo "<td>Tradesman Name</td>";
+                    echo "<td>Expiration Date</td>";
                     echo "<td>Material Cost</td>";
                     echo "<td>Labour Cost</td>";
                     echo "<td>Total Cost</td>";
-                    echo "<td>Expiration Date</td>";
+                   
                     echo "</tr>";
                         foreach($estimates->getRecords() as $id => $estimate){
-                          $tradesman=  Tradesman ::findById($mysqli,$estimate->getTradesmanId());
-                          
+                          //$tradesman=  Tradesman ::findById($mysqli,$estimate->getTradesmanId());
+                          //var_dump($tradesman);
+                          //echo $tradesman->getFName();
                             echo "<tr>";
-                            // echo "<td>".$estimate->getJobId()."</td>";
+                            echo "<td>".$estimate->getJobId()."</td>";
                             echo "<td>".$estimate->getTradesmanId()."</td>";
-                            echo "<td>".$tradesman->getFName().'  '.$tradesman->getLName()."</td>";
-                            // echo "<td>ESTID".$estimate->getEstimateId()."</td>";
+                            //echo "<td>".$tradesman->getFName()."</td>"; //'  '.$tradesman->getLName()."</td>"; 
+                            echo "<td>".$estimate->getExpirationDate()."</td>";
+                           // echo "<td>ESTID".$estimate->getEstimateId()."</td>";
                             
                             echo "<td>$".$estimate->getMaterialCost()."</td>";
                             echo "<td>$".$estimate->getLabourCost()."</td>";
                             echo "<td>$".$estimate->getTotalCost()."</td>";
-                            echo "<td>".$estimate->getExpirationDate()."</td>";
                             // echo "<td><a href=\"showEstimate.php?id=".$job->getId()."\">View</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>";
                     ?>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -94,7 +96,7 @@ require_once("footer.php");
             </div>
             <!-- end Modal -->
         </div>
-            
+
       </div>
     </div>
 
