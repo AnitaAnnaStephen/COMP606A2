@@ -63,6 +63,7 @@ class Tradesman{
         $_SESSION['username']=$email;//initialising session
         $_SESSION['firstname']=$row['FirstName'];
         $_SESSION['lastname']=$row['LastName'];
+        $_SESSION['tid']=$row['TId'];
         $result = $tradesman;
       }
     }
