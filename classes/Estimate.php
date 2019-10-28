@@ -22,7 +22,7 @@ class Estimate{
     $this->lcost = $lcost;
     $this->tcost = $tcost;
     $this->expdate = $expdate;
-    $this->$isaccepted=$isaccepted;
+    $this->isaccepted=$isaccepted;
   }
 
   public static function create($mysqli,$jid,$tid, $mcost, $lcost, $expdate){
@@ -62,6 +62,26 @@ class Estimate{
     if ($qresult){
       $estimate = new Estimate($eid,$jid,$tid, $mcost, $lcost, $tcost, $expdate,$isaccepted);
       $result = $estimate;
+    }
+    return $result;
+  }
+  public static function delete($mysqli,$eid){
+    // create a new estimate record in estimatedetails table and if successful 
+    // create a estimate object and return it otherwise return false;
+    $sql1 = sprintf("select * from estimatedetails where EstimateId=%s", $eid);
+    $qresult1 = $mysqli->query($sql1);
+    if ($qresult1){
+      if ($qresult1->num_rows == 1){
+        $row = $qresult1->fetch_assoc();
+        $_SESSION['tid']=$row['TId'];
+      }
+    }
+    $result = false;
+    $sql = sprintf("delete from estimatedetails where EstimateId='%s'", $eid);
+    $qresult = $mysqli->query($sql);
+    if ($qresult){
+     
+      $result = true;
     }
     return $result;
   }
