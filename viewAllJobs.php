@@ -1,10 +1,7 @@
 <?php
-
 require_once("headers.php");
-
 $jobs = Job::getAll($mysqli);
 require_once("footer.php");
-
 ?>
 <div class="container">
 <div class="row">
@@ -22,17 +19,11 @@ require_once("footer.php");
         </div>
         <div class="panel-footer pviewestimate">
             <!-- <a href="showEstimate.php?id=<?php echo $job->getJobId(); ?>" class="btn btn-primary">View Estimates</a> -->
-            <input type="hidden" value="<?php echo $job->getJobId(); ?>" >
-           
-            <!-- <a data-toggle="modal" data-target="" class="btn btn-primary viewestimate" name="viewestimate">Post Estimates</a> -->
-
-           
+            <input type="hidden" value="<?php echo $job->getJobId(); ?>" >          
         </div>
-
+        </div>
       </div>
-    </div>
-
     <?php }; ?>
-    </div>
+</div>
 </div>
 
