@@ -59,6 +59,24 @@ class Job{
     return $result;
   } 
 
+  public static function findByUser($mysqli, $uid){
+    // search jobdetails table and locate record with id
+    // get that record and create job object 
+    // return job object OR false if we cannot find it
+    $result = false;
+    $sql = sprintf("select * from jobdetails where UId=%s", $uid);
+    $result = $mysqli->query($sql);    
+    $job = false;
+    if ($result){
+      $jobs = new Collection();
+      while($row = $result->fetch_assoc()){
+        $job = new Job($row['JobId'],$row['UId'], $row['JobType'], $row['JobDescription'], $row['Location'], $row['CostRange'], $row['ActiveDate'], $row['EstimateDate'],$row['IsClosed']);
+        $jobs->Add($row['JobId'], $job);      
+      }    
+    }
+    return $jobs;
+  } 
+
   public static function getAll($mysqli){
     // get all jobs and return as a collection of job objects
     // returns false or a collection of job objects
