@@ -42,12 +42,35 @@ class Estimate{
     return $result;
   }
 
+  public static function edit($mysqli,$eid, $mcost, $lcost, $expdate){
+    // create a new estimate record in estimatedetails table and if successful 
+    // create a estimate object and return it otherwise return false;
+    $result = false;
+    $tcost=$lcost+$mcost;
+    $isaccepted=0;
+    $sql1 = sprintf("select * from estimatedetails where EstimateId=%s", $eid);
+    $qresult1 = $mysqli->query($sql1);
+    if ($qresult1){
+      if ($qresult1->num_rows == 1){
+        $row = $qresult1->fetch_assoc();
+        $jid=$row['JobId'];
+        $tid=$row['TId'];
+      }
+    }
+    $sql = sprintf("update estimatedetails set materialcost='%s', labourcost='%s', totalcost='%s', expirationdate='%s' where EstimateId='%s'",  $mcost,$lcost ,$tcost, $expdate,$eid);
+    $qresult = $mysqli->query($sql);
+    if ($qresult){
+      $estimate = new Estimate($eid,$jid,$tid, $mcost, $lcost, $tcost, $expdate,$isaccepted);
+      $result = $estimate;
+    }
+    return $result;
+  }
   public static function find($mysqli, $eid){
     // search estimatedetails table and locate record with id
     // get that record and create estimate object 
     // return estimate object OR false if we cannot find it
     $result = false;
-    $sql = sprintf("select * from estimatedetails where eid=%s", $eid);
+    $sql = sprintf("select * from estimatedetails where EstimateId=%s", $eid);
     $qresult = $mysqli->query($sql);
     if ($qresult){
       if ($qresult->num_rows == 1){
