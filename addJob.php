@@ -8,7 +8,7 @@ if (is_null($job)){
     "<h2>failed to add result</h2>";
 } else {
     echo "<p>Job Posted </p>";
-   
+    header("Location:UserPage.php?uid=".$job->getUserId());
     //echo "<p><a href=\"showallStudents.php\">show all students</a></p>";
 }
 
