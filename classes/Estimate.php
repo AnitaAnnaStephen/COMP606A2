@@ -101,7 +101,30 @@ class Estimate{
     }
     return $result;
   } 
-
+  public static function accept($mysqli,$eid){
+    // create a new estimate record in estimatedetails table and if successful 
+    // create a estimate object and return it otherwise return false;
+    $result = false;
+    // $tcost=$lcost+$mcost;
+    $isaccepted=1;
+    $sql1 = sprintf("select * from estimatedetails where EstimateId=%s", $eid);
+    $qresult1 = $mysqli->query($sql1);
+    if ($qresult1){
+      if ($qresult1->num_rows == 1){
+        $row = $qresult1->fetch_assoc();
+        // $jid=$row['JobId'];
+        // $tid=$row['TId'];
+      }
+    }
+    $sql = sprintf("update estimatedetails set isAccepted='%s' where EstimateId='%s'",$isaccepted, $eid);
+    $qresult = $mysqli->query($sql);
+    if ($qresult){
+      $estimate = new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted']);
+      // $estimate = new Estimate($eid,$jid,$tid, $mcost, $lcost, $tcost, $expdate,$isaccepted);
+      $result = $estimate;
+    }
+    return $result;
+  }
   
   public static function findByTradesman($mysqli, $tid){
     // search estimatedetails table and locate record with id
