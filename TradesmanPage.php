@@ -85,7 +85,8 @@ require_once("headers.php");
                                     echo "<td>$ ".$estimate->getTotalCost()."</td>";
                                     echo "<td>".$estimate->getExpirationDate()."</td>";
                                     echo "<td><a href=\"editEstimate.php?id=". $estimate->getEstimateId()."\"     class=\"btn\">Edit</td>";
-                                  
+                                 // echo "<td><a href=\"deleteEstimate.php?id=". $estimate->getEstimateId()."\"     class=\"btn\">Delete</td>";
+                                    echo "<td><a href=\"deleteEstimateDB.php?id=".$estimate->getEstimateId()."\" class=\"btn\" onclick=\"return confirm('Are you sure to cancel your estimate?')\">Cancel</td>";
                                     echo "</tr>";
                                   }
                                 }
