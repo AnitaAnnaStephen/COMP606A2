@@ -8,6 +8,7 @@ if (is_null($estimate)){
     "<h2>failed to add result</h2>";
 } else {
     echo "<p>Estimate Posted </p>";
+   // echo $estimate->getTradesmanId();
     header("Location: TradesmanPage.php?tid=".$estimate->getTradesmanId());//redirecting to tradesman profile
     
 }

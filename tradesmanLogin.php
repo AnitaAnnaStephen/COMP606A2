@@ -1,5 +1,5 @@
 <!-- Page for user to login -->
-
+<?php require_once("heading.php");?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,7 +39,12 @@
              <button type="submit" id="btn" name="login" > Login </button> 
             <a href="ForgotPassword.php" style="padding-left: 10px;">Forgot Password?</a>
             </p>
-            <!-- <span><?php echo $error;?></span> -->
+            <?php
+                    if(isset($_SESSION["error"])){
+                        $error = $_SESSION["error"];
+                        echo "<span>$error</span>";
+                    }
+                ?>
             </form>
         </div>
         <div id="register">

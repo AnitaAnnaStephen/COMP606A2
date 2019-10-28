@@ -1,16 +1,16 @@
 <!-- Page to check if username and password is correct -->
 
 <?php 
-require_once("headers.php");
+require_once("heading.php");
 
 $loggedTradesman = Tradesman::find($mysqli, $_POST['email'], $_POST['password']);
 //echo http_build_query($loggedTradesman);
 if(!$loggedTradesman){
-    echo "<h2>Invalid username or password</h2>";
+    //echo "<h2>Invalid username or password 1</h2>";
+    $_SESSION['error']="Invalid username or password";
+    header("Location: tradesmanLogin.php");
 }
-if (is_null($loggedTradesman)){
-    "<h2>Invalid username or password</h2>";
-} else {
+else {
     echo "<h2>Login Success</h2>";
     $_SESSION['uid'] = '';
     $_SESSION['tid'] = $loggedTradesman->getTId();

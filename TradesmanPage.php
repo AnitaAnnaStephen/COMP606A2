@@ -39,11 +39,11 @@ require_once("headers.php");
            <br /><br />  
            <div class="container" style="width:700px;">  
            <title>Tradesman Page</title>
-                <h3 align="center">View your Estimates</h3>  
+                <h3 align="center"><b>View your Estimates</b></h3>  
                 <br />  
                 <div class="table-responsive">  
                      <div align="right">  
-                      <a href="viewJobs.php?tid=<?php echo $_GET['tid']; ?>" class="btn" style="background-color:#fff;">View Jobs</a>  
+                      <!-- <a href="viewJobs.php?tid=<?php echo $_GET['tid']; ?>" class="btn" style="background-color:#fff;">View Jobs</a>   -->
                      </div>  
                      <br />  
                      <div id="bookings_table">  
@@ -62,19 +62,20 @@ require_once("headers.php");
                                 if($count ==0)
                                 {
                                   echo "You have not posted any estimates yet! Post one now....";
-                                  echo "<a href=\"viewJobs.php?tid=".$_GET['tid']."\" class=\"btn\" style=\"background-color:#fff;\">Click here to view jobs</a> ";
+                                  echo "<a href=\"viewJobs.php?tid=".$_GET['tid']."\" class=\"btn\" >Click here to view jobs</a> ";
                                  
                                 }
                                 else
                                 {
                                     
                                   echo "<tr>";
-                                  echo "<td>Estimate Id</td>";
-                                  echo "<td>Job Id</td>";
-                                  echo "<td>Labour Cost</td>";
-                                  echo "<td>Material Cost</td>";
-                                  echo "<td>Total Cost</td>";
-                                  echo "<td>Expiration Date</td>";
+                                  echo "<td><b>Estimate Id</b></td>";
+                                  echo "<td><b>Job Id</b></td>";
+                                  echo "<td><b>Labour Cost</b></td>";
+                                  echo "<td><b>Material Cost</b></td>";
+                                  echo "<td><b>Total Cost</b></td>";
+                                  echo "<td><b>Expiration Date</b></td>";
+                                  
                                   echo "</tr>";
                                   foreach($estimates->getRecords() as $id => $estimate)
                                   {
@@ -85,9 +86,9 @@ require_once("headers.php");
                                     echo "<td>$ ".$estimate->getMaterialCost()."</td>";
                                     echo "<td>$ ".$estimate->getTotalCost()."</td>";
                                     echo "<td>".$estimate->getExpirationDate()."</td>";
-                                    echo "<td><a href=\"Edit.php?id=<?php echo $id; ?>\"     class=\"btn\">Edit</td>";
-                                    echo "<td><a href=\"Delete.php?id=<?php echo $id; ?>\" class=\"btn\">Cancel</td>";
-                                    echo "<td><a href=\"View.php?id=<?php echo $id; ?>\" class=\"btn\">View</td>";
+                                    echo "<td><a href=\"Edit.php?id=<?php echo $estimate->getEstimateId(); ?>\"     class=\"btn\">Edit</td>";
+                                    echo "<td><a href=\"Delete.php?id=<?php echo $estimate->getEstimateId(); ?>\" class=\"btn\">Cancel</td>";
+                                    echo "<td><a href=\"View.php?id=<?php echo $estimate->getEstimateId(); ?>\" class=\"btn\">View</td>";
                                     // echo "<td><a href=\"postEstimate.php?jid=".$job->getJobId()."&tid=".$data."\">Post Estimate</a></td>";
                                     
                                     echo "</tr>";

@@ -2,7 +2,7 @@
 
 require_once("headers.php");
 
-$jobs = Job::getAll($mysqli);
+//$jobs = Job::getAll($mysqli);
 //$jobs->debug();
 // echo "<table>";
 // foreach($jobs->getRecords() as $id => $job){
@@ -22,11 +22,28 @@ $jobs = Job::getAll($mysqli);
 require_once("footer.php");
 
 ?>
-<div class="container">
+<div class="container" style="margin-top: 80px;width: 700px;">
 <div class="row">
-    <?php foreach($jobs->getRecords() as $id => $job){  ?>
+<?php  $jobs=Job ::findByUser($mysqli,$_GET['uid']);
+          $count=0;
+          //echo $count;
+          foreach($jobs->getRecords() as $id => $job)
+          {
+             $count=$count+1;
+            
+          }
+          //echo $count;
+          if($count ==0)
+          {
+            echo "You have not posted any jobs yet! Post one now....";
+            echo "<a data-toggle=\"modal\" data-target=\"#myModal\">Click here to Post Job</a>";
+           
+           
+          }
+          else{
+             foreach($jobs->getRecords() as $id => $job){  ?>
 
-<div class="col-sm-4">
+<div class="col-sm-4" >
       <div class="panel panel-primary">
         <div class="panel-heading"><?php echo $job->getJobType(); ?></div>
         <div class="panel-body" style="height:230px">
@@ -100,7 +117,7 @@ require_once("footer.php");
       </div>
     </div>
 
-    <?php }; ?>
+    <?php }}; ?>
     </div>
 </div>
 <script>
