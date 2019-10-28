@@ -44,6 +44,10 @@ class Tradesman{
       $tid = $mysqli->insert_id;
       $tradesman = new Tradesman($tid, $fname, $lname, $email, $phone,$password,$uid);      
       $result = $tradesman;
+      $_SESSION['username']=$email;//initialising session
+        $_SESSION['firstname']=$fname;
+        $_SESSION['lastname']=$lname;
+        $_SESSION['tid']=$tid;
     }
     return $result;
   }

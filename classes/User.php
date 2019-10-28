@@ -40,6 +40,10 @@ class User{
       $uid = $mysqli->insert_id;
       $user = new User($uid, $fname, $lname,$address,$suburb,$city,$po, $phone,$email, $password);      
       $result = $user;
+      $_SESSION['username']=$email;//initialising session
+        $_SESSION['firstname']=$fname;
+        $_SESSION['lastname']=$lname;
+        $_SESSION['tid']=$uid;
      }    
     return $result;
   }
