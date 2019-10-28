@@ -6,9 +6,7 @@ $newUser = User::create($mysqli, $_POST['fname'], $_POST['lname'], $_POST['addre
 if(!$newUser){
     echo "<h2>Failed</h2>";
 }
-if (is_null($newUser)){
-    "<h2>failed to create new User</h2>";
-} else {
+ else {
     echo "<h2>New User Created</h2>";
     echo "<h2>Login Success</h2>";
     $_SESSION['uid'] = $newUser->getUId();
