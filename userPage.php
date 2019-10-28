@@ -22,7 +22,7 @@ require_once("headers.php");
 require_once("footer.php");
 
 ?>
-<div class="container" style="margin-top: 80px;width: 700px;">
+<div class="container" >
 <div class="row">
 <?php  $jobs=Job ::findByUser($mysqli,$_GET['uid']);
           $count=0;
@@ -72,7 +72,7 @@ require_once("footer.php");
                 <div class="modal-body">
                     
                     <?php
-                    echo "<table>";
+                    echo "<table class='table'>";
                     echo '<tr style="font-weight:bold;">';
                     echo "<td>Job Id</td>";
                     echo "<td>Tradesman Id</td>";
@@ -81,13 +81,36 @@ require_once("footer.php");
                     echo "<td>Material Cost</td>";
                     echo "<td>Labour Cost</td>";
                     echo "<td>Total Cost</td>";
+                    echo "<td>Choose</td>";
                    
                     echo "</tr>";
+                    $accept=false;
+                    foreach($estimates->getRecords() as $id => $estimate)
+                    {   
+                        if($estimate->getIsAccepted()==1){
+                        $accept=true;
+                        }
+                    }
+                    if($accept==false){
+                        $hid="";
+                        
+                    }else{
+                        
+                        $hid="style='display:none'";
+                    }
                         foreach($estimates->getRecords() as $id => $estimate){
                           //$tradesman=  Tradesman ::findById($mysqli,$estimate->getTradesmanId());
-                          //var_dump($tradesman);
+                        //   var_dump($estimate);
                           //echo $tradesman->getFName();
-                            echo "<tr>";
+                            if($estimate->getIsAccepted()==0){
+                                $color="white";
+                                
+                            }else{
+                                $color="alert-success";
+                                // $hid="style='display:none'";
+                            }
+                            echo "<tr class=".$color.">";
+
                             echo "<td>".$estimate->getJobId()."</td>";
                             echo "<td>".$estimate->getTradesmanId()."</td>";
                             //echo "<td>".$tradesman->getFName()."</td>"; //'  '.$tradesman->getLName()."</td>"; 
@@ -97,7 +120,8 @@ require_once("footer.php");
                             echo "<td>$".$estimate->getMaterialCost()."</td>";
                             echo "<td>$".$estimate->getLabourCost()."</td>";
                             echo "<td>$".$estimate->getTotalCost()."</td>";
-                            // echo "<td><a href=\"showEstimate.php?id=".$job->getId()."\">View</a></td>";
+                            
+                             echo "<td ".$hid."><a href=\"acceptEstimate.php?eid=".$estimate->getEstimateId()."&uid=".$_GET['uid']."\">Accept</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>";
