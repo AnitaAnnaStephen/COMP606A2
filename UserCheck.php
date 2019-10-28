@@ -24,8 +24,7 @@ else {
     echo "<h2>Login Success</h2>";
     $_SESSION['uid'] = $loggedUser->getUId();
     $_SESSION['tid'] = '';
-    header("Location: UserPage.php?uid=".$loggedUser->getUId());//redirecting to user profile
-    
+    header("Location: UserPage.php?uid=".$loggedUser->getUId());//redirecting to user profile  
 }
 
 

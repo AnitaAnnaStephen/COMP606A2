@@ -49,8 +49,6 @@ require_once("headers.php");
                      <div id="bookings_table">  
                           <table class="table table-bordered">  
                                 <?php  $estimates=Estimate ::findByTradesman($mysqli,$_GET['tid']);
-                                //var_dump($estimates);
-                                //echo $estimates->getEstimateId();
                                 $count=0;
                                 //echo $count;
                                 foreach($estimates->getRecords() as $id => $estimate)
@@ -86,11 +84,8 @@ require_once("headers.php");
                                     echo "<td>$ ".$estimate->getMaterialCost()."</td>";
                                     echo "<td>$ ".$estimate->getTotalCost()."</td>";
                                     echo "<td>".$estimate->getExpirationDate()."</td>";
-                                    echo "<td><a href=\"Edit.php?id=<?php echo $estimate->getEstimateId(); ?>\"     class=\"btn\">Edit</td>";
-                                    echo "<td><a href=\"Delete.php?id=<?php echo $estimate->getEstimateId(); ?>\" class=\"btn\">Cancel</td>";
-                                    echo "<td><a href=\"View.php?id=<?php echo $estimate->getEstimateId(); ?>\" class=\"btn\">View</td>";
-                                    // echo "<td><a href=\"postEstimate.php?jid=".$job->getJobId()."&tid=".$data."\">Post Estimate</a></td>";
-                                    
+                                    echo "<td><a href=\"editEstimate.php?id=". $estimate->getEstimateId()."\"     class=\"btn\">Edit</td>";
+                                  
                                     echo "</tr>";
                                   }
                                 }
@@ -109,9 +104,9 @@ require_once("headers.php");
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header" style="text-align:center;background-color:#337ab7;">
+      <div class="modal-header"  style="text-align:center;background-color:#337ab7;">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h2 class="modal-title">Post Estimate</h2>
+        <h2 class="modal-title">Edit Estimate</h2>
       </div>
       <div class="modal-body" style="text-align:center;background-color:white;">
         <p>Enter Estimate Details</p>
