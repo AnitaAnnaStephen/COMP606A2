@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2019 at 10:35 AM
+-- Generation Time: Oct 28, 2019 at 09:24 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -35,17 +35,26 @@ CREATE TABLE `estimatedetails` (
   `LabourCost` double NOT NULL,
   `MaterialCost` double NOT NULL,
   `TotalCost` double NOT NULL,
-  `ExpirationDate` datetime NOT NULL
+  `ExpirationDate` date NOT NULL,
+  `IsAccepted` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `estimatedetails`
 --
 
-INSERT INTO `estimatedetails` (`EstimateId`, `JobId`, `TId`, `LabourCost`, `MaterialCost`, `TotalCost`, `ExpirationDate`) VALUES
-(12, 1, 12, 50, 90, 140, '2020-03-12 00:00:00'),
-(13, 2, 12, 80, 65, 145, '2019-11-25 00:00:00'),
-(14, 2, 12, 80, 65, 145, '2019-11-25 00:00:00');
+INSERT INTO `estimatedetails` (`EstimateId`, `JobId`, `TId`, `LabourCost`, `MaterialCost`, `TotalCost`, `ExpirationDate`, `IsAccepted`) VALUES
+(12, 1, 12, 50, 90, 140, '2020-03-12', 0),
+(14, 2, 12, 80, 65, 145, '2019-11-25', 0),
+(18, 2, 12, 25, 25, 50, '2019-12-20', 0),
+(26, 5, 12, 60, 120, 180, '2019-11-20', 0),
+(27, 5, 12, 60, 90, 150, '2019-12-25', 0),
+(28, 2, 13, 30, 50, 80, '2019-12-25', 0),
+(29, 5, 13, 90, 90, 180, '2019-12-25', 0),
+(30, 2, 0, 25, 60, 85, '2019-12-25', 0),
+(36, 2, 12, 25, 85, 110, '2019-12-22', 0),
+(37, 2, 12, 30, 50, 80, '2020-01-25', 0),
+(38, 6, 13, 125, 150, 275, '2019-12-31', 0);
 
 -- --------------------------------------------------------
 
@@ -60,8 +69,8 @@ CREATE TABLE `jobdetails` (
   `JobDescription` varchar(255) NOT NULL,
   `Location` varchar(50) NOT NULL,
   `CostRange` double NOT NULL,
-  `ActiveDate` datetime NOT NULL,
-  `EstimateDate` datetime NOT NULL,
+  `ActiveDate` date NOT NULL,
+  `EstimateDate` date NOT NULL,
   `IsClosed` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -70,8 +79,8 @@ CREATE TABLE `jobdetails` (
 --
 
 INSERT INTO `jobdetails` (`JobId`, `UId`, `JobType`, `JobDescription`, `Location`, `CostRange`, `ActiveDate`, `EstimateDate`, `IsClosed`) VALUES
-(1, 0, 'Plumbing', 'Repair the water pipes in kitchen and bathroom with new ones', 'Hamilton', 120, '2019-10-21 00:00:00', '2019-10-31 00:00:00', 0),
-(2, 0, 'Electrical', 'Landscape lighting', 'Frankton', 75, '2019-10-21 00:00:00', '2019-10-29 00:00:00', 0);
+(5, 14, 'Roofing', 'Repair the roofing to prevent leakage', 'Beatty Street', 150, '2019-11-25', '2019-11-20', 0),
+(6, 18, 'fencing', 'Put fencing around a 10 acre property', 'Frankton', 250, '2019-11-30', '2019-11-25', 0);
 
 -- --------------------------------------------------------
 
@@ -94,7 +103,9 @@ CREATE TABLE `tradesmandetails` (
 --
 
 INSERT INTO `tradesmandetails` (`TId`, `FirstName`, `LastName`, `Email`, `Phone`, `Password`, `UId`) VALUES
-(12, 'anna', 'Anita', 'anna@mail.com', 2041871686, '25d55ad283aa400af464c76d713c07ad', 14);
+(12, 'anna', 'Anita', 'anna@mail.com', 2041871686, '25d55ad283aa400af464c76d713c07ad', 14),
+(13, 'don', 'dan', 'don@mail.com', 2041871686, '25f9e794323b453885f5181f1b624d0b', 0),
+(14, 'RAYMOL', 'MATHEW', 'anna.stephen@gmail.com', 2041871686, '25d55ad283aa400af464c76d713c07ad', 0);
 
 -- --------------------------------------------------------
 
@@ -120,7 +131,9 @@ CREATE TABLE `userdetails` (
 --
 
 INSERT INTO `userdetails` (`UId`, `FirstName`, `LastName`, `Address`, `Suburb`, `City`, `PO`, `Phone`, `Email`, `Password`) VALUES
-(14, 'Anna', 'Anita', '1/11 Queens Ave', 'Frankton', 'Hamilton', 3204, 2041871686, 'anna@mail.com', '25d55ad283aa400af464c76d713c07ad');
+(14, 'Anna', 'Anita', '1/11 Queens Ave', 'Frankton', 'Hamilton', 3204, 2041871686, 'anna@mail.com', '25d55ad283aa400af464c76d713c07ad'),
+(18, 'Annas', 'Mathew', '1/1 Beatty Street, Melville', 'Hamilton', 'Hamilton', 3200, 2041871686, 'cat@mail.com', '25d55ad283aa400af464c76d713c07ad'),
+(19, 'Elena', 'Gilbert', '1/11', 'Street', 'Mystic Falls', 1234, 123654879, 'tvd@123.com', '22d7fe8c185003c98f97e5d6ced420c7');
 
 --
 -- Indexes for dumped tables
@@ -160,25 +173,25 @@ ALTER TABLE `userdetails`
 -- AUTO_INCREMENT for table `estimatedetails`
 --
 ALTER TABLE `estimatedetails`
-  MODIFY `EstimateId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `EstimateId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `jobdetails`
 --
 ALTER TABLE `jobdetails`
-  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tradesmandetails`
 --
 ALTER TABLE `tradesmandetails`
-  MODIFY `TId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `TId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `userdetails`
 --
 ALTER TABLE `userdetails`
-  MODIFY `UId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `UId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
