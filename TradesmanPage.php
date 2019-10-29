@@ -79,8 +79,8 @@ require_once("headers.php");
             <input type="hidden" value="<?php echo $estimate->getEstimateId(); ?>" >
             
             <?php 
-            echo "<a href=\"editEstimate.php?id=".$estimate->getEstimateId()."\"  class=\"btn btn-primary viewestimate\">Edit Estimate</a>";
-            echo "<a href=\"deleteEstimateDB.php?id=".$estimate->getEstimateId()."\" class=\"btn btn-primary viewestimate\" onclick=\"return confirm('Are you sure to cancel your estimate?')\">Cancel Estimate</a>";
+            echo "<a href=\"editEstimate.php?id=".$estimate->getEstimateId()."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary viewestimate\">Edit </a>";
+            echo "<a href=\"deleteEstimateDB.php?id=".$estimate->getEstimateId()."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary viewestimate\" onclick=\"return confirm('Are you sure to remove your estimate?')\">Delete </a>";
 
             ?>
             <!-- <a href="editEstimate.php?id="<?php echo $estimate->getEstimateId(); ?>  class="btn btn-primary viewestimate">Edit Estimate</a>
