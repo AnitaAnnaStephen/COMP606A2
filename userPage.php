@@ -2,23 +2,6 @@
 
 require_once("headers.php");
 
-//$jobs = Job::getAll($mysqli);
-//$jobs->debug();
-// echo "<table>";
-// foreach($jobs->getRecords() as $id => $job){
-//     echo "<tr>";
-//     echo "<td>".$job->getJobId()."</td>";
-//     echo "<td>".$job->getJobType()."</td>";
-//     echo "<td>".$job->getJobDescription()."</td>";
-//     echo "<td>".$job->getLocation()."</td>";
-//     echo "<td>".$job->getCost()."</td>";
-//     echo "<td>".$job->getActiveDate()."</td>";
-//     echo "<td>".$job->getEstimateDate()."</td>";
-//     echo "<td><a href=\"showEstimate.php?id=".$job->getJobId()."\">View</a></td>";
-//     echo "</tr>";
-// }
-// echo "</table>";
-
 require_once("footer.php");
 
 ?>
@@ -65,66 +48,73 @@ require_once("footer.php");
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="text-align:center;background-color:#337ab7;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2 class="modal-title"><b>View Estimates</b></h2>
                 </div>
                 <div class="modal-body">
                     
                     <?php
-                    echo "<table class='table'>";
-                    echo '<tr style="font-weight:bold;">';
-                    echo "<td>Job Id</td>";
-                    echo "<td>Tradesman Id</td>";
-                   // echo "<td>Tradesman Name</td>";
-                    echo "<td>Expiration Date</td>";
-                    echo "<td>Material Cost</td>";
-                    echo "<td>Labour Cost</td>";
-                    echo "<td>Total Cost</td>";
-                    echo "<td>Choose</td>";
-                   
-                    echo "</tr>";
-                    $accept=false;
-                    foreach($estimates->getRecords() as $id => $estimate)
-                    {   
-                        if($estimate->getIsAccepted()==1){
-                        $accept=true;
-                        }
-                    }
-                    if($accept==false){
-                        $hid="";
-                        
-                    }else{
-                        
-                        $hid="style='display:none'";
-                    }
+                      $accept=false;
+                      $ecount=0;
+                      foreach($estimates->getRecords() as $id => $estimate)
+                      {   $ecount=$ecount+1;
+                          if($estimate->getIsAccepted()==1){
+                          $accept=true;
+                          }
+                      }
+                      if($accept==false){
+                          $hid="";
+                          
+                      }else{
+                          
+                          $hid="style='display:none'";
+                      }
+                      if($ecount!=0)
+                      {
+                        echo "<table class='table'>";
+                        echo '<tr style="font-weight:bold;">';
+                        //echo "<td>Job Id</td>";
+                        echo "<td>Tradesman Id</td>";
+                        echo "<td>Tradesman Name</td>";
+                        echo "<td>Tradesman Contact</td>";
+                        echo "<td>Expiration Date</td>";
+                        echo "<td>Material Cost</td>";
+                        echo "<td>Labour Cost</td>";
+                        echo "<td>Total Cost</td>";
+                        //echo "<td>Choose</td>";
+                        echo "</tr>";
                         foreach($estimates->getRecords() as $id => $estimate){
-                          //$tradesman=  Tradesman ::findById($mysqli,$estimate->getTradesmanId());
-                        //   var_dump($estimate);
-                          //echo $tradesman->getFName();
-                            if($estimate->getIsAccepted()==0){
-                                $color="white";
-                                
-                            }else{
-                                $color="alert-success";
-                                // $hid="style='display:none'";
-                            }
-                            echo "<tr class=".$color.">";
+                          if($estimate->getIsAccepted()==0){
+                              $color="white";      
+                              }
+                          else{
+                              $color="alert-success";
+                              }
 
-                            echo "<td>".$estimate->getJobId()."</td>";
-                            echo "<td>".$estimate->getTradesmanId()."</td>";
-                            //echo "<td>".$tradesman->getFName()."</td>"; //'  '.$tradesman->getLName()."</td>"; 
-                            echo "<td>".$estimate->getExpirationDate()."</td>";
-                           // echo "<td>ESTID".$estimate->getEstimateId()."</td>";
-                            
-                            echo "<td>$".$estimate->getMaterialCost()."</td>";
-                            echo "<td>$".$estimate->getLabourCost()."</td>";
-                            echo "<td>$".$estimate->getTotalCost()."</td>";
-                            
-                             echo "<td ".$hid."><a href=\"acceptEstimate.php?eid=".$estimate->getEstimateId()."&uid=".$_GET['uid']."\">Accept</a></td>";
-                            echo "</tr>";
-                        }
-                        echo "</table>";
+                              $tradesman= Tradesman :: findById($mysqli,$estimate->getTradesmanId());
+                                echo "<tr class=".$color.">";
+    
+                                //echo "<td>".$estimate->getJobId()."</td>";
+                                echo "<td>".$estimate->getTradesmanId()."</td>";
+                                echo "<td>".$tradesman->getFName().'  '.$tradesman->getLName()."</td>"; 
+                                echo "<td>".$tradesman->getPhone()."</td>";
+                                echo "<td>".$estimate->getExpirationDate()."</td>";
+                               // echo "<td>ESTID".$estimate->getEstimateId()."</td>";
+                               
+                                echo "<td>$".$estimate->getMaterialCost()."</td>";
+                                echo "<td>$".$estimate->getLabourCost()."</td>";
+                                echo "<td>$".$estimate->getTotalCost()."</td>";
+                                
+                                 echo "<td ".$hid."><a href=\"acceptEstimate.php?eid=".$estimate->getEstimateId()."&uid=".$_GET['uid']."\">Accept</a></td>";
+                                echo "</tr>";
+                            }
+                            echo "</table>";
+                      }
+                      else{
+                        echo "<p style=\"text-align: center;\"><b>No Estimates yet...........!<b></p>";
+                      }
+                   
                     ?>
 
                 </div>
