@@ -1,3 +1,4 @@
+<!-- Class Estimate having functions to update ,edit and delete estimates as well fetch estimates based on conditions -->
 <?php
 
 class Estimate{
@@ -43,7 +44,7 @@ class Estimate{
   }
 
   public static function edit($mysqli,$eid, $mcost, $lcost, $expdate){
-    // create a new estimate record in estimatedetails table and if successful 
+    // edit an estimate record in estimatedetails table and if successful 
     // create a estimate object and return it otherwise return false;
     $result = false;
     $tcost=$lcost+$mcost;
@@ -66,8 +67,8 @@ class Estimate{
     return $result;
   }
   public static function delete($mysqli,$eid){
-    // create a new estimate record in estimatedetails table and if successful 
-    // create a estimate object and return it otherwise return false;
+    //delete estimate record in estimatedetails table and if successful 
+    // return true otherwise return false;
     $sql1 = sprintf("select * from estimatedetails where EstimateId=%s", $eid);
     $qresult1 = $mysqli->query($sql1);
     if ($qresult1){
@@ -102,7 +103,7 @@ class Estimate{
     return $result;
   } 
   public static function accept($mysqli,$eid){
-    // create a new estimate record in estimatedetails table and if successful 
+    // update estimate record in estimatedetails table and if user accepts the estimate 
     // create a estimate object and return it otherwise return false;
     $result = false;
     // $tcost=$lcost+$mcost;
@@ -127,7 +128,7 @@ class Estimate{
   }
   
   public static function findByTradesman($mysqli, $tid){
-    // search estimatedetails table and locate record with id
+    // search estimatedetails table based on tradesmanid and locate record with id
     // get that record and create estimate object 
     // return estimate object OR false if we cannot find it
     $result = false;
