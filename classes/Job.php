@@ -1,3 +1,5 @@
+<!-- Class Job having functions to update ,edit and delete jobs as well fetch jobs based on conditions -->
+
 <?php
 
 class Job{
@@ -43,7 +45,7 @@ class Job{
   }
 
   public static function find($mysqli, $jid){
-    // search jobdetails table and locate record with id
+    // search jobdetails table for given job id and locate record with id
     // get that record and create job object 
     // return job object OR false if we cannot find it
     $result = false;
@@ -60,7 +62,7 @@ class Job{
   } 
 
   public static function findByUser($mysqli, $uid){
-    // search jobdetails table and locate record with id
+    // search jobdetails table for given user id  and locate record with id
     // get that record and create job object 
     // return job object OR false if we cannot find it
     $result = false;
