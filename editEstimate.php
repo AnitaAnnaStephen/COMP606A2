@@ -9,39 +9,122 @@ $job=Job::find($mysqli,$estimate->getJobId());
 <html>
 
 <head>
-     <title> Edit Booking</title>
+     <title> Edit Estimate</title>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+     <style>
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+input[type=number], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+input[type=date], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #337ab7;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: white;
+  padding: 20px;
+  width:800px;
+}
+
+.col-25 {
+  float: left;
+  width: 20%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.row{
+     margin-left:150px;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
 </head>
 
-<body style="background-color:silver;">
-     <div class="container">
-     <div id="add_data_Modal" class="">
-          <div class="modal-dialog">
-               <div class="modal-content">
+<body>
+     <!-- <div class="container"> -->
+    
+            <!-- <div class="row">  -->
+               <div class="modal-content" style="height: 600px;">
                     <div class="modal-header" style="text-align:center;background-color:#337ab7;">
                          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>   -->
-                         <h4 class="modal-title"><b>Edit Booking</b></h4>
+                         <h4 class="modal-title"><b>Edit Estimate</b></h4>
                     </div>
-                    <div class="modal-body" style="text-align:center;background-color:white;">
+            <!-- </div> -->
+                    <!-- <div class="modal-body" style="text-align:center;background-color:white;"> -->
 					<form method="post" id="insert_form" action="editEstimateDB.php">
 					<!-- <p><label>Job Id</label><input name="jobId" type="text" value="<?php echo $estimate->getJobId();?>"></p>  -->
-<p><label>Job Type</label><input name="jtype" type="text" disabled value="<?php echo $job->getJobType();?>"></p>
-<p><label>Job Description</label><textarea name="jdescription" disabled type="text" value=""><?php echo $job->getJobDescription();?></textarea></p>
-<p><label>Customer Cost Range</label><input name="crange" type="number" disabled value="<?php echo $job->getCost();?>"></p> 
-<p><label>Job Start Date:</label><input name="sdate" type="date" disabled value="<?php echo $job->getActiveDate();?>"></p> 
-<p><label>Estimate Date</label><input name="edate" type="date" disabled value="<?php echo $job->getEstimateDate();?>"></p>
-<p><label>Material Cost</label><input name="mcost" type="number" value="<?php echo $estimate->getMaterialCost();?>"></p>
-<p><label>Labour Cost</label><input name="lcost" type="number" value="<?php echo $estimate->getLabourCost();?>"></p>
-<p><label>Expiration Date</label><input name="expdate" type="date" value="<?php echo $estimate->getExpirationDate();?>"></p>
-
-<input type="hidden" name="eid" value="<?php echo $_GET['id'];?>">
-<p><input type="submit" value="Confirm"></p>
-					 </form>
-					 </div>
+                         <div class="row"><div class="col-25"><label>Job Type</label></div> <div class="col-75"><input name="jtype" type="text" disabled value="<?php echo $job->getJobType();?>"></div></div>
+                         <div class="row"><div class="col-25"><label>Job Description</label></div> <div class="col-75"><textarea name="jdescription" disabled type="text" value=""><?php echo $job->getJobDescription();?></textarea></div></div>
+                         <div class="row"><div class="col-25"><label>Customer Cost Range</label></div> <div class="col-75"><input name="crange" type="text" disabled value="<?php echo $job->getCost();?>"></div></div>
+                         <div class="row"><div class="col-25"><label>Job Start Date</label></div> <div class="col-75"><input name="sdate" type="text" disabled value="<?php echo $job->getActiveDate();?>"></div> </div>
+                         <div class="row"><div class="col-25"><label>Estimate Date</label></div> <div class="col-75"><input name="edate" type="text" disabled value="<?php echo $job->getEstimateDate();?>"></div></div>
+                         <div class="row"><div class="col-25"><label>Material Cost</label></div> <div class="col-75"><input name="mcost" type="number" value="<?php echo $estimate->getMaterialCost();?>"></div></div>
+                         <div class="row"><div class="col-25"><label>Labour Cost</label></div> <div class="col-75"><input name="lcost" type="number" value="<?php echo $estimate->getLabourCost();?>"></div></div>
+                         <div class="row"><div class="col-25"><label>Expiration Date</label></div> <div class="col-75"><input name="expdate" type="date" value="<?php echo $estimate->getExpirationDate();?>"></div></div>
+                         <input type="hidden" name="eid" value="<?php echo $_GET['id'];?>">
+                         <div class="row"><div class="col-75"><input type="submit" style="text-align:center;" value="Confirm"></div></div>
+					</form>
+				<!-- </div> -->
                      
                </div>
-          </div>
-     </div>
-                                   </div>
+          <!-- </div> -->
+     <!-- </div> -->
+     
 </body>
 </html>
