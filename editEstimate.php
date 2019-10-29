@@ -28,6 +28,8 @@ $job=Job::find($mysqli,$estimate->getJobId());
 <p><label>Job Type</label><input name="jtype" type="text" disabled value="<?php echo $job->getJobType();?>"></p>
 <p><label>Job Description</label><textarea name="jdescription" disabled type="text" value=""><?php echo $job->getJobDescription();?></textarea></p>
 <p><label>Customer Cost Range</label><input name="crange" type="number" disabled value="<?php echo $job->getCost();?>"></p> 
+<p><label>Job Start Date:</label><input name="sdate" type="date" disabled value="<?php echo $job->getActiveDate();?>"></p> 
+<p><label>Estimate Date</label><input name="edate" type="date" disabled value="<?php echo $job->getEstimateDate();?>"></p>
 <p><label>Material Cost</label><input name="mcost" type="number" value="<?php echo $estimate->getMaterialCost();?>"></p>
 <p><label>Labour Cost</label><input name="lcost" type="number" value="<?php echo $estimate->getLabourCost();?>"></p>
 <p><label>Expiration Date</label><input name="expdate" type="date" value="<?php echo $estimate->getExpirationDate();?>"></p>
