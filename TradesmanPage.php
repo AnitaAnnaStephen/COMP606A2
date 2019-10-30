@@ -30,7 +30,19 @@ require_once("headers.php");
          <div class="panel panel-primary">
          <?php $job= Job :: find($mysqli,$estimate->getJobId());?>
          <div class="panel-heading"><?php echo $job->getJobType(); ?></div>
-         <div class="panel-body" style="height:400px">
+         <?php if($estimate->getIsAccepted() == 1) {
+           $bcolor="#dff0d8";
+          $color="3c763d";
+         }
+         else{
+           $bcolor="white";
+           $color="black";
+         } 
+         
+         echo '<div class=\"panel-body\" style=\"height:400px;background-color:'.$bcolor.';color:'.$color.';">';
+        
+          ?>
+          <!-- <div class="panel-body" style="height:400px;"> -->
          <p><b>Job Details</b></p>
          <p><?php echo $job->getJobDescription(); ?></p>
          <p>Job Id: <b><?php echo $estimate->getJobId(); ?></b></p>
