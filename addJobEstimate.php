@@ -7,7 +7,7 @@ $expdate=$_POST['expdate'];
 //echo $expdate;
 //echo $start;
 $existing=Estimate :: findByTradesmanAndJob($mysqli, $_POST['jobId'],$_SESSION['tid']);
-var_dump($existing);
+//var_dump($existing);
 if($existing)
 
 {
