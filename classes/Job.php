@@ -94,7 +94,50 @@ class Job{
     }
     return $jobs;    
   }
-
+  public static function edit($mysqli,$jid, $jtype, $jdescription,$location, $crange,$sdate,$edate){
+    // edit an estimate record in estimatedetails table and if successful 
+    // create a estimate object and return it otherwise return false;
+    $result = false;
+    $sql1 = sprintf("select * from jobdetails where JobId=%s", $jid);
+    $qresult1 = $mysqli->query($sql1);
+    if ($qresult1){
+      if ($qresult1->num_rows == 1){
+        $row = $qresult1->fetch_assoc();
+        // $jid=$row['JobId'];
+        $uid=$row['UId'];
+        $isclosed=$row['IsClosed'];
+      }
+    }
+    $sql = sprintf("update jobdetails set JobType='%s', JobDescription='%s', Location='%s', CostRange='%s', ActiveDate='%s', EstimateDate='%s' where JobId='%s'",  $jtype,$jdescription,$location ,$crange, $sdate,$edate,$jid);
+    var_dump($sql);
+    $qresult = $mysqli->query($sql);
+    if ($qresult){
+      echo "hi";
+      $job = new Job($jid,$uid,$jtype,$jdescription,$location,$crange, $sdate,$edate,$isclosed);
+      $result = $job;
+    }
+    return $result;
+  }
+  public static function delete($mysqli,$jid){
+    //delete job record in jobdetails table and if successful 
+    // return true otherwise return false;
+    $sql1 = sprintf("select * from jobdetails where JobId=%s", $jid);
+    $qresult1 = $mysqli->query($sql1);
+    if ($qresult1){
+      if ($qresult1->num_rows == 1){
+        $row = $qresult1->fetch_assoc();
+        $_SESSION['uid']=$row['UId'];
+      }
+    }
+    $result = false;
+    $sql = sprintf("delete from jobdetails where JobId='%s'", $jid);
+    $qresult = $mysqli->query($sql);
+    if ($qresult){
+     
+      $result = true;
+    }
+    return $result;
+  }
 
   // ------ setter methods -------
   public function setJid($jid){
