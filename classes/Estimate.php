@@ -12,10 +12,11 @@ class Estimate{
   private $tcost = "";
   private $expdate = null;
   private $isaccepted=null;
+  private $isdeleted=null;
   
   
   // constructor to create new estimate object
-  public function __construct($eid, $jid,$tid,$mcost, $lcost, $tcost, $expdate,$isaccepted){
+  public function __construct($eid, $jid,$tid,$mcost, $lcost, $tcost, $expdate,$isaccepted,$isdeleted){
     $this->eid = $eid;
     $this->jid = $jid;
     $this->tid = $tid;
@@ -24,6 +25,7 @@ class Estimate{
     $this->tcost = $tcost;
     $this->expdate = $expdate;
     $this->isaccepted=$isaccepted;
+    $this->isdeleted=$isdeleted;
   }
 
   public static function create($mysqli,$jid,$tid, $mcost, $lcost, $expdate){
@@ -33,11 +35,12 @@ class Estimate{
     $result = false;
     $tcost=$lcost+$mcost;
     $isaccepted=0;
-    $sql = sprintf("insert into estimatedetails(jobid,tid,materialcost, labourcost, totalcost, expirationdate,isaccepted) values('%s', '%s','%s', '%s', '%s', '%s','%s')",  $jid,$tid,$mcost,$lcost ,$tcost, $expdate,$isaccepted);
+    $isdeleted=0;
+    $sql = sprintf("insert into estimatedetails(jobid,tid,materialcost, labourcost, totalcost, expirationdate,isaccepted,isdeleted) values('%s', '%s','%s', '%s', '%s', '%s','%s','%s')",  $jid,$tid,$mcost,$lcost ,$tcost, $expdate,$isaccepted,$isdeleted);
     $qresult = $mysqli->query($sql);
     if ($qresult){
       $eid = $mysqli->insert_id;
-      $estimate = new Estimate($eid,$jid,$tid, $mcost, $lcost, $tcost, $expdate,$isaccepted);
+      $estimate = new Estimate($eid,$jid,$tid, $mcost, $lcost, $tcost, $expdate,$isaccepted,$isdeleted);
       $result = $estimate;
     }
     return $result;
@@ -49,7 +52,8 @@ class Estimate{
     $result = false;
     $tcost=$lcost+$mcost;
     $isaccepted=0;
-    $sql1 = sprintf("select * from estimatedetails where EstimateId=%s", $eid);
+    $isdeleted=0;
+    $sql1 = sprintf("select * from estimatedetails where isdeleted=0 and EstimateId=%s", $eid);
     $qresult1 = $mysqli->query($sql1);
     if ($qresult1){
       if ($qresult1->num_rows == 1){
@@ -61,7 +65,7 @@ class Estimate{
     $sql = sprintf("update estimatedetails set materialcost='%s', labourcost='%s', totalcost='%s', expirationdate='%s' where EstimateId='%s'",  $mcost,$lcost ,$tcost, $expdate,$eid);
     $qresult = $mysqli->query($sql);
     if ($qresult){
-      $estimate = new Estimate($eid,$jid,$tid, $mcost, $lcost, $tcost, $expdate,$isaccepted);
+      $estimate = new Estimate($eid,$jid,$tid, $mcost, $lcost, $tcost, $expdate,$isaccepted,$isdeleted);
       $result = $estimate;
     }
     return $result;
@@ -69,7 +73,7 @@ class Estimate{
   public static function delete($mysqli,$eid){
     //delete estimate record in estimatedetails table and if successful 
     // return true otherwise return false;
-    $sql1 = sprintf("select * from estimatedetails where EstimateId=%s", $eid);
+    $sql1 = sprintf("select * from estimatedetails where isdeleted=0 and  EstimateId=%s", $eid);
     $qresult1 = $mysqli->query($sql1);
     if ($qresult1){
       if ($qresult1->num_rows == 1){
@@ -78,7 +82,7 @@ class Estimate{
       }
     }
     $result = false;
-    $sql = sprintf("delete from estimatedetails where EstimateId='%s'", $eid);
+    $sql = sprintf("update estimatedetails set isdeleted=1 where EstimateId='%s'", $eid);
     $qresult = $mysqli->query($sql);
     if ($qresult){
      
@@ -91,12 +95,12 @@ class Estimate{
     // get that record and create estimate object 
     // return estimate object OR false if we cannot find it
     $result = false;
-    $sql = sprintf("select * from estimatedetails where EstimateId=%s", $eid);
+    $sql = sprintf("select * from estimatedetails where Isdeleted=0 and EstimateId=%s", $eid);
     $qresult = $mysqli->query($sql);
     if ($qresult){
       if ($qresult->num_rows == 1){
         $row = $qresult->fetch_assoc();
-        $estimate = new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted']);
+        $estimate = new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted'],$row['IsDeleted']);
         $result = $estimate;
       }
     }
@@ -108,7 +112,7 @@ class Estimate{
     $result = false;
     // $tcost=$lcost+$mcost;
     $isaccepted=1;
-    $sql1 = sprintf("select * from estimatedetails where EstimateId=%s", $eid);
+    $sql1 = sprintf("select * from estimatedetails where isdeleted=0 and EstimateId=%s", $eid);
     $qresult1 = $mysqli->query($sql1);
     if ($qresult1){
       if ($qresult1->num_rows == 1){
@@ -120,7 +124,7 @@ class Estimate{
     $sql = sprintf("update estimatedetails set isAccepted='%s' where EstimateId='%s'",$isaccepted, $eid);
     $qresult = $mysqli->query($sql);
     if ($qresult){
-      $estimate = new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted']);
+      $estimate = new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted'],$row['IsDeleted']);
       // $estimate = new Estimate($eid,$jid,$tid, $mcost, $lcost, $tcost, $expdate,$isaccepted);
       $result = $estimate;
     }
@@ -132,29 +136,47 @@ class Estimate{
     // get that record and create estimate object 
     // return estimate object OR false if we cannot find it
     $result = false;
-    $sql = sprintf("select * from estimatedetails where tid=%s", $tid);
+    $sql = sprintf("select * from estimatedetails where isdeleted=0 and tid=%s", $tid);
     $result = $mysqli->query($sql);    
     $estimate = false;
     if ($result){
       $estimates = new Collection();
       while($row = $result->fetch_assoc()){
-        $estimate =  new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted']);
+        $estimate =  new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted'],$row['IsDeleted']);
         $estimates->Add($row['EstimateId'], $estimate);      
       }    
     }
     return $estimates;   
   } 
 
+  public static function findByTradesmanAndJob($mysqli, $jid,$tid){
+    // search estimatedetails table based on tradesmanid and locate record with id
+    // get that record and create estimate object 
+    // return estimate object OR false if we cannot find it
+    $result = false;
+    $sql = sprintf("select * from estimatedetails where isdeleted=0 and tid=%s and jobid=%s", $tid,$jid);
+    //echo $sql;
+    $qresult = $mysqli->query($sql);
+    if ($qresult){
+      if ($qresult->num_rows == 1){
+        //$row = $qresult->fetch_assoc();
+        //$estimate = new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted']);
+        $result = true;
+        //var_dump($result);
+      }
+    }
+    return $result; 
+  } 
   public static function getAllEstimatePerJob($mysqli,$jid){
     // get all estimates based on jobid and return as a collection of estimate objects
     // returns false or a collection of estimate objects
-    $sql = sprintf("select * from estimatedetails where jobid=%s",$jid);
+    $sql = sprintf("select * from estimatedetails where isdeleted=0 and jobid=%s",$jid);
     $result = $mysqli->query($sql);    
     $estimates = false;
     if ($result){
       $estimates = new Collection();
       while($row = $result->fetch_assoc()){
-        $estimate =  new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted']);
+        $estimate =  new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted'],$row['IsDeleted']);
         $estimates->Add($row['EstimateId'], $estimate);      
       }    
     }
@@ -164,13 +186,13 @@ class Estimate{
   public static function getAll($mysqli){
     // get all estimates based on jobid and return as a collection of estimate objects
     // returns false or a collection of estimate objects
-    $sql = sprintf("select * from estimatedetails ");
+    $sql = sprintf("select * from estimatedetails where isdeleted=0");
     $result = $mysqli->query($sql);    
     $estimates = false;
     if ($result){
       $estimates = new Collection();
       while($row = $result->fetch_assoc()){
-        $estimate =  new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted']);
+        $estimate =  new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted'],$row['IsDeleted']);
         $estimates->Add($row['EstimateId'], $estimate);      
       }    
     }
@@ -189,6 +211,10 @@ class Estimate{
 
   public function setIsAccepted($isaccepted){
     $this->$isaccepted = $isaccepted;
+  }
+
+  public function setIsDeleted($isdeleted){
+    $this->$isdeleted = $isdeleted;
   }
   public function setTradesmanid($tid){
     $this->$tid = $tid;
@@ -221,6 +247,10 @@ class Estimate{
   public function getIsAccepted(){    
     return $this->isaccepted;
   }
+  public function getIsDeleted(){    
+    return $this->isdeleted;
+  }
+  
   public function getExpirationDate(){    
     return $this->expdate;
   }
