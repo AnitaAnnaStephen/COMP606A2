@@ -6,7 +6,7 @@ require_once("headers.php");
 
 <div class="container" >
   <div class="row">
-    <?php  $estimates=Estimate ::findByTradesman($mysqli,$_GET['tid']);
+    <?php  $estimates=Estimate ::findByTradesman($mysqli,$_SESSION['tid']);
       $count=0;
                                 
       foreach($estimates->getRecords() as $id => $estimate)
