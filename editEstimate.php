@@ -53,6 +53,18 @@ input[type=submit] {
   float: right;
 }
 
+
+.link {
+  background-color: #337ab7;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  margin-left: 25px;
+}
+
 input[type=submit]:hover {
   background-color: #45a049;
 }
@@ -118,7 +130,12 @@ input[type=submit]:hover {
                          <div class="row"><div class="col-25"><label>Labour Cost</label></div> <div class="col-75"><input name="lcost" type="number" value="<?php echo $estimate->getLabourCost();?>"></div></div>
                          <div class="row"><div class="col-25"><label>Expiration Date</label></div> <div class="col-75"><input name="expdate" type="date" value="<?php echo $estimate->getExpirationDate();?>"></div></div>
                          <input type="hidden" name="eid" value="<?php echo $_GET['id'];?>">
-                         <div class="row"><div class="col-75"><input type="submit" style="text-align:center;" value="Confirm"></div></div>
+                         <div class="row"><div class="col-75">
+                         <?php $tid= $_GET['tid']; ?> 
+                         <div class="link"><?php echo "<a style=\"color:white;\" href=\"TradesmanPage.php?tid=".$tid."\" >Cancel</a>";?></div>
+                         <input type="submit" style="text-align:center;" value="Confirm">
+                         </div></div>
+                         
 					</form>
 				<!-- </div> -->
                      
