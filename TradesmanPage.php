@@ -29,14 +29,16 @@ require_once("headers.php");
          <div class="col-sm-4" >
          <div class="panel panel-primary">
          <?php $job= Job :: find($mysqli,$estimate->getJobId());?>
-         <div class="panel-heading"><?php echo $job->getJobType(); ?></div>
+         <!-- <div class="panel-heading"><?php echo $job->getJobType(); ?></div> -->
          <?php if($estimate->getIsAccepted() == 1) {
            $bcolor="#dff0d8";
           $color="3c763d";
+          echo '<div class="panel-heading" style="background-color:green;">'.$job->getJobType().'</div>';
          }
          else{
            $bcolor="white";
            $color="black";
+           echo '<div class="panel-heading">'.$job->getJobType().'</div>';
          } 
          
          echo '<div class=\"panel-body\" style=\"height:400px;background-color:'.$bcolor.';color:'.$color.';">';
@@ -46,6 +48,7 @@ require_once("headers.php");
          <p><b>Job Details</b></p>
          <p><?php echo $job->getJobDescription(); ?></p>
          <p>Job Id: <b><?php echo $estimate->getJobId(); ?></b></p>
+         <p>Location: <b><?php echo $job->getLocation(); ?></b></p>
          <p>Cost Range: <b><?php echo $job->getCost(); ?></b></p>
          <p>Estimate Date: <b><?php echo $job->getEstimateDate(); ?></b></p>
          <p>Active Date: <b><?php echo $job->getActiveDate(); ?></b></p>
@@ -60,9 +63,17 @@ require_once("headers.php");
             <!-- <input type="hidden" value="<?php echo $estimate->getEstimateId(); ?>" > -->
             
             <?php 
-            echo "<a href=\"editEstimate.php?id=".$estimate->getEstimateId()."&tid=".$_GET['tid']."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary viewestimate\">Edit </a>";
-            echo "<a href=\"deleteEstimateDB.php?id=".$estimate->getEstimateId()."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary viewestimate\" onclick=\"return confirm('Are you sure to remove your estimate?')\">Delete </a>";
-
+            if ($estimate->getIsAccepted()==0)
+            {
+              echo "<a href=\"editEstimate.php?id=".$estimate->getEstimateId()."&tid=".$_GET['tid']."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary viewestimate\">Edit </a>";
+              echo "<a href=\"deleteEstimateDB.php?id=".$estimate->getEstimateId()."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary viewestimate\" onclick=\"return confirm('Are you sure to remove your estimate?')\">Delete </a>";
+  
+            }
+            else
+            {
+              echo "<a href=\"#\" class=\"btn btn-primary viewestimate\" disabled style=\"width: 100px;margin-left: 25px;background-color: green;\" >Accepted </a>";
+            }
+           
             ?>
             <!-- <a href="editEstimate.php?id="<?php echo $estimate->getEstimateId(); ?>  class="btn btn-primary viewestimate">Edit Estimate</a>
             <a href="deleteEstimateDB.php?id="<?php echo $estimate->getEstimateId();?> class="btn btn-primary viewestimate" onclick="return confirm('Are you sure to cancel your estimate?')">Cancel Estimate</a> -->
