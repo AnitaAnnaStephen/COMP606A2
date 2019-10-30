@@ -41,7 +41,11 @@ require_once("footer.php");
             <input type="hidden" value="<?php echo $job->getJobId(); ?>" >
             <?php $estimates = Estimate::getAllEstimatePerJob($mysqli, $job->getJobId()); ?>
             <a data-toggle="modal" data-target="" class="btn btn-primary viewestimate" name="viewestimate">View Estimates</a>
+            <?php 
+            echo "<a href=\"editJob.php?id=".$job->getJobId()."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary\">Edit </a>";
+            echo "<a href=\"deleteJobDB.php?id=".$job->getJobId()."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary\" onclick=\"return confirm('Are you sure to remove your job?')\">Delete </a>";
 
+            ?>      
             <!-- Modal -->
             <div id="" class="modal fade estimate" role="dialog">
             <div class="modal-dialog modal-lg">
