@@ -102,6 +102,7 @@ class Estimate{
         $row = $qresult->fetch_assoc();
         $estimate = new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted'],$row['IsDeleted']);
         $result = $estimate;
+        $_SESSION['eid']=$row['EstimateId'];
       }
     }
     return $result;
