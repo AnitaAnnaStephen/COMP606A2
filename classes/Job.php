@@ -49,7 +49,7 @@ class Job{
     // get that record and create job object 
     // return job object OR false if we cannot find it
     $result = false;
-    $sql = sprintf("select * from jobdetails where jobid=%s", $jid);
+    $sql = sprintf("select * from jobdetails where isclosed=0 and jobid=%s", $jid);
     $qresult = $mysqli->query($sql);
     if ($qresult){
       if ($qresult->num_rows == 1){
@@ -66,7 +66,7 @@ class Job{
     // get that record and create job object 
     // return job object OR false if we cannot find it
     $result = false;
-    $sql = sprintf("select * from jobdetails where UId=%s", $uid);
+    $sql = sprintf("select * from jobdetails where IsClosed=0 and UId=%s", $uid);
     $result = $mysqli->query($sql);    
     $job = false;
     if ($result){
@@ -98,7 +98,7 @@ class Job{
     // edit an estimate record in estimatedetails table and if successful 
     // create a estimate object and return it otherwise return false;
     $result = false;
-    $sql1 = sprintf("select * from jobdetails where JobId=%s", $jid);
+    $sql1 = sprintf("select * from jobdetails where IsClosed=0 and JobId=%s", $jid);
     $qresult1 = $mysqli->query($sql1);
     if ($qresult1){
       if ($qresult1->num_rows == 1){
@@ -121,7 +121,7 @@ class Job{
   public static function delete($mysqli,$jid){
     //delete job record in jobdetails table and if successful 
     // return true otherwise return false;
-    $sql1 = sprintf("select * from jobdetails where JobId=%s", $jid);
+    $sql1 = sprintf("select * from jobdetails where IsClosed=0 and JobId=%s", $jid);
     $qresult1 = $mysqli->query($sql1);
     if ($qresult1){
       if ($qresult1->num_rows == 1){
@@ -130,7 +130,7 @@ class Job{
       }
     }
     $result = false;
-    $sql = sprintf("delete from jobdetails where JobId='%s'", $jid);
+    $sql = sprintf("update jobdetails set IsClosed=1 where JobId='%s'", $jid);
     $qresult = $mysqli->query($sql);
     if ($qresult){
      
