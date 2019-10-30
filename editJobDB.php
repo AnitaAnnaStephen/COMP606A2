@@ -15,7 +15,7 @@ if(!$editjob){
 }
  else {
     echo "<h2>Updated</h2>";
-    $_SESSION['success'] = "Update Successfull..";
+    $_SESSION["success"]="edit";
     
     header("Location: UserPage.php?uid=".$editjob->getUserId());//redirecting to user profile
     

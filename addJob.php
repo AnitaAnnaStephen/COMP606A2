@@ -11,6 +11,7 @@ if (is_null($job)){
     "<h2>failed to add result</h2>";
 } else {
     echo "<p>Job Posted </p>";
+    $_SESSION["success"]="post";
     //Redirect to user profile
     header("Location:UserPage.php?uid=".$job->getUserId());
     

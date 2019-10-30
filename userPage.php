@@ -3,10 +3,32 @@
 require_once("headers.php");
 
 require_once("footer.php");
-
+session_start();
 ?>
 <div class="container" >
 <div class="row">
+  <?php 
+  if(isset($_SESSION["success"])&&($_SESSION["success"]=="post")){
+    ?>
+    
+<div class="alert alert-success" align="center">
+  <strong>Job Post Success!</strong>
+</div>
+<?php
+  unset($_SESSION["success"]);
+  }
+  ?>
+  <?php 
+  if(isset($_SESSION["success"])&&($_SESSION["success"]=="edit")){
+    ?>
+    
+<div class="alert alert-success" align="center">
+  <strong>Update Success!</strong>
+</div>
+<?php
+  unset($_SESSION["success"]);
+  }
+  ?>
 <?php  $jobs=Job ::findByUser($mysqli,$_GET['uid']);
           $count=0;
           //echo $count;
