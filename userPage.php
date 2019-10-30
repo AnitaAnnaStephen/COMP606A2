@@ -11,7 +11,7 @@ session_start();
   if(isset($_SESSION["success"])&&($_SESSION["success"]=="post")){
     ?>
     
-<div class="alert alert-success" align="center">
+<div class="alert alert-success div1" align="center">
   <strong>Job Post Success!</strong>
 </div>
 <?php
@@ -22,7 +22,7 @@ session_start();
   if(isset($_SESSION["success"])&&($_SESSION["success"]=="edit")){
     ?>
     
-<div class="alert alert-success" align="center">
+<div class="alert alert-success div1" align="center">
   <strong>Update Success!</strong>
 </div>
 <?php
@@ -167,5 +167,6 @@ session_start();
       var a = $(this).parents('.pviewestimate').find('.estimate');
       $(a).modal('show');
     });
+    $(".div1").fadeOut(3000);
   });
 </script>
