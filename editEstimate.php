@@ -1,7 +1,18 @@
 <?php 
 require_once("headers.php");
-$estimate=Estimate::find($mysqli,$_GET['id']);
-//echo $estimate->getJobId();
+
+if(!isset($_GET['id']))
+{
+    
+    $estimate=Estimate::find($mysqli,$_GET['eid']);
+}
+else{
+    
+    $estimate=Estimate::find($mysqli,$_GET['id']);
+    $_SESSION['error']="";
+}
+//$estimate=Estimate::find($mysqli,$_GET['id']);
+
 $job=Job::find($mysqli,$estimate->getJobId());
 //var_dump($job);
 //echo $job->getJobType();
@@ -112,11 +123,18 @@ input[type=submit]:hover {
      <!-- <div class="container"> -->
     
             <!-- <div class="row">  -->
-               <div class="modal-content" style="height: 600px;">
+               <div class="modal-content" style="height: 650px;">
                     <div class="modal-header" style="text-align:center;background-color:#337ab7;">
                          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>   -->
                          <h4 class="modal-title"><b>Edit Estimate</b></h4>
+                   
                     </div>
+                    <?php
+                    if(isset($_SESSION["error"])){
+                        $error = $_SESSION["error"];
+                        echo "<span style=\"margin-left: 260px;color:red;background-color:yellow;\">$error</span>";
+                    }
+                ?>
             <!-- </div> -->
                     <!-- <div class="modal-body" style="text-align:center;background-color:white;"> -->
 					<form method="post" id="insert_form" action="editEstimateDB.php">
@@ -130,8 +148,12 @@ input[type=submit]:hover {
                          <div class="row"><div class="col-25"><label>Labour Cost</label></div> <div class="col-75"><input name="lcost" type="number" value="<?php echo $estimate->getLabourCost();?>"></div></div>
                          <div class="row"><div class="col-25"><label>Expiration Date</label></div> <div class="col-75"><input name="expdate" type="date" value="<?php echo $estimate->getExpirationDate();?>"></div></div>
                          <input type="hidden" name="eid" value="<?php echo $_GET['id'];?>">
+                         <input type="hidden" name="sdate" value="<?php echo $job->getActiveDate();?>">
+                         <input type="hidden" name="edate" value="<?php echo $job->getEstimateDate();?>">
+                         <input type="hidden" name="tid" value="<?php echo $_SESSION['tid'];?>">
+          
                          <div class="row"><div class="col-75">
-                         <?php $tid= $_GET['tid']; ?> 
+                         <?php $tid= $_SESSION['tid']; ?> 
                          <div class="link"><?php echo "<a style=\"color:white;\" href=\"TradesmanPage.php?tid=".$tid."\" >Cancel</a>";?></div>
                          <input type="submit" style="text-align:center;" value="Confirm">
                          </div></div>
