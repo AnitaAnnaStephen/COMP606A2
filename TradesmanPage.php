@@ -45,10 +45,10 @@ require_once("headers.php");
         </div>
          <div class="panel-footer pviewestimate" style="text-align: center;">
             
-            <input type="hidden" value="<?php echo $estimate->getEstimateId(); ?>" >
+            <!-- <input type="hidden" value="<?php echo $estimate->getEstimateId(); ?>" > -->
             
             <?php 
-            echo "<a href=\"editEstimate.php?id=".$estimate->getEstimateId()."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary viewestimate\">Edit </a>";
+            echo "<a href=\"editEstimate.php?id=".$estimate->getEstimateId()."&tid=".$_GET['tid']."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary viewestimate\">Edit </a>";
             echo "<a href=\"deleteEstimateDB.php?id=".$estimate->getEstimateId()."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary viewestimate\" onclick=\"return confirm('Are you sure to remove your estimate?')\">Delete </a>";
 
             ?>
