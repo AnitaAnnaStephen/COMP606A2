@@ -8,20 +8,30 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
          
     </head>
-    <body style="background-color:silver;">
+    <body style="background-color:white;">
         <div id="header">
-        <p>
-            <img src="Logo.jpg" alt="Logo" width="100" height="100">
+        <!-- <p>
+            <img src="Logo.jpg" alt="Logo" width="150" height="150">
             
                 
             </p>
             <p>
                 <h2>Tradesman Login </h2>
-            </p>
+            </p> -->
         </div>
         <div id="login">
             <!-- <form action="" method="POST"> -->
             <form method="post" action="tradesmanCheck.php" enctype="application/x-www-form-urlencoded">
+            <p style="text-align: center;">
+            <img src="Logo.jpg" alt="Logo" width="150" height="150">
+            
+                
+            </p>
+            <p>
+            </p>
+            <p>
+                <h1 style="text-align: center;">Tradesman Login </h1>
+            </p>
             <p>
                 <label> UserName</label>    
             </p>
@@ -40,18 +50,21 @@
             <a href="ForgotPassword.php" style="padding-left: 10px;">Forgot Password?</a>
             </p>
             <?php
+            $error ="";
                     if(isset($_SESSION["error"])){
                         $error = $_SESSION["error"];
                         echo "<span>$error</span>";
+                        $_SESSION["error"]="";
                     }
                 ?>
             </form>
-        </div>
-        <div id="register">
+            <div id="register">
             <p> <label style="font-weight:normal;">Not a tradesman yet? </label>
                 <a href="tradesmanRegister.php">Register Now</a>
             </p>
         </div>
+        </div>
+        
         <ul style="text-align:center;">
                     
                      <a href="Login.php" style="text-align:right;">Home</a>|
