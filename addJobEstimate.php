@@ -11,13 +11,13 @@ $existing=Estimate :: findByTradesmanAndJob($mysqli, $_POST['jobId'],$_SESSION['
 if($existing)
 
 {
-    $_SESSION['error']="Already posted estimate for this job";
+    $_SESSION['error']="Already";
     header("Location:addEstimate.php?jid=".$_POST['jobId']);//redirecting to add Estimate page
     
 }
 else if($expdate>$start)
 {
-    $_SESSION['error']= "Expiration date past job start date";
+    $_SESSION['error']= "Expiration";
     header("Location:addEstimate.php?jid=".$_POST['jobId']);//redirecting to add estimate page
 }
 else

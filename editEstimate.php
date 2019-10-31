@@ -120,6 +120,17 @@ input[type=submit]:hover {
 </head>
 
 <body>
+<?php 
+  if(isset($_SESSION["error"])&&($_SESSION["error"]=="Expiration")){
+    ?>
+    
+<div class="alert alert-success div1" align="center">
+  <strong>Expiration date past job start date!</strong>
+</div>
+<?php
+  unset($_SESSION["error"]);
+  }
+  ?>
      <!-- <div class="container"> -->
     
             <!-- <div class="row">  -->
@@ -167,3 +178,9 @@ input[type=submit]:hover {
      
 </body>
 </html>
+<script>
+  $(document).ready(function() {
+    debugger;
+    // $(".div1").fadeOut(4000);
+  });
+</script>

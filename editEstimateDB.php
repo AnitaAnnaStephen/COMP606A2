@@ -7,7 +7,7 @@ $estimate=$_POST['edate'];
 $expdate=$_POST['expdate'];
 if($expdate>$start)
 {
-    $_SESSION['error']= "Expiration date past job start date";
+    $_SESSION['error']= "Expiration";
     header("Location:editEstimate.php?eid=".$_SESSION['eid']);//redirecting to edit estimate page
 }
 else{

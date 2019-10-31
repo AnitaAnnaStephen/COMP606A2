@@ -14,13 +14,14 @@ else{
 
 //var_dump($job);
 require_once("footer.php");
-
+session_start();
 ?>
 <html>
 
 <head>
      <title> Add Estimate</title>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+     
      <style>
      * {
   box-sizing: border-box;
@@ -118,6 +119,28 @@ input[type=submit]:hover {
 </style>
 </head>
 <body>
+<?php 
+  if(isset($_SESSION["error"])&&($_SESSION["error"]=="Already")){
+    ?>
+    
+<div class="alert alert-success div1" align="center" style="margin-left:360px;margin-right:400px">
+  <strong>Already posted estimate for this job!</strong>
+</div>
+<?php
+  unset($_SESSION["error"]);
+  }
+  ?>
+  <?php 
+  if(isset($_SESSION["error"])&&($_SESSION["error"]=="Expiration")){
+    ?>
+    
+<div class="alert alert-success div1" align="center" style="margin-left:360px;margin-right:400px">
+  <strong>Expiration date past job start date!</strong>
+</div>
+<?php
+  unset($_SESSION["error"]);
+  }
+  ?>
 <div class="modal-content" style="height: 700px; margin-left: 360px; width: 50%; display: inline-block;">
                     <div class="modal-header" style="text-align:center;background-color:#337ab7;">
                          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>   -->
@@ -166,3 +189,9 @@ input[type=submit]:hover {
      <?php require ("footer.php"); ?>
 </body>
 </html>
+<script>
+  $(document).ready(function() {
+    debugger;
+    // $(".div1").fadeOut(4000);
+  });
+</script>
