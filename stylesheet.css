@@ -32,7 +32,8 @@ span{
 
 #login{
 background-color: cyan;
-border:solid gray 1px;
+
+border:solid #337B0E 15px;
 width:25%;
 border-radius: 25px;
 margin:25px auto;
