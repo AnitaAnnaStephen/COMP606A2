@@ -25,7 +25,7 @@ require_once("headers.php");
 {
    text-align:center;
     color:darkgrey;
-    font-size:40px;
+    font-size:30px;
     transform:rotate(360deg);
     -webkit-transform:rotate(360deg);
 }
@@ -74,7 +74,7 @@ require_once("headers.php");
          echo '<div class=\"panel-body\" id=\"background\" style=\"height:400px;background-color:'.$bcolor.';color:'.$color.';">';
         
           ?>
-           <div class="content" >
+           
          <p><b>Job Details</b></p>
          <p><?php echo $job->getJobDescription(); ?></p>
          <p>Job Id: <b><?php echo $estimate->getJobId(); ?></b></p>
@@ -88,7 +88,7 @@ require_once("headers.php");
          <p>Material Cost: <b><?php echo $estimate->getMaterialCost(); ?></b></p>
          <p>Total Cost: <b><?php echo $estimate->getTotalCost(); ?></b></p>
          <p>Date: <b><?php echo $estimate->getExpirationDate(); ?></b></p>
-        </div>
+        
         </div>
 
          <div class="panel-footer pviewestimate" style="text-align: center;">
@@ -108,7 +108,7 @@ require_once("headers.php");
               // echo "<a href=\"#\" class=\"btn btn-primary viewestimate\" disabled style=\"width: 100px;margin-left: 25px;background-color: green;\" >Accepted </a>";
               $user = User::getByUserId($mysqli, $job->getUserId());
               
-              echo '<a data-toggle="modal" data-target="" class="btn btn-primary viewestimate" name="viewestimate">Click here to view client details</a>';
+              echo '<a data-toggle="modal" data-target="" class="btn btn-primary viewestimate" style="background-color: green;" name="viewestimate">Click here to view client details</a>';
               
             }
            
