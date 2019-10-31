@@ -82,7 +82,7 @@ class Job{
   public static function getAll($mysqli){
     // get all jobs and return as a collection of job objects
     // returns false or a collection of job objects
-    $sql = "select * from jobdetails where IsClosed=0";
+    $sql = "select * from jobdetails where IsEstimateAccepted=0 and IsClosed=0";
     $result = $mysqli->query($sql);    
     $job = false;
     if ($result){
