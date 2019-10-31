@@ -69,6 +69,23 @@ class User{
     return $result;
   } 
 
+  public static function getByUserId($mysqli, $uid){
+    // search userdetails table and locate record with id
+    // get that record and create user object 
+    // return user object OR false if we cannot find it
+    $result = false;
+    $sql = sprintf("select * from userdetails where UId='%s'", $uid);
+    $qresult = $mysqli->query($sql);
+    if ($qresult){
+      if ($qresult->num_rows == 1){
+        $row = $qresult->fetch_assoc();
+        $user = new User($row['UId'], $row['FirstName'], $row['LastName'], $row['Address'], $row['Suburb'], $row['City'], $row['PO'], $row['Phone'],$row['Email'], $row['Password']);
+        $result = $user;
+      }
+    }
+    return $result;
+  } 
+
   public static function getAll($mysqli){
     // get all User and return as a collection of user objects
     // returns false or a collection of user objects
