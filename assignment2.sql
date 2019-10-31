@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2019 at 09:24 AM
+-- Generation Time: Oct 31, 2019 at 02:23 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -36,25 +36,24 @@ CREATE TABLE `estimatedetails` (
   `MaterialCost` double NOT NULL,
   `TotalCost` double NOT NULL,
   `ExpirationDate` date NOT NULL,
-  `IsAccepted` int(11) NOT NULL
+  `IsAccepted` int(11) NOT NULL,
+  `IsDeleted` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `estimatedetails`
 --
 
-INSERT INTO `estimatedetails` (`EstimateId`, `JobId`, `TId`, `LabourCost`, `MaterialCost`, `TotalCost`, `ExpirationDate`, `IsAccepted`) VALUES
-(12, 1, 12, 50, 90, 140, '2020-03-12', 0),
-(14, 2, 12, 80, 65, 145, '2019-11-25', 0),
-(18, 2, 12, 25, 25, 50, '2019-12-20', 0),
-(26, 5, 12, 60, 120, 180, '2019-11-20', 0),
-(27, 5, 12, 60, 90, 150, '2019-12-25', 0),
-(28, 2, 13, 30, 50, 80, '2019-12-25', 0),
-(29, 5, 13, 90, 90, 180, '2019-12-25', 0),
-(30, 2, 0, 25, 60, 85, '2019-12-25', 0),
-(36, 2, 12, 25, 85, 110, '2019-12-22', 0),
-(37, 2, 12, 30, 50, 80, '2020-01-25', 0),
-(38, 6, 13, 125, 150, 275, '2019-12-31', 0);
+INSERT INTO `estimatedetails` (`EstimateId`, `JobId`, `TId`, `LabourCost`, `MaterialCost`, `TotalCost`, `ExpirationDate`, `IsAccepted`, `IsDeleted`) VALUES
+(47, 8, 12, 120, 100, 220, '2019-12-30', 1, 1),
+(49, 6, 12, 90, 200, 290, '2019-11-25', 0, 0),
+(52, 13, 13, 50, 120, 170, '2019-12-30', 0, 1),
+(54, 12, 13, 50, 90, 140, '2019-12-22', 0, 1),
+(59, 13, 13, 90, 120, 210, '2019-12-24', 1, 0),
+(60, 12, 13, 50, 90, 140, '2019-12-25', 0, 1),
+(61, 6, 13, 60, 200, 260, '2019-11-26', 0, 0),
+(62, 12, 13, 80, 40, 120, '2019-12-23', 0, 0),
+(63, 12, 12, 50, 70, 120, '2019-12-20', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -79,8 +78,10 @@ CREATE TABLE `jobdetails` (
 --
 
 INSERT INTO `jobdetails` (`JobId`, `UId`, `JobType`, `JobDescription`, `Location`, `CostRange`, `ActiveDate`, `EstimateDate`, `IsClosed`) VALUES
-(5, 14, 'Roofing', 'Repair the roofing to prevent leakage', 'Beatty Street', 150, '2019-11-25', '2019-11-20', 0),
-(6, 18, 'fencing', 'Put fencing around a 10 acre property', 'Frankton', 250, '2019-11-30', '2019-11-25', 0);
+(6, 18, 'fencing', 'Put fencing around a 10 acre property', 'Frankton', 250, '2019-11-30', '2019-11-25', 0),
+(8, 14, 'Plumbing', 'Repair kitchen plumming', 'Lyon Street', 200, '2020-01-30', '2020-01-15', 1),
+(12, 19, 'Repairing', 'Car body repairing', 'Mahoe', 100, '2019-12-25', '2019-12-20', 0),
+(13, 14, 'Plumbing', 'Repair bathroom plumming', 'Mahoe', 150, '2019-12-25', '2019-12-20', 0);
 
 -- --------------------------------------------------------
 
@@ -173,13 +174,13 @@ ALTER TABLE `userdetails`
 -- AUTO_INCREMENT for table `estimatedetails`
 --
 ALTER TABLE `estimatedetails`
-  MODIFY `EstimateId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `EstimateId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `jobdetails`
 --
 ALTER TABLE `jobdetails`
-  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tradesmandetails`
