@@ -123,12 +123,16 @@ class Estimate{
       }
     }
     $sql = sprintf("update estimatedetails set isAccepted='%s' where EstimateId='%s'",$isaccepted, $eid);
+    
     $qresult = $mysqli->query($sql);
     if ($qresult){
       $estimate = new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted'],$row['IsDeleted']);
       // $estimate = new Estimate($eid,$jid,$tid, $mcost, $lcost, $tcost, $expdate,$isaccepted);
       $result = $estimate;
     }
+    $jid=$row['JobId'];
+    $sql = sprintf("update jobdetails set isEstimateAccepted=1 where JobId='%s'", $jid);
+    $qresult = $mysqli->query($sql);
     return $result;
   }
   
