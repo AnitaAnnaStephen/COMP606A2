@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2019 at 02:23 AM
+-- Generation Time: Oct 31, 2019 at 10:20 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -51,9 +51,10 @@ INSERT INTO `estimatedetails` (`EstimateId`, `JobId`, `TId`, `LabourCost`, `Mate
 (54, 12, 13, 50, 90, 140, '2019-12-22', 0, 1),
 (59, 13, 13, 90, 120, 210, '2019-12-24', 1, 0),
 (60, 12, 13, 50, 90, 140, '2019-12-25', 0, 1),
-(61, 6, 13, 60, 200, 260, '2019-11-26', 0, 0),
-(62, 12, 13, 80, 40, 120, '2019-12-23', 0, 0),
-(63, 12, 12, 50, 70, 120, '2019-12-20', 0, 0);
+(61, 6, 13, 70, 200, 270, '2019-11-26', 0, 0),
+(62, 12, 13, 90, 40, 130, '2019-12-23', 1, 0),
+(63, 12, 12, 50, 70, 120, '2019-12-20', 0, 0),
+(65, 15, 13, 150, 400, 550, '2019-12-25', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -70,18 +71,21 @@ CREATE TABLE `jobdetails` (
   `CostRange` double NOT NULL,
   `ActiveDate` date NOT NULL,
   `EstimateDate` date NOT NULL,
-  `IsClosed` int(11) NOT NULL
+  `IsClosed` int(11) NOT NULL,
+  `IsEstimateAccepted` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jobdetails`
 --
 
-INSERT INTO `jobdetails` (`JobId`, `UId`, `JobType`, `JobDescription`, `Location`, `CostRange`, `ActiveDate`, `EstimateDate`, `IsClosed`) VALUES
-(6, 18, 'fencing', 'Put fencing around a 10 acre property', 'Frankton', 250, '2019-11-30', '2019-11-25', 0),
-(8, 14, 'Plumbing', 'Repair kitchen plumming', 'Lyon Street', 200, '2020-01-30', '2020-01-15', 1),
-(12, 19, 'Repairing', 'Car body repairing', 'Mahoe', 100, '2019-12-25', '2019-12-20', 0),
-(13, 14, 'Plumbing', 'Repair bathroom plumming', 'Mahoe', 150, '2019-12-25', '2019-12-20', 0);
+INSERT INTO `jobdetails` (`JobId`, `UId`, `JobType`, `JobDescription`, `Location`, `CostRange`, `ActiveDate`, `EstimateDate`, `IsClosed`, `IsEstimateAccepted`) VALUES
+(6, 18, 'fencing', 'Put fencing around a 10 acre property', 'Frankton', 250, '2019-11-30', '2019-11-25', 0, 0),
+(8, 14, 'Plumbing', 'Repair kitchen plumming', 'Lyon Street', 200, '2020-01-30', '2020-01-15', 1, 0),
+(12, 19, 'Repairing', 'Car body repairing', 'Mahoe', 100, '2019-12-25', '2019-12-20', 0, 1),
+(13, 14, 'Plumbing', 'Repair bathroom plumming', 'Mahoe', 160, '2019-12-25', '2019-12-20', 0, 0),
+(14, 14, 'Electrical', 'Landscape lighting for a new house', 'Hamilton', 250, '2019-12-30', '2019-12-26', 1, 1),
+(15, 14, 'Roofing', 'Repair the roofing to prevent leakage', 'Hamilton', 450, '2020-01-01', '2019-12-25', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -174,13 +178,13 @@ ALTER TABLE `userdetails`
 -- AUTO_INCREMENT for table `estimatedetails`
 --
 ALTER TABLE `estimatedetails`
-  MODIFY `EstimateId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `EstimateId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `jobdetails`
 --
 ALTER TABLE `jobdetails`
-  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tradesmandetails`
