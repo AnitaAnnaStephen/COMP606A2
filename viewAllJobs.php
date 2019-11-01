@@ -1,11 +1,18 @@
 <?php
 require_once("headers.php");
 $jobs = Job::getAll($mysqli);
+//var_dump($jobs);
+//echo $jobs->getJobId();
 require_once("footer.php");
 ?>
 <div class="container">
 <div class="row">
-    <?php foreach($jobs->getRecords() as $id => $job){  ?>
+    <?php 
+    // if((!$jobs)){
+    //   echo '<h1>No jobs to show</h1>';
+    // }
+    // else{
+    foreach($jobs->getRecords() as $id => $job){  ?>
 
 <div class="col-sm-4">
       <div class="panel panel-primary">
@@ -23,7 +30,8 @@ require_once("footer.php");
         </div>
         </div>
       </div>
-    <?php }; ?>
+    <?php //}
+  }; ?>
 </div>
 </div>
 
