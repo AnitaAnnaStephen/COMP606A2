@@ -43,7 +43,7 @@ padding:50px;
 
 #registration{
     background-color: cyan;
-    border:solid gray 1px;
+    border:solid#337B0E 15px;
     width:25%;
     border-radius: 25px;
     margin:25px auto;
@@ -58,7 +58,7 @@ padding:50px;
 
 #btn{
     color:#fff;
-    background: #333ab7;
+    background: #337B0E;
     padding: 5px;
     width:100px;
     /* margin-left:25%; */
