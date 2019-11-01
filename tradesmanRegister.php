@@ -24,7 +24,7 @@ var check = function() {
 }
 </script>
 </head>
-<body style="background-color:silver;">
+<body style="background-color:white;">
 <div id="registration">
 <h1 style="text-align: center;">Enter Details</h1>
 
@@ -33,12 +33,19 @@ var check = function() {
 <p><label>Last Name</label><input name="lname" type="text" pattern="[A-Za-z\s]{3,15}" title="Minimum 3 letters.No digits." required="true" placeholder ="Last Name" style="border-radius: 5px;height: 20px;"></p> 
 <p><label>Email</label><input name="email" type="email" required="true"  placeholder ="Email Address" style="border-radius: 5px;height: 20px;"></p> 
 <p><label>Phone</label><input name="phone" type="text" required="true" pattern="^\+?\d{0,13}" placeholder ="Mobile Number" style="border-radius: 5px;height: 20px;"></p>
-<p><label>Password</label><input name="password" id="password" type="password" pattern="[A-Za-z0-9]{8,15}" title="Minimum 8 characters" style="border-radius: 5px;height: 20px;" onkeyup='check();' required="true" placeholder ="Password" style="border-radius: 5px;height: 20px;"></p>
-<p><label>Confirm Password</label><input name="repassword" id="repassword" type="password" pattern="[A-Za-z0-9^\w]{8,15}" title="Minimum 8 characters" style="border-radius: 5px;height: 20px;" onkeyup='check();' required="true" placeholder ="Confirm Password" style="border-radius: 5px;height: 20px;"><span id='message'></span></p>
+<p><label>Password</label><input name="password" id="password" type="password" pattern="[A-Za-z0-9]{3,15}" title="Minimum 3 characters" style="border-radius: 5px;height: 20px;" onkeyup='check();' required="true" placeholder ="Password" style="border-radius: 5px;height: 20px;"></p>
+<p><label>Confirm Password</label><input name="repassword" id="repassword" type="password" pattern="[A-Za-z0-9^\w]{3,15}" title="Minimum 3 characters" style="border-radius: 5px;height: 20px;" onkeyup='check();' required="true" placeholder ="Confirm Password" style="border-radius: 5px;height: 20px;"><span id='message'></span></p>
 
 <p style="text-align: center;padding-top: 15px;">
 <button type="submit" id="btn" value="Register" style="width:160px;">Register as Tradesman</button></p>
 </form>
 </div>
+<ul style="text-align:center;">
+                    
+                    <a href="Login.php" style="text-align:right;">Home</a>|
+                    <a href="#" style="text-align:right;">About</a>|
+                    <a href="#" style="text-align:right;">Contact Us</a>|
+                    <a href="tradesmanLogin.php" style="text-align:right;">Tradesman Login</a>
+               </ul>
 </body>
 </html>
