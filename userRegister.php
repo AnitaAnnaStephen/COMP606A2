@@ -24,7 +24,7 @@ var check = function() {
 }
 </script>
 </head>
-<body style="background-color:silver;">
+<body style="background-color:white;">
 
 
 <div id="registration">
@@ -38,11 +38,19 @@ var check = function() {
 <p><label>PO</label><input name="po" type="text" required="true" style="border-radius: 5px;height: 20px;" placeholder ="PO"></p> 
 <p><label>Email</label><input name="email" type="email" required="true" style="border-radius: 5px;height: 20px;" placeholder ="Email Address"></p> 
 <p><label>Phone</label><input name="phone" type="text" required="true" pattern="^\+?\d{0,13}"style="border-radius: 5px;height: 20px;"  placeholder ="Mobile Number"></p>
-<p><label>Password</label><input name="password" id="password" type="password" pattern="[A-Za-z0-9]{8,15}" title="Minimum 8 characters" onkeyup='check();' style="border-radius: 5px;height: 20px;" required="true" placeholder ="Password" ></p>
-<p><label>Confirm Password</label><input name="repassword" id="repassword" type="password" style="border-radius: 5px;height: 20px;" pattern="[A-Za-z0-9^\w]{8,15}" title="Minimum 8 characters" onkeyup='check();' style="border-radius: 5px;height: 20px;" required="true" placeholder ="Confirm Password"><span id='message'></span></p>
+<p><label>Password</label><input name="password" id="password" type="password" pattern="[A-Za-z0-9]{3,15}" title="Minimum 3 characters" onkeyup='check();' style="border-radius: 5px;height: 20px;" required="true" placeholder ="Password" ></p>
+<p><label>Confirm Password</label><input name="repassword" id="repassword" type="password" style="border-radius: 5px;height: 20px;" pattern="[A-Za-z0-9^\w]{3,15}" title="Minimum 3 characters" onkeyup='check();' style="border-radius: 5px;height: 20px;" required="true" placeholder ="Confirm Password"><span id='message'></span></p>
 
 <p style="text-align: center;padding-top: 15px;"><button type="submit" id="btn"  value="Register">Register</button></p>
 </form>
 </div>
+
+<ul style="text-align:center;">
+                    
+                    <a href="Login.php" style="text-align:right;">Home</a>|
+                    <a href="#" style="text-align:right;">About</a>|
+                    <a href="#" style="text-align:right;">Contact Us</a>|
+                    <a href="tradesmanLogin.php" style="text-align:right;">Tradesman Login</a>
+               </ul>
 </body>
 </html>
