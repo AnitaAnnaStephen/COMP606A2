@@ -141,7 +141,10 @@ class Estimate{
     // get that record and create estimate object 
     // return estimate object OR false if we cannot find it
     $result = false;
-    $sql = sprintf("select * from estimatedetails where isdeleted=0 and tid=%s", $tid);
+    $today=date('Y-m-d');
+    //echo $today;
+    $sql = sprintf("select * from estimatedetails e join jobdetails j on e.JobId=j.JobId where e.isdeleted=0 and e.tid=%s and j.ActiveDate>='%s'", $tid,$today);
+    //echo $sql;
     $result = $mysqli->query($sql);    
     $estimate = false;
     if ($result){
@@ -154,6 +157,27 @@ class Estimate{
     return $estimates;   
   } 
 
+  public static function findExpiredBytradesman($mysqli, $tid){
+    // search jobdetails table for given user id  and locate record with id
+    // get that record and create job object 
+    // return job object OR false if we cannot find it
+    $result = false;
+    $today=date('Y-m-d');
+  //echo $today;
+    $sql = sprintf("select * from estimatedetails e join jobdetails j on j.jobid=e.jobid where e.isdeleted=0 and e.tid=%s and j.ActiveDate<'%s'", $tid,$today);
+    $result = $mysqli->query($sql);    
+    $estimates = false;
+    if ($result){
+      //echo $sql;
+      $estimates = new Collection();
+      while($row = $result->fetch_assoc()){
+        $estimate = new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted'],$row['IsDeleted']);
+       //echo $row['ActiveDate'];
+        $estimates->Add($row['EstimateId'], $estimate);      
+      }    
+    }
+    return $estimates;
+  } 
   public static function findByTradesmanAndJob($mysqli, $jid,$tid){
     // search estimatedetails table based on tradesmanid and locate record with id
     // get that record and create estimate object 
@@ -188,6 +212,21 @@ class Estimate{
     return $estimates;    
   }
 
+  public static function getAcceptedEstimatePerJob($mysqli,$jid){
+    // get all estimates based on jobid and return as a collection of estimate objects
+    // returns false or a collection of estimate objects
+    $sql = sprintf("select * from estimatedetails where isdeleted=0 and IsAccepted=1 and jobid=%s",$jid);
+    $result = $mysqli->query($sql);    
+    $estimate = false;
+    if ($result){
+      
+      while($row = $result->fetch_assoc()){
+        $estimate =  new Estimate($row['EstimateId'], $row['JobId'],$row['TId'], $row['MaterialCost'], $row['LabourCost'], $row['TotalCost'], $row['ExpirationDate'],$row['IsAccepted'],$row['IsDeleted']);
+             
+      }    
+    }
+    return $estimate;    
+  }
   public static function getAll($mysqli){
     // get all estimates based on jobid and return as a collection of estimate objects
     // returns false or a collection of estimate objects
