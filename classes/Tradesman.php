@@ -86,8 +86,8 @@ class Tradesman{
         $row = $qresult->fetch_assoc();
         $tradesman = new Tradesman($row['TId'], $row['FirstName'], $row['LastName'], $row['Email'], $row['Phone'], $row['Password'], $row['UId']);
         //$_SESSION['username']=$email;//initialising session
-        $_SESSION['firstname']=$row['FirstName'];
-        $_SESSION['lastname']=$row['LastName'];
+       // $_SESSION['firstname']=$row['FirstName'];
+        //$_SESSION['lastname']=$row['LastName'];
         $result = $tradesman;
       }
     }
