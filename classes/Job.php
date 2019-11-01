@@ -49,7 +49,7 @@ class Job{
     // get that record and create job object 
     // return job object OR false if we cannot find it
     $result = false;
-    $sql = sprintf("select * from jobdetails where isclosed=0 and jobid=%s", $jid);
+    $sql = sprintf("select * from jobdetails where  jobid=%s", $jid);
     $qresult = $mysqli->query($sql);
     if ($qresult){
       if ($qresult->num_rows == 1){
@@ -66,27 +66,56 @@ class Job{
     // get that record and create job object 
     // return job object OR false if we cannot find it
     $result = false;
-    $sql = sprintf("select * from jobdetails where IsClosed=0 and UId=%s", $uid);
+    $today=date('Y-m-d');
+  //echo $today;
+    $sql = sprintf("select * from jobdetails where IsClosed=0 and UId=%s and ActiveDate>='%s'", $uid,$today);
     $result = $mysqli->query($sql);    
     $job = false;
     if ($result){
+      //echo $sql;
       $jobs = new Collection();
       while($row = $result->fetch_assoc()){
         $job = new Job($row['JobId'],$row['UId'], $row['JobType'], $row['JobDescription'], $row['Location'], $row['CostRange'], $row['ActiveDate'], $row['EstimateDate'],$row['IsClosed']);
+       //echo $row['ActiveDate'];
         $jobs->Add($row['JobId'], $job);      
       }    
     }
     return $jobs;
   } 
 
-  public static function getAll($mysqli){
-    // get all jobs and return as a collection of job objects
-    // returns false or a collection of job objects
-    $sql = "select * from jobdetails where IsEstimateAccepted=0 and IsClosed=0";
+  public static function findExpiredByUser($mysqli, $uid){
+    // search jobdetails table for given user id  and locate record with id
+    // get that record and create job object 
+    // return job object OR false if we cannot find it
+    $result = false;
+    $today=date('Y-m-d');
+  //echo $today;
+    $sql = sprintf("select * from jobdetails where IsClosed=0 and IsEstimateAccepted=1 and UId=%s and ActiveDate<'%s'", $uid,$today);
     $result = $mysqli->query($sql);    
     $job = false;
     if ($result){
+      //echo $sql;
       $jobs = new Collection();
+      while($row = $result->fetch_assoc()){
+        $job = new Job($row['JobId'],$row['UId'], $row['JobType'], $row['JobDescription'], $row['Location'], $row['CostRange'], $row['ActiveDate'], $row['EstimateDate'],$row['IsClosed']);
+       //echo $row['ActiveDate'];
+        $jobs->Add($row['JobId'], $job);      
+      }    
+    }
+    return $jobs;
+  } 
+
+  
+  public static function getAll($mysqli){
+    // get all jobs and return as a collection of job objects
+    // returns false or a collection of job objects
+    $today=date('Y-m-d');
+    //echo $today;
+    $sql = sprintf("select * from jobdetails where IsEstimateAccepted=0 and IsClosed=0 and  ActiveDate>='%s'",$today);
+    $result = $mysqli->query($sql);    
+    $jobs = false;
+    if ($result){
+           $jobs = new Collection();
       while($row = $result->fetch_assoc()){
         $job =  new Job($row['JobId'],$row['UId'], $row['JobType'], $row['JobDescription'], $row['Location'], $row['CostRange'], $row['ActiveDate'], $row['EstimateDate'],$row['IsClosed']);
         $jobs->Add($row['JobId'], $job);      
