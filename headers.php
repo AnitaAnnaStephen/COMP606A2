@@ -27,20 +27,22 @@ session_start();
     <a class="" href="#"><img src="logo.jpg" alt="logo" style="width:40px;margin-top:10px"></a>
     </div>
     <ul class="nav navbar-nav">
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Hello <?php echo $_SESSION['firstname'] ?> <span class="caret"></span></a>
+    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Hello <?php echo $_SESSION['firstname']; ?> <span class="caret"></span></a>
       <!-- <li><a class="nav-link" href="userPage.php">View Jobs</a></li> -->
       <li><?php 
                     //toggle to show login, signup and logout button
                     if($_SESSION['uid']<>''){ 
+                      
                     echo  "<li><a class=\"nav-link\" href=\"UserPage.php?uid=".$_SESSION['uid']."\">Home </a></li>";
                     echo "<li><a class=\"nav-link\" href=\"viewAllJobs.php\">View All Jobs</a></li>";
+                    echo "<li><a class=\"nav-link\" href=\"viewExpiredJobs.php?uid=".$_SESSION['uid']."\">View Past Jobs</a></li>";
                     echo "<li><a data-toggle=\"modal\" data-target=\"#myModal\">Post Job</a></li>";
                     
                     
                  }else{
                   echo "<li><a class=\"nav-link\" href=\"TradesmanPage.php?tid=".$_SESSION['tid']."\">Home</a></li>";
                   echo "<li><a class=\"nav-link\" href=\"viewJobs.php?tid=".$_SESSION['tid']."\">View Jobs</a></li>";
-                  
+                  echo "<li><a class=\"nav-link\" href=\"viewPastEstimates.php?tid=".$_SESSION['tid']."\">View Past Estimates</a></li>";
                  } 
                  ?></li>
       
