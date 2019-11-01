@@ -40,8 +40,8 @@ require_once("headers.php");
       foreach($estimates->getRecords() as $id => $estimate)
       {
        $count=$count+1;
-                                  
-     }
+      }
+     //echo $count;
      //Check if tradesman has posted any estimates'
       if($count ==0)
       {
@@ -53,23 +53,33 @@ require_once("headers.php");
       { 
         //Display all estimates posted by the tradesman
          foreach($estimates->getRecords() as $id => $estimate)
-         {?>
+         { ?>
          <div class="col-sm-4" >
          <div class="panel panel-primary">
          <?php $job= Job :: find($mysqli,$estimate->getJobId());?>
-         <!-- <div class="panel-heading"><?php echo $job->getJobType(); ?></div> -->
-         <?php if($estimate->getIsAccepted() == 1) {
-           $bcolor="#dff0d8";
-          $color="3c763d";
-          echo '<div class="panel-heading" style="background-color:green;">'.$job->getJobType().'</div>';
-          $status="Accepted";
-         }
-         else{
-           $bcolor="white";
-           $color="black";
-           $status="";
-           echo '<div class="panel-heading">'.$job->getJobType().'</div>';
-         } 
+         
+         <?php 
+           if($estimate->getIsAccepted() == 1 && $job->getIsClosed() == 0)
+            {
+              $bcolor="#dff0d8";
+              $color="3c763d";
+              echo '<div class="panel-heading" style="background-color:green;">'.$job->getJobType().'</div>';
+              $status="Accepted";
+            }
+           else if ($job->getIsClosed() == 1)
+           {
+              $bcolor="white";
+              $color="black";
+              $status="Job removed";
+              echo '<div class="panel-heading" style="background-color:red;">'.$job->getJobType().'</div>';
+           } 
+           else 
+           {
+              $bcolor="white";
+              $color="black";
+              $status="Pending";
+              echo '<div class="panel-heading" >'.$job->getJobType().'</div>';
+            }
          
          echo '<div class=\"panel-body\" id=\"background\" style=\"height:400px;background-color:'.$bcolor.';color:'.$color.';">';
         
@@ -91,59 +101,31 @@ require_once("headers.php");
         
         </div>
 
-         <div class="panel-footer pviewestimate" style="text-align: center;">
-            
-            <!-- <input type="hidden" value="<?php echo $estimate->getEstimateId(); ?>" > -->
-            
-            <?php 
-            if ($estimate->getIsAccepted()==0)
+            <div class="panel-footer pviewestimate" style="text-align: center;">            
+           <?php   
+            if ($estimate->getIsAccepted()==0 && $job->getIsClosed() == 0)
             {
               
               echo "<a href=\"editEstimate.php?id=".$estimate->getEstimateId()."&tid=".$_GET['tid']."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary viewestimate\">Edit </a>";
               echo "<a href=\"deleteEstimateDB.php?id=".$estimate->getEstimateId()."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary viewestimate\" onclick=\"return confirm('Are you sure to remove your estimate?')\">Delete </a>";
   
             }
-            else
+           
+            if($estimate->getIsAccepted() == 1 && $job->getIsClosed() == 0)
             {
               // echo "<a href=\"#\" class=\"btn btn-primary viewestimate\" disabled style=\"width: 100px;margin-left: 25px;background-color: green;\" >Accepted </a>";
-              $user = User::getByUserId($mysqli, $job->getUserId());
               
-              echo '<a data-toggle="modal" data-target="" class="btn btn-primary viewestimate" style="background-color: green;" name="viewestimate">Click here to view client details</a>';
+              echo "<a href=\"showClientDetails.php?uid=".$job->getUserId()."\"  style=\"background-color: green;\" class=\"btn btn-primary viewestimate\">Click here to view client details</a>";
+              // echo '<a data-toggle="modal" data-target="" class="btn btn-primary viewestimate" style="background-color: green;" name="viewestimate">Click here to view client details</a>';
               
+            }
+            else if ($job->getIsClosed() == 1)
+            {
+              echo "<a href=\"deleteEstimateDB.php?id=".$estimate->getEstimateId()."\"  style=\"background-color: red;\" class=\"btn btn-primary viewestimate\" onclick=\"return confirm('Are you sure to remove your estimate?')\">Delete the Estimate</a>";
             }
            
             ?>
-             <!-- Modal -->
- <div id="" class="modal fade estimate" role="dialog">
-            <div class="modal-dialog modal-lg">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                <div class="modal-header" style="text-align:center;background-color:#337ab7;">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2 class="modal-title"><b>View Client Details</b></h2>
-                </div>
-                <div class="modal-body">
-                    <p><label>Client Name :</label><?php echo $user->getFName().' '.$user->getLName(); ?></p>
-                    <p><label>Address     :</label><?php echo $user->getAddress().' , '.$user->getSuburb(); ?></p>
-                    <p><label>P.O         :</label><?php echo $user->getPO(); ?></p>
-                    <p><label>City        :</label><?php echo $user->getCity(); ?></p>
-                    <p><label>Phone Number:</label><?php echo $user->getPhone(); ?></p>
-                    <p><label>Email       :</label><?php echo $user->getEmail(); ?></p>
-                    <?php
-                                        
-                    ?>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-                </div>
-
             </div>
-            </div>
-            <!-- end Modal -->
-        </div>
 
 </div>
 </div>
