@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2019 at 10:20 AM
+-- Generation Time: Nov 01, 2019 at 02:09 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -45,16 +45,11 @@ CREATE TABLE `estimatedetails` (
 --
 
 INSERT INTO `estimatedetails` (`EstimateId`, `JobId`, `TId`, `LabourCost`, `MaterialCost`, `TotalCost`, `ExpirationDate`, `IsAccepted`, `IsDeleted`) VALUES
-(47, 8, 12, 120, 100, 220, '2019-12-30', 1, 1),
-(49, 6, 12, 90, 200, 290, '2019-11-25', 0, 0),
-(52, 13, 13, 50, 120, 170, '2019-12-30', 0, 1),
-(54, 12, 13, 50, 90, 140, '2019-12-22', 0, 1),
-(59, 13, 13, 90, 120, 210, '2019-12-24', 1, 0),
-(60, 12, 13, 50, 90, 140, '2019-12-25', 0, 1),
-(61, 6, 13, 70, 200, 270, '2019-11-26', 0, 0),
-(62, 12, 13, 90, 40, 130, '2019-12-23', 1, 0),
-(63, 12, 12, 50, 70, 120, '2019-12-20', 0, 0),
-(65, 15, 13, 150, 400, 550, '2019-12-25', 1, 0);
+(69, 18, 15, 100, 250, 350, '2019-12-28', 0, 0),
+(71, 20, 15, 90, 50, 140, '2020-01-26', 0, 0),
+(72, 23, 15, 30, 40, 70, '2019-12-25', 1, 0),
+(73, 22, 15, 100, 150, 250, '2019-12-30', 1, 0),
+(74, 24, 15, 200, 150, 350, '2019-12-12', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -80,12 +75,15 @@ CREATE TABLE `jobdetails` (
 --
 
 INSERT INTO `jobdetails` (`JobId`, `UId`, `JobType`, `JobDescription`, `Location`, `CostRange`, `ActiveDate`, `EstimateDate`, `IsClosed`, `IsEstimateAccepted`) VALUES
-(6, 18, 'fencing', 'Put fencing around a 10 acre property', 'Frankton', 250, '2019-11-30', '2019-11-25', 0, 0),
-(8, 14, 'Plumbing', 'Repair kitchen plumming', 'Lyon Street', 200, '2020-01-30', '2020-01-15', 1, 0),
-(12, 19, 'Repairing', 'Car body repairing', 'Mahoe', 100, '2019-12-25', '2019-12-20', 0, 1),
-(13, 14, 'Plumbing', 'Repair bathroom plumming', 'Mahoe', 160, '2019-12-25', '2019-12-20', 0, 0),
-(14, 14, 'Electrical', 'Landscape lighting for a new house', 'Hamilton', 250, '2019-12-30', '2019-12-26', 1, 1),
-(15, 14, 'Roofing', 'Repair the roofing to prevent leakage', 'Hamilton', 450, '2020-01-01', '2019-12-25', 0, 1);
+(18, 14, 'Roofing', 'Repair the roofing to prevent leakage', 'Queens Ave', 350, '2019-11-30', '2019-12-25', 1, 0),
+(19, 14, 'Electrical', 'Dining room lighting and rewiring', 'Queens Ave', 150, '2020-01-01', '2019-12-25', 1, 0),
+(20, 14, 'Cleaning', 'Garage and attic cleaning', 'Queens Avenue', 150, '2019-01-30', '2020-02-25', 1, 1),
+(21, 14, 'Roofing', 'Repair the roofing to prevent leakage', 'Queens Ave', 150, '2019-10-31', '2019-11-01', 0, 1),
+(22, 19, 'Electrical', 'Dining room lighting and rewiring', 'Lyon Street', 200, '2019-12-30', '2019-12-25', 0, 1),
+(23, 19, 'Washing', 'Car Washing and waxing', 'Beatty Street', 50, '2019-10-31', '2019-12-20', 0, 1),
+(24, 14, 'Plumbing', 'Repair bathroom plumbing', 'Dinsdale', 200, '2019-12-20', '2019-12-15', 0, 0),
+(25, 14, 'Fencing', 'Put fence around 25 acre property', 'Napier', 800, '2020-01-01', '2019-12-30', 0, 0),
+(26, 19, 'Catering', 'Prepare and serve food for 15 people', 'Melville', 1000, '2019-11-15', '2019-11-10', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -108,9 +106,9 @@ CREATE TABLE `tradesmandetails` (
 --
 
 INSERT INTO `tradesmandetails` (`TId`, `FirstName`, `LastName`, `Email`, `Phone`, `Password`, `UId`) VALUES
-(12, 'anna', 'Anita', 'anna@mail.com', 2041871686, '25d55ad283aa400af464c76d713c07ad', 14),
 (13, 'don', 'dan', 'don@mail.com', 2041871686, '25f9e794323b453885f5181f1b624d0b', 0),
-(14, 'RAYMOL', 'MATHEW', 'anna.stephen@gmail.com', 2041871686, '25d55ad283aa400af464c76d713c07ad', 0);
+(14, 'RAYMOL', 'MATHEW', 'anna.stephen@gmail.com', 2041871686, '25d55ad283aa400af464c76d713c07ad', 0),
+(15, 'stefan', 'salvatore', 'stefan@123.com', 2041871686, '202cb962ac59075b964b07152d234b70', 0);
 
 -- --------------------------------------------------------
 
@@ -178,19 +176,19 @@ ALTER TABLE `userdetails`
 -- AUTO_INCREMENT for table `estimatedetails`
 --
 ALTER TABLE `estimatedetails`
-  MODIFY `EstimateId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `EstimateId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `jobdetails`
 --
 ALTER TABLE `jobdetails`
-  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tradesmandetails`
 --
 ALTER TABLE `tradesmandetails`
-  MODIFY `TId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `TId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `userdetails`
