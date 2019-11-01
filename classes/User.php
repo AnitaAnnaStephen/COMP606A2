@@ -43,7 +43,7 @@ class User{
       $_SESSION['username']=$email;//initialising session
         $_SESSION['firstname']=$fname;
         $_SESSION['lastname']=$lname;
-        $_SESSION['tid']=$uid;
+        $_SESSION['uid']=$uid;
      }    
     return $result;
   }
