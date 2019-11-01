@@ -35,6 +35,7 @@ session_start();
           foreach($jobs->getRecords() as $id => $job)
           {
              $count=$count+1;
+             //var_dump($job);
             
           }
           //echo $count;
@@ -46,13 +47,14 @@ session_start();
            
           }
           else{
-             foreach($jobs->getRecords() as $id => $job){  ?>
+             foreach($jobs->getRecords() as $id => $job){ 
+              //var_dump($job); ?>
 
 <div class="col-sm-4" >
       <div class="panel panel-primary">
         <div class="panel-heading"><?php echo $job->getJobType(); ?></div>
         <div class="panel-body" style="height:230px">
-        <p><?php echo $job->getJobDescription(); ?></p>
+        <p><b><?php echo $job->getJobDescription(); ?></b></p>
         <p>Location: <b><?php echo $job->getLocation(); ?></b></p>
         <p>Cost: <b><?php echo $job->getCost(); ?></b></p>
         <p>Date: <b><?php echo $job->getActiveDate(); ?></b></p>
@@ -70,7 +72,7 @@ session_start();
             ?>      
             <!-- Modal -->
             <div id="" class="modal fade estimate" role="dialog">
-            <div class="modal-dialog modal-lg">
+               <div class="modal-dialog modal-lg">
 
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -138,7 +140,7 @@ session_start();
                             echo "</table>";
                       }
                       else{
-                        echo "<p style=\"text-align: center;\"><b>No Estimates yet...........!<b></p>";
+                        echo "<p style=\"text-align: center;\"><b>No Estimates yet...........!</b></p>";
                       }
                    
                     ?>
