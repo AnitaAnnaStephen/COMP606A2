@@ -89,7 +89,7 @@ class Job{
   } 
 
   public static function findExpiredByUser($mysqli, $uid){
-    // search jobdetails table for given user id  and locate record with id
+    // search jobdetails table for given user id  and locate record with id if active date is passed
     // get that record and create job object 
     // return job object OR false if we cannot find it
     $result = false;
