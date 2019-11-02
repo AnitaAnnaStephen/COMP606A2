@@ -3,11 +3,14 @@
 
 require_once("headers.php");
 
-
 //Calling create function in Job class
 $job = Job::create($mysqli,$_SESSION['uid'], $_POST['jtype'],$_POST['jdescription'], $_POST['jlocation'], $_POST['crange'], $_POST['actdate'], $_POST['estenddate'],'0');
-
-if (is_null($job)){
+$today=date('Y-m-d');//getting current date
+if (!($job)){
+    // if($_POST['actdate']<$today ||  $_POST['estenddate']<$today)
+    // {
+    //     $_SESSION["error"]="Active date and Estimation Date should not be past date";
+    // }
     "<h2>failed to add result</h2>";
 } else {
     echo "<p>Job Posted </p>";

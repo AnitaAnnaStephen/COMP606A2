@@ -34,13 +34,18 @@ class Job{
     // create a job object and return it otherwise return false;
     $jid=0;
     $result = false;
-    $sql = sprintf("insert into jobdetails(uid,jobtype, jobdescription, location, costrange,activedate,estimatedate,isclosed) values('%s','%s', '%s', '%s', '%s', '%s', '%s', '%s')", $uid, $jtype,$jdescription,$location ,$cost, $activedate,$estimationdate,$isclosed);
+    // $today=date('Y-m-d');//getting current date
+    // if($activedate>=$today && $estimationdate >= $today)
+    // {
+      $sql = sprintf("insert into jobdetails(uid,jobtype, jobdescription, location, costrange,activedate,estimatedate,isclosed) values('%s','%s', '%s', '%s', '%s', '%s', '%s', '%s')", $uid, $jtype,$jdescription,$location ,$cost, $activedate,$estimationdate,$isclosed);
     $qresult = $mysqli->query($sql);
     if ($qresult){
       $jid = $mysqli->insert_id;
       $job = new Job($jid,$uid,$jtype,$jdescription,$location,$cost, $activedate,$estimationdate,$isclosed);
       $result = $job;
     }
+   // }
+    
     return $result;
   }
 
