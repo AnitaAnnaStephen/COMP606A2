@@ -1,3 +1,4 @@
+<!-- Page to enter estimate details and send details to the create estimate function  -->
 <?php
 
 require_once("headers.php");
