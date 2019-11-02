@@ -1,3 +1,4 @@
+<!-- Class to store the objects as an array and retrieve each record -->
 <?php
 
 class Collection {
