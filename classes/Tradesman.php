@@ -52,6 +52,44 @@ class Tradesman{
     return $result;
   }
 
+  public static function changePassword($mysqli, $email, $phone,$password){
+    // create a new tradesman record in tradesmandetails table and if successful 
+    // create a tradesman object and return it otherwise return false;
+    $tid=0;
+    $sql = sprintf("select * from tradesmandetails where email='%s' and phone='%s'", $email,$phone);
+    //echo $sql;
+    $qresult = $mysqli->query($sql);
+    if ($qresult){
+      if ($qresult->num_rows == 1){
+        $row = $qresult->fetch_assoc();
+        $tid = $row['TId'];
+        
+        }
+       
+    }
+    echo $tid;
+    $result = false;
+    if($tid>0)
+    {
+      //echo $password;
+      $password=md5($password);
+      
+      $sql1 = sprintf("update tradesmandetails set password= '%s' where TId='%s' ", $password, $tid);
+      //echo $sql1;
+      $qresult1 = $mysqli->query($sql1);
+      if ($qresult1){
+             
+        $result = true;
+         }
+    }
+    // else 
+    // {
+    //   $_SESSION['reseterror']="Invalid Email or phone number";
+    // }
+    
+    return $result;
+  }
+
   public static function find($mysqli, $email,$password){
     // search tradesmandetails table and locate record 
     // get that record and create tradesman object 
