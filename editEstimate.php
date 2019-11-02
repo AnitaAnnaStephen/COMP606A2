@@ -1,3 +1,4 @@
+<!-- PAge to edit the estimate by tradesman -->
 <?php 
 require_once("headers.php");
 
@@ -14,8 +15,6 @@ else{
 //$estimate=Estimate::find($mysqli,$_GET['id']);
 
 $job=Job::find($mysqli,$estimate->getJobId());
-//var_dump($job);
-//echo $job->getJobType();
 ?>
 <html>
 
@@ -109,7 +108,7 @@ input[type=submit]:hover {
      margin-left:150px;
 }
 
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+
 @media screen and (max-width: 600px) {
   .col-25, .col-75, input[type=submit] {
     width: 100%;
@@ -147,9 +146,9 @@ input[type=submit]:hover {
                     }
                 ?>
             <!-- </div> -->
-                    <!-- <div class="modal-body" style="text-align:center;background-color:white;"> -->
+                    
 					<form method="post" id="insert_form" action="editEstimateDB.php">
-					<!-- <p><label>Job Id</label><input name="jobId" type="text" value="<?php echo $estimate->getJobId();?>"></p>  -->
+					
                          <div class="row"><div class="col-25"><label>Job Type</label></div> <div class="col-75"><input name="jtype" type="text" required="true"disabled value="<?php echo $job->getJobType();?>"></div></div>
                          <div class="row"><div class="col-25"><label>Job Description</label></div> <div class="col-75"><textarea name="jdescription" disabled type="text" value=""><?php echo $job->getJobDescription();?></textarea></div></div>
                          <div class="row"><div class="col-25"><label>Customer Cost Range</label></div> <div class="col-75"><input name="crange" type="text" disabled value="<?php echo $job->getCost();?>"></div></div>
