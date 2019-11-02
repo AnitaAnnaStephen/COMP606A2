@@ -1,3 +1,4 @@
+<!-- Header page with navigation bar and db connect -->
 <?php
 
 require "libs/dbconnect.php";
