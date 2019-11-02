@@ -116,7 +116,7 @@ class Job{
     // returns false or a collection of job objects
     $today=date('Y-m-d');
     //echo $today;
-    $sql = sprintf("select * from jobdetails where IsEstimateAccepted=0 and IsClosed=0 and  ActiveDate>='%s'",$today);
+    $sql = sprintf("select * from jobdetails where IsClosed=0 and  ActiveDate>='%s'",$today);
     $result = $mysqli->query($sql);    
     $jobs = false;
     if ($result){
