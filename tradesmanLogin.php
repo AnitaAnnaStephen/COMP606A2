@@ -47,7 +47,7 @@
             </p>
             <p>
              <button type="submit" id="btn" name="login" > Login </button> 
-            <a href="ForgotPassword.php" style="padding-left: 10px;">Forgot Password?</a>
+            <a href="tradesmanForgotPassword.php" style="padding-left: 10px;">Forgot Password?</a>
             </p>
             <?php
             $error ="";
