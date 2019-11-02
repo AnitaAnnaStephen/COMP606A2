@@ -93,6 +93,48 @@ input[type=submit]:hover {
   }
 }
 </style>
+<script>
+function dateValidate(sdate)
+{
+    var pickeddate =  new Date(sdate.value);
+    var todayDate =  new Date();
+    if( pickeddate > todayDate )
+    {
+       return true;
+    }
+    else
+    {
+        alert("Enter a Future Date");
+    } 
+}
+function dateValidate2(edate)
+{
+    var pickeddate =  new Date(edate.value);
+    var todayDate =  new Date();
+    if( pickeddate > todayDate )
+    {
+       return true;
+    }
+    else
+    {
+        alert("Enter a Future Date");
+    } 
+}
+// function myFunction() {
+//   var v2 = document.getElementById('sdate');
+//   var v1 = document.getElementById('edate');
+//   if(new Date (v1.value)>new Date (v2.value))
+//   {
+//     alert("Estimate end date should be before job active date");
+//     return false;
+//   }
+//   else{
+//     //var v=getAttribute("sdate");
+//     alert(v1);
+//     return true;
+//   }
+// }
+</Script>
 </head>
 
 <body>
@@ -112,9 +154,9 @@ input[type=submit]:hover {
                          <div class="row"><div class="col-25"><label>Job Description</label></div> <div class="col-75"><textarea name="jdescription"  required="true" type="text" value=""><?php echo $job->getJobDescription();?></textarea></div></div>
                          <div class="row"><div class="col-25"><label>Job Location</label></div> <div class="col-75"><input name="location" required="true" type="text" value="<?php echo $job->getLocation();?>"></div></div>
                          <div class="row"><div class="col-25"><label>Customer Cost Range</label></div> <div class="col-75"><input name="crange" required="true" type="text"  value="<?php echo $job->getCost();?>"></div></div>
-                         <div class="row"><div class="col-25"><label>Job Start Date</label></div> <div class="col-75"><input name="sdate" type="date" required="true" value="<?php echo $job->getActiveDate();?>"></div> </div>
-                         <div class="row"><div class="col-25"><label>Estimate Date</label></div> <div class="col-75"><input name="edate" type="date" required="true" value="<?php echo $job->getEstimateDate();?>"></div></div> 
-                         <div class="row"><div class="col-75"><input type="submit" style="text-align:center;" value="Confirm"></div></div>
+                         <div class="row"><div class="col-25"><label>Job Start Date</label></div> <div class="col-75"><input name="sdate" type="date" required="true" onblur="return dateValidate(this)" value="<?php echo $job->getActiveDate();?>"></div> </div>
+                         <div class="row"><div class="col-25"><label>Estimate Date</label></div> <div class="col-75"><input name="edate" type="date" required="true" onblur="return dateValidate2(this)" value="<?php echo $job->getEstimateDate();?>"></div></div> 
+                         <div class="row"><div class="col-75"><input type="submit" style="text-align:center;" value="Confirm"  ></div></div>
 					</form>
 				<!-- </div> -->
                      
