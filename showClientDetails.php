@@ -113,7 +113,7 @@ input[type=submit]:hover {
                <div class="modal-content" style="height: 500px;width: 50%;margin-left: 350px;">
                     <div class="modal-header" style="text-align:center;background-color:#337ab7;">
                          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>   -->
-                         <h4 class="modal-title"><b>View Client Details</b></h4>
+                         <h4 class="modal-title"><b> Client Details</b></h4>
                    
                     </div>
                    
