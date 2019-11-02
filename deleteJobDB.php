@@ -1,7 +1,8 @@
-<!-- Page to check if username and password is correct -->
+<!-- Page to delete job -->
 
 <?php 
 require_once("heading.php");
+//Calling function to delete
 $deletejob=Job :: delete($mysqli,$_GET['id']);
 var_dump($deletejob);
 if(!$deletejob){
