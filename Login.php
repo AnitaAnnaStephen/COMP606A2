@@ -10,22 +10,13 @@
     </head>
     <body style="background-color:white;">
         <div id="header">
-        <!-- <p>
-            <img src="Logo.jpg" alt="Logo" width="100" height="100">
-            
-                
-            </p>
-            <p>
-                <h2>User Login </h2>
-            </p> -->
+        
         </div>
         <div id="login">
             <!-- <form action="" method="POST"> -->
             <form method="post" action="UserCheck.php" enctype="application/x-www-form-urlencoded">
             <p style="text-align: center;">
-            <img src="Logo.jpg" alt="Logo"  width="150" height="150">
-            
-                
+            <img src="Logo.jpg" alt="Logo"  width="150" height="150">                
             </p>
             <p>
             </p>
@@ -66,11 +57,7 @@
             </p>
         </div>
         </div>
-        <!-- <div id="register">
-            <p> <label style="font-weight:normal;">Don't have an account? </label>
-                <a href="userRegister.php">Register Now</a>
-            </p>
-        </div> -->
+       
         <ul style="text-align:center;">
                     
                      <a href="Login.php" style="text-align:right;">Home</a>|
