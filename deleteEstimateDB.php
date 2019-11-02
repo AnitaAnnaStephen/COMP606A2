@@ -1,7 +1,8 @@
-<!-- Page to check if username and password is correct -->
+<!-- Page to delete estimate -->
 
 <?php 
 require_once("heading.php");
+//Calling function to delete estimate
 $deleteestimate=Estimate :: delete($mysqli,$_GET['id']);
 var_dump($deleteestimate);
 if(!$deleteestimate){
