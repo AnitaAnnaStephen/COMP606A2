@@ -1,4 +1,4 @@
-<!-- Page to check if username and password is correct -->
+<!-- Page to edit Estimate details -->
 
 <?php 
 require_once("heading.php");
@@ -11,6 +11,7 @@ if($expdate>$start)
     header("Location:editEstimate.php?eid=".$_SESSION['eid']);//redirecting to edit estimate page
 }
 else{
+    //Calling function to edit Estimate.
     $editestimate=Estimate :: edit($mysqli,$_POST['eid'], $_POST['mcost'], $_POST['lcost'], $_POST['expdate']);
     //var_dump($editestimate);
     if(!$editestimate){
