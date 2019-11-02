@@ -1,4 +1,4 @@
-<!-- Class Estimate having functions to update ,edit and delete estimates as well fetch estimates based on conditions -->
+<!-- Class Review having functions to add review as well fetch reviews based on conditions -->
 <?php
 
 class Review{
@@ -11,7 +11,7 @@ class Review{
   private $rating = "";
 
   
-  // constructor to create new estimate object
+  // constructor to create new review object
   public function __construct($rid, $eid,$comment, $rating){
     $this->eid = $eid;
     $this->rid = $rid;
@@ -21,8 +21,8 @@ class Review{
       }
 
       public static function create($mysqli,$eid,$comment, $rating){
-        // create a new estimate record in estimatedetails table and if successful 
-        // create a estimate object and return it otherwise return false;
+        // create a new review record in reviewdetails table and if successful 
+        // create a review object and return it otherwise return false;
         $rid=0;
         $result = false;
         $sql = sprintf("insert into reviewdetails(EstimateId,Comment, Rating) values('%s', '%s','%s')",  $eid,$comment,$rating);
@@ -36,9 +36,9 @@ class Review{
       }
 
       public static function find($mysqli, $eid){
-        // search estimatedetails table and locate record with id
-        // get that record and create estimate object 
-        // return estimate object OR false if we cannot find it
+        // search reviewdetails table and locate record with id
+        // get that record and create review object 
+        // return review object OR false if we cannot find it
         $result = false;
         $sql = sprintf("select * from reviewdetails where EstimateId=%s", $eid);
         $qresult = $mysqli->query($sql);
