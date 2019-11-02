@@ -1,3 +1,4 @@
+<!-- Class Tradesman having functions to update ,edit tradesman details as well fetch tradesman details based on conditions -->
 <?php
 
 class Tradesman{
@@ -53,7 +54,7 @@ class Tradesman{
   }
 
   public static function changePassword($mysqli, $email, $phone,$password){
-    // create a new tradesman record in tradesmandetails table and if successful 
+    // update a tradesman record in tradesmandetails table and if successful 
     // create a tradesman object and return it otherwise return false;
     $tid=0;
     $sql = sprintf("select * from tradesmandetails where email='%s' and phone='%s'", $email,$phone);
