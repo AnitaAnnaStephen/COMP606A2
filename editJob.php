@@ -108,12 +108,12 @@ input[type=submit]:hover {
                     <!-- <div class="modal-body" style="text-align:center;background-color:white;"> -->
 					<form method="post" id="insert_form" action="editJobDB.php">
                         <input type="hidden" name="jid" value="<?php echo $job->getJobId();?>" />
-                         <div class="row"><div class="col-25"><label>Job Type</label></div> <div class="col-75"><input name="jtype" type="text"  value="<?php echo $job->getJobType();?>"></div></div>
-                         <div class="row"><div class="col-25"><label>Job Description</label></div> <div class="col-75"><textarea name="jdescription"  type="text" value=""><?php echo $job->getJobDescription();?></textarea></div></div>
-                         <div class="row"><div class="col-25"><label>Job Location</label></div> <div class="col-75"><input name="location"  type="text" value="<?php echo $job->getLocation();?>"></div></div>
-                         <div class="row"><div class="col-25"><label>Customer Cost Range</label></div> <div class="col-75"><input name="crange" type="text"  value="<?php echo $job->getCost();?>"></div></div>
-                         <div class="row"><div class="col-25"><label>Job Start Date</label></div> <div class="col-75"><input name="sdate" type="date"  value="<?php echo $job->getActiveDate();?>"></div> </div>
-                         <div class="row"><div class="col-25"><label>Estimate Date</label></div> <div class="col-75"><input name="edate" type="date"  value="<?php echo $job->getEstimateDate();?>"></div></div> 
+                         <div class="row"><div class="col-25"><label>Job Type</label></div> <div class="col-75"><input name="jtype" type="text"  required="true" value="<?php echo $job->getJobType();?>"></div></div>
+                         <div class="row"><div class="col-25"><label>Job Description</label></div> <div class="col-75"><textarea name="jdescription"  required="true" type="text" value=""><?php echo $job->getJobDescription();?></textarea></div></div>
+                         <div class="row"><div class="col-25"><label>Job Location</label></div> <div class="col-75"><input name="location" required="true" type="text" value="<?php echo $job->getLocation();?>"></div></div>
+                         <div class="row"><div class="col-25"><label>Customer Cost Range</label></div> <div class="col-75"><input name="crange" required="true" type="text"  value="<?php echo $job->getCost();?>"></div></div>
+                         <div class="row"><div class="col-25"><label>Job Start Date</label></div> <div class="col-75"><input name="sdate" type="date" required="true" value="<?php echo $job->getActiveDate();?>"></div> </div>
+                         <div class="row"><div class="col-25"><label>Estimate Date</label></div> <div class="col-75"><input name="edate" type="date" required="true" value="<?php echo $job->getEstimateDate();?>"></div></div> 
                          <div class="row"><div class="col-75"><input type="submit" style="text-align:center;" value="Confirm"></div></div>
 					</form>
 				<!-- </div> -->
