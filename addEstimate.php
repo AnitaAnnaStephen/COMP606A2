@@ -117,6 +117,22 @@ input[type=submit]:hover {
   }
 }
 </style>
+<script>
+function dateValidate2(expdate)
+{
+    var pickeddate =  new Date(expdate.value);
+    var todayDate =  new Date();
+    if( pickeddate > todayDate )
+    {
+       return true;
+    }
+    else
+    {
+        alert("Enter a Future Date");
+    } 
+}
+
+</Script>
 </head>
 <body>
 <?php 
@@ -166,7 +182,7 @@ input[type=submit]:hover {
           <div class="row"><div class="col-25"><label>Estimate Date</label></div> <div class="col-75"><input name="edate" type="date" required="true" disabled value="<?php echo $job->getEstimateDate();?>"></div></div>
           <div class="row"><div class="col-25"><label>Material Cost</label></div> <div class="col-75"><input name="mcost" required="true" type="number"></div></div>
           <div class="row"><div class="col-25"><label>Labour Cost</label></div> <div class="col-75"><input name="lcost" required="true" type="number"></div></div>
-          <div class="row"><div class="col-25"><label>Expiration Date</label></div> <div class="col-75"><input name="expdate" required="true" type="date"></div></div>
+          <div class="row"><div class="col-25"><label>Expiration Date</label></div> <div class="col-75"><input name="expdate" required="true" type="date" onblur="return dateValidate2(this)"></div></div>
           
           <input type="hidden" name="sdate" value="<?php echo $job->getActiveDate();?>">
           <input type="hidden" name="edate" value="<?php echo $job->getEstimateDate();?>">
