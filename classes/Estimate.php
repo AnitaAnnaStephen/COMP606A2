@@ -91,7 +91,7 @@ class Estimate{
     return $result;
   }
   public static function find($mysqli, $eid){
-    // search estimatedetails table and locate record with id
+    // search estimatedetails table and locate record with estimateid
     // get that record and create estimate object 
     // return estimate object OR false if we cannot find it
     $result = false;
@@ -179,7 +179,7 @@ class Estimate{
     return $estimates;
   } 
   public static function findByTradesmanAndJob($mysqli, $jid,$tid){
-    // search estimatedetails table based on tradesmanid and locate record with id
+    // search estimatedetails table based on tradesmanid and jobid and locate record with id
     // get that record and create estimate object 
     // return estimate object OR false if we cannot find it
     $result = false;
@@ -213,7 +213,7 @@ class Estimate{
   }
 
   public static function getAcceptedEstimatePerJob($mysqli,$jid){
-    // get all estimates based on jobid and return as a collection of estimate objects
+    // get all estimates based on jobid and Accept status
     // returns false or a collection of estimate objects
     $sql = sprintf("select * from estimatedetails where isdeleted=0 and IsAccepted=1 and jobid=%s",$jid);
     $result = $mysqli->query($sql);    
