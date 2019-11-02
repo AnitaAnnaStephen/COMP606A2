@@ -1,3 +1,4 @@
+<!-- Header page with dbconnect and autoloader -->
 <?php
 
 require "libs/dbconnect.php";
