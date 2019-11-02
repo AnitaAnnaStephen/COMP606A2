@@ -1,9 +1,7 @@
+<!-- Page to enter details to edit the Job details -->
 <?php 
 require_once("headers.php");
-//echo $estimate->getJobId();
 $job=Job::find($mysqli,$_GET['id']);
-//var_dump($job);
-//echo $job->getJobType();
 ?>
 <html>
 
