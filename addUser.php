@@ -1,7 +1,8 @@
+<!-- Page to add new User -->
 <?php
 
 require_once("heading.php");
-
+//Calling function to create new user
 $newUser = User::create($mysqli, $_POST['fname'], $_POST['lname'], $_POST['address'], $_POST['suburb'],$_POST['city'], $_POST['po'], $_POST['phone'], $_POST['email'], $_POST['password']);
 if(!$newUser){
     echo "<h2>Failed</h2>";
