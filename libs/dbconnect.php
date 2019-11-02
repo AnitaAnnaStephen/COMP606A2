@@ -1,3 +1,4 @@
+<!-- Database connection page -->
 <?php
 
 error_reporting(0);
