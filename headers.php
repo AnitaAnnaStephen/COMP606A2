@@ -79,13 +79,13 @@ echo "<li><a class=\"nav-link\" href=\"viewPastEstimates.php?tid=".$_SESSION['ti
 <div class="modal-body" style="text-align:center;background-color:white;">
 <p>Enter Job Details</p>
 <form method="post" action="addJob.php" enctype="application/x-www-form-urlencoded" class="">
-<p><div class="form-group"><label>Job Type</label><input name="jtype" type="text" class="form-control"></div></p>
+<p><div class="form-group"><label>Job Type</label><input name="jtype" type="text" required="true" class="form-control"></div></p>
 <!-- <p><label>Job Description</label><textarea rows="2"name="jdescription"  cols="20"></p> -->
-<p><div class="form-group"><label>Job Description</label><textarea name="jdescription" type="text" class="form-control"></textarea></div></p>
-<p><div class="form-group"><label>Location</label><input name="jlocation" type="text" class="form-control"></div></p>
-<p><div class="form-group"><label>Cost Range</label><input name="crange" type="number" class="form-control"></div></p>
-<p><div class="form-group"><label>Active Date</label><input name="actdate" type="date" class="form-control"></div></p>
-<p><div class="form-group"><label>Estimate End Date</label><input name="estenddate" type="date" class="form-control"></div></p>
+<p><div class="form-group"><label>Job Description</label><textarea name="jdescription" required="true" type="text" class="form-control"></textarea></div></p>
+<p><div class="form-group"><label>Location</label><input name="jlocation" required="true" type="text" class="form-control"></div></p>
+<p><div class="form-group"><label>Cost Range</label><input name="crange" required="true" type="number" class="form-control"></div></p>
+<p><div class="form-group"><label>Active Date</label><input name="actdate" required="true" type="date" class="form-control"></div></p>
+<p><div class="form-group"><label>Estimate End Date</label><input name="estenddate" required="true" type="date" class="form-control"></div></p>
 <input type="hidden" name="uid" value="<?php echo $_SESSION['uid'];?>">
 <p><input type="submit" value="Post Job" class="btn btn-primary"></p>
 </form>
