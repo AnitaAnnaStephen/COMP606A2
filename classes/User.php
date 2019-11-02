@@ -1,3 +1,4 @@
+<!-- Class User having functions to update ,edit user details as well fetch user details based on conditions -->
 <?php
 
 class User{
