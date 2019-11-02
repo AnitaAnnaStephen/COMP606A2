@@ -159,14 +159,14 @@ input[type=submit]:hover {
         <form method="post" action="addJobEstimate.php" enctype="application/x-www-form-urlencoded">
         <!-- <?php echo $job->getJobId();?> -->
            <!-- <p><label>Job Id</label><input name="jobId" type="text" value="<?php echo $job->getJobId();?>"></p>  -->
-          <div class="row"><div class="col-25"><label>Job Type</label></div> <div class="col-75"><input name="jtype" type="text" disabled value="<?php echo $job->getJobType();?>"></div></div>
-          <div class="row"><div class="col-25"><label>Job Description</label></div> <div class="col-75"><textarea name="jdescription" disabled type="text" value=""><?php echo $job->getJobDescription();?></textarea></div></div>
-          <div class="row"><div class="col-25"><label>Customer Cost Range</label></div> <div class="col-75"><input name="crange" type="number" disabled value="<?php echo $job->getCost();?>"></div></div> 
-          <div class="row"><div class="col-25"><label>Job Start Date:</label></div> <div class="col-75"><input name="sdate" type="date" disabled value="<?php echo $job->getActiveDate();?>"></div></div>
-          <div class="row"><div class="col-25"><label>Estimate Date</label></div> <div class="col-75"><input name="edate" type="date" disabled value="<?php echo $job->getEstimateDate();?>"></div></div>
-          <div class="row"><div class="col-25"><label>Material Cost</label></div> <div class="col-75"><input name="mcost" type="number"></div></div>
-          <div class="row"><div class="col-25"><label>Labour Cost</label></div> <div class="col-75"><input name="lcost" type="number"></div></div>
-          <div class="row"><div class="col-25"><label>Expiration Date</label></div> <div class="col-75"><input name="expdate" type="date"></div></div>
+          <div class="row"><div class="col-25"><label>Job Type</label></div> <div class="col-75"><input name="jtype" required="true" type="text" disabled value="<?php echo $job->getJobType();?>"></div></div>
+          <div class="row"><div class="col-25"><label>Job Description</label></div> <div class="col-75"><textarea name="jdescription" required="true" disabled type="text" value=""><?php echo $job->getJobDescription();?></textarea></div></div>
+          <div class="row"><div class="col-25"><label>Customer Cost Range</label></div> <div class="col-75"><input name="crange" required="true" type="number" disabled value="<?php echo $job->getCost();?>"></div></div> 
+          <div class="row"><div class="col-25"><label>Job Start Date:</label></div> <div class="col-75"><input name="sdate" type="date" required="true" disabled value="<?php echo $job->getActiveDate();?>"></div></div>
+          <div class="row"><div class="col-25"><label>Estimate Date</label></div> <div class="col-75"><input name="edate" type="date" required="true" disabled value="<?php echo $job->getEstimateDate();?>"></div></div>
+          <div class="row"><div class="col-25"><label>Material Cost</label></div> <div class="col-75"><input name="mcost" required="true" type="number"></div></div>
+          <div class="row"><div class="col-25"><label>Labour Cost</label></div> <div class="col-75"><input name="lcost" required="true" type="number"></div></div>
+          <div class="row"><div class="col-25"><label>Expiration Date</label></div> <div class="col-75"><input name="expdate" required="true" type="date"></div></div>
           
           <input type="hidden" name="sdate" value="<?php echo $job->getActiveDate();?>">
           <input type="hidden" name="edate" value="<?php echo $job->getEstimateDate();?>">
