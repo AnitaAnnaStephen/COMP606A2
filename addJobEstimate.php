@@ -1,13 +1,13 @@
+<!-- Page to add new Estimate by Tradesman for a job -->
 <?php
 
 require_once("headers.php");
 $start=$_POST['sdate'];
 $estimate=$_POST['edate'];
 $expdate=$_POST['expdate'];
-//echo $expdate;
-//echo $start;
+//Calling function to find if record already exists
 $existing=Estimate :: findByTradesmanAndJob($mysqli, $_POST['jobId'],$_SESSION['tid']);
-//var_dump($existing);
+
 if($existing)
 
 {
@@ -22,15 +22,16 @@ else if($expdate>$start)
 }
 else
 {
+    //Calling function to create estimate
     $estimate = Estimate::create($mysqli, $_POST['jobId'],$_SESSION['tid'], $_POST['mcost'], $_POST['lcost'], $_POST['expdate']);
-    //var_dump($estimate);
+    
     if (!$estimate){
         
         echo "<h2>failed to add estimate</h2>";
     } else {
         
         echo "<p>Estimate Posted </p>";
-       // echo $estimate->getTradesmanId();
+       
        header("Location:TradesmanPage.php?tid=".$estimate->getTradesmanId());//redirecting to tradesman profile
         
     }
