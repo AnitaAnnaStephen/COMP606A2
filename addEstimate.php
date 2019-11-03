@@ -15,7 +15,7 @@ else{
 
 //var_dump($job);
 require_once("footer.php");
-session_start();
+// session_start();
 ?>
 <html>
 
