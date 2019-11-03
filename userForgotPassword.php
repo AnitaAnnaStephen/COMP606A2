@@ -1,5 +1,5 @@
 <!-- Page for user to enter details to change password -->
-<?php require_once("heading.php");?>
+ <?php require_once("heading.php");?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tradesman Registeration</title>
+    <title>User Password Reset</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!-- <?php require("heading.php"); ?> -->
+        
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script>
 var check = function() {
