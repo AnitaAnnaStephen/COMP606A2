@@ -1,5 +1,8 @@
+
+<!-- Page to call function to get all expired jobs for a user  -->
 <?php
 require_once("headers.php");
+//Calling function to get all expired jobs
 $jobs = Job::findExpiredByUser($mysqli,$_GET['uid']);
 //var_dump($jobs);
 //echo $jobs->getJobId();
