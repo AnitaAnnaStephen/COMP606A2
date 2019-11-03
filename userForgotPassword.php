@@ -1,3 +1,4 @@
+<!-- Page for user to enter details to change password -->
 <?php require_once("heading.php");?>
 
 <!DOCTYPE html>
