@@ -2,22 +2,15 @@
 
 <?php 
 require_once("heading.php");
-
+//Calling function to check if user exists and password is correct
 $loggedUser = User::find($mysqli, $_POST['email'], $_POST['password']);
 
-if(!$loggedUser){
-   // echo "<h2>Invalid username or password </h2>";
-    //$error="Invalid username or password";
+if(!$loggedUser){//Redirecting to Login page
+   
     $_SESSION['error']="Invalid username or password";
     header("Location: Login.php");
 
-    //echo "Invalid username or password";
-    //echo "<script>setTimeout(\"location.href = 'Login.php';\",1500);</script>";
-
-//     echo '<script language="javascript">
-// alert("Invalid username or password");
-// window.location.href="Login.php";
-// </script>';
+   
 }
  
 else {
