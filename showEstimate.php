@@ -1,7 +1,8 @@
+<!-- Page to show all estimates for a Job -->
 <?php
 
 require_once("headers.php");
-
+//Calling function to get all estimates for a particular job
 $jobs = Estimate::getAllJob($mysqli, $_GET['id']);
 //$jobs->debug();
 echo "<table>";
