@@ -1,3 +1,4 @@
+<!-- Page for displaying all jobs for Tradesman -->
 <?php
 
 require_once("headers.php");
