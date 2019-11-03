@@ -1,3 +1,4 @@
+<!-- Page for registering as Tradesman -->
 <?php require_once("heading.php");?>
 
 <!DOCTYPE html>
