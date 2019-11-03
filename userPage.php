@@ -1,3 +1,4 @@
+<!-- Users home page -->
 <?php
 
 require_once("headers.php");
