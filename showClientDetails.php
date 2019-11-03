@@ -1,3 +1,4 @@
+<!-- Page for user to see client details -->
 <?php 
 require_once("headers.php");
 
@@ -6,7 +7,7 @@ require_once("footer.php");
 ?>
 
 <head>
-     <title> CLient Details</title>
+     <title> Client Details</title>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
      <style>
 * {
@@ -107,20 +108,13 @@ input[type=submit]:hover {
 
 <body>
 
-     <!-- <div class="container"> -->
     
-            <!-- <div class="row">  -->
                <div class="modal-content" style="height: 500px;width: 50%;margin-left: 350px;">
                     <div class="modal-header" style="text-align:center;background-color:#337ab7;">
                          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>   -->
                          <h4 class="modal-title"><b> Client Details</b></h4>
                    
                     </div>
-                   
-            <!-- </div> -->
-                    <!-- <div class="modal-body" style="text-align:center;background-color:white;"> -->
-					<!-- <form method="post" id="insert_form" action="editEstimateDB.php"> -->
-					
                          <div class="row"><div class="col-25"><label>Client Name </label></div> <div class="col-75"><input name="jtype" type="text" disabled value="<?php echo $user->getFName().' '.$user->getLName(); ?>"></div></div>
                          <div class="row"><div class="col-25"><label>Address</label></div> <div class="col-75"><textarea name="jdescription" disabled type="text" value=""><?php echo $user->getAddress().' , '.$user->getSuburb();?></textarea></div></div>
                          <div class="row"><div class="col-25"><label>P.O</label></div> <div class="col-75"><input name="crange" type="text" disabled value="<?php echo $user->getPO();?>"></div></div>
@@ -133,14 +127,10 @@ input[type=submit]:hover {
                          <div class="link"><?php echo "<a style=\"color:white;\" href=\"TradesmanPage.php?tid=".$tid."\" >Close</a>";?></div>
                          <!-- <input type="submit" style="text-align:center;" value="Confirm"> -->
                          </div></div>
-                         
-					<!-- </form> -->
-				<!-- </div> -->
+         
                      
                </div>
-          <!-- </div> -->
-     <!-- </div> -->
-     
+        
 </body>
 </html>
 <script>
