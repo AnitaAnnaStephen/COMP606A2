@@ -45,8 +45,8 @@ require_once("headers.php");
      //Check if tradesman has posted any estimates'
       if($count ==0)
       {
-        echo "You have not posted any estimates yet! Post one now....";
-        echo "<a href=\"viewJobs.php?tid=".$_GET['tid']."\" class=\"btn\" >Click here to view jobs</a> ";
+        echo "<h3 style=\"font-style:italic;\"> You have not posted any estimates yet! Post one now....!";
+        echo "<a href=\"viewJobs.php?tid=".$_GET['tid']."\" class=\"btn\" >Click here to view jobs</a></h3> ";
        
       }
       else
