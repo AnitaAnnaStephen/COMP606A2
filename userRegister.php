@@ -1,3 +1,4 @@
+<!-- Page for user to enter details to register -->
 <?php require_once("heading.php");?>
 
 <!DOCTYPE html>
