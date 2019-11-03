@@ -42,8 +42,8 @@ session_start();
           //echo $count;
           if($count ==0)
           {
-            echo "You have not posted any jobs yet! Post one now....";
-            echo "<a data-toggle=\"modal\" data-target=\"#myModal\">Click here to Post Job</a>";
+            echo '<h3 style="font-style:italic;">You have not posted any jobs yet! Post one now....';
+            echo "<a data-toggle=\"modal\" data-target=\"#myModal\">Click here to Post Job</a></h3>";
            
            
           }
