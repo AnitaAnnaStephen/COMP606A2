@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2019 at 02:09 PM
+-- Generation Time: Nov 04, 2019 at 12:41 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -79,11 +79,31 @@ INSERT INTO `jobdetails` (`JobId`, `UId`, `JobType`, `JobDescription`, `Location
 (19, 14, 'Electrical', 'Dining room lighting and rewiring', 'Queens Ave', 150, '2020-01-01', '2019-12-25', 1, 0),
 (20, 14, 'Cleaning', 'Garage and attic cleaning', 'Queens Avenue', 150, '2019-01-30', '2020-02-25', 1, 1),
 (21, 14, 'Roofing', 'Repair the roofing to prevent leakage', 'Queens Ave', 150, '2019-10-31', '2019-11-01', 0, 1),
-(22, 19, 'Electrical', 'Dining room lighting and rewiring', 'Lyon Street', 200, '2019-12-30', '2019-12-25', 0, 1),
+(22, 19, 'Electrical', 'Dining room lighting and rewiring', 'Lyon Street', 200, '2019-10-30', '2019-12-25', 0, 1),
 (23, 19, 'Washing', 'Car Washing and waxing', 'Beatty Street', 50, '2019-10-31', '2019-12-20', 0, 1),
 (24, 14, 'Plumbing', 'Repair bathroom plumbing', 'Dinsdale', 200, '2019-12-20', '2019-12-15', 0, 0),
 (25, 14, 'Fencing', 'Put fence around 25 acre property', 'Napier', 800, '2020-01-01', '2019-12-30', 0, 0),
 (26, 19, 'Catering', 'Prepare and serve food for 15 people', 'Melville', 1000, '2019-11-15', '2019-11-10', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviewdetails`
+--
+
+CREATE TABLE `reviewdetails` (
+  `rid` int(11) NOT NULL,
+  `EstimateId` int(11) NOT NULL,
+  `Comment` varchar(255) NOT NULL,
+  `Rating` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reviewdetails`
+--
+
+INSERT INTO `reviewdetails` (`rid`, `EstimateId`, `Comment`, `Rating`) VALUES
+(7, 73, 'Preety good', 4);
 
 -- --------------------------------------------------------
 
@@ -155,6 +175,12 @@ ALTER TABLE `jobdetails`
   ADD PRIMARY KEY (`JobId`);
 
 --
+-- Indexes for table `reviewdetails`
+--
+ALTER TABLE `reviewdetails`
+  ADD PRIMARY KEY (`rid`);
+
+--
 -- Indexes for table `tradesmandetails`
 --
 ALTER TABLE `tradesmandetails`
@@ -183,6 +209,12 @@ ALTER TABLE `estimatedetails`
 --
 ALTER TABLE `jobdetails`
   MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `reviewdetails`
+--
+ALTER TABLE `reviewdetails`
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tradesmandetails`
