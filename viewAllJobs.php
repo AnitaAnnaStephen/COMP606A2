@@ -1,8 +1,8 @@
 <?php
 require_once("headers.php");
+//Calling function to get all active jobs
 $jobs = Job::getAll($mysqli);
-//var_dump($jobs);
-//echo $jobs->getJobId();
+
 require_once("footer.php");
 ?>
 <div class="container">
