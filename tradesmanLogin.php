@@ -1,4 +1,4 @@
-<!-- Page for user to login -->
+<!-- Page for Tradesman to login -->
 <?php require_once("heading.php");?>
 <!DOCTYPE html>
 <html>
@@ -10,14 +10,6 @@
     </head>
     <body style="background-color:white;">
         <div id="header">
-        <!-- <p>
-            <img src="Logo.jpg" alt="Logo" width="150" height="150">
-            
-                
-            </p>
-            <p>
-                <h2>Tradesman Login </h2>
-            </p> -->
         </div>
         <div id="login">
             <!-- <form action="" method="POST"> -->
