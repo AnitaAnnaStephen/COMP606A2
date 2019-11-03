@@ -1,3 +1,4 @@
+<!-- Page for tradesman to enter details to reset password details -->
 <?php require_once("heading.php");?>
 
 <!DOCTYPE html>
