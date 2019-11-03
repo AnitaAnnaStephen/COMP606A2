@@ -1,5 +1,7 @@
+<!-- Page to get all expired estimates -->
 <?php
 require_once("headers.php");
+//Calling function to get all expired estimates posted by the tradesman
 $estimates = Estimate::findExpiredBytradesman($mysqli,$_GET['tid']);
 //var_dump($jobs);
 //echo $jobs->getJobId();
