@@ -10,7 +10,7 @@
     <title>Tradesman Registeration</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!-- <?php require("heading.php"); ?> -->
+        
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script>
 var check = function() {
