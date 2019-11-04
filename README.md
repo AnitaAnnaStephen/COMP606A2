@@ -16,9 +16,9 @@ Dynamic PHP Web Application
 1. don@mail.com   password : 123
 2. stefan@123.com password : 123 
 
-# Home page is Login.php
+#Home page is Login.php
 
-#CUSTOMER SECTION
+# CUSTOMER SECTION
 
 #Registeration 
 
@@ -35,7 +35,7 @@ Dynamic PHP Web Application
 #Forgot Password
 1. User can reset password by clicking on Forgot password link and have to provide email and phone number for verification.
 
-#TRADESMAN SECTION
+# TRADESMAN SECTION
 
 #Registeration 
 1. Click on TrademanLogin link at the bottom of the Home page
