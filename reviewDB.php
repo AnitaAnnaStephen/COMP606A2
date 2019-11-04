@@ -24,7 +24,7 @@ if (!($review)){
 } else {
     echo "<p>Job Posted </p>";
     // echo $_POST['jid'];
-    // $_SESSION["success"]="post";
+    $_SESSION["success"]="post";
     //Redirect to user profile
     // header("Location:viewExpiredJobs.php?uid=".$job->getUserId());
     header("Location:viewExpiredJobs.php?uid=".$_POST['uid']);
