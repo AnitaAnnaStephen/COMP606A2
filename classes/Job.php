@@ -128,6 +128,24 @@ class Job{
     }
     return $jobs;    
   }
+  public static function getAllTradesman($mysqli){
+    // get all jobs and return as a collection of job objects
+    // returns false or a collection of job objects
+    $today=date('Y-m-d');
+    //echo $today;
+    $sql = sprintf("select * from jobdetails where IsClosed=0 and  IsEstimateAccepted=0 and ActiveDate>='%s'",$today);
+    //echo $sql;
+    $result = $mysqli->query($sql);    
+    $jobs = false;
+    if ($result){
+           $jobs = new Collection();
+      while($row = $result->fetch_assoc()){
+        $job =  new Job($row['JobId'],$row['UId'], $row['JobType'], $row['JobDescription'], $row['Location'], $row['CostRange'], $row['ActiveDate'], $row['EstimateDate'],$row['IsClosed']);
+        $jobs->Add($row['JobId'], $job);      
+      }    
+    }
+    return $jobs;    
+  }
   public static function edit($mysqli,$jid, $jtype, $jdescription,$location, $crange,$sdate,$edate){
     // edit an estimate record in estimatedetails table and if successful 
     // create a estimate object and return it otherwise return false;
