@@ -1,9 +1,9 @@
-<!-- Page for displaying all jobs for Tradesman -->
+<!-- Page for displaying all  jobs for Tradesman -->
 <?php
 
 require_once("headers.php");
 
-$jobs = Job::getAll($mysqli);
+$jobs = Job::getAllTradesman($mysqli);
 require_once("footer.php");
 
 ?>
