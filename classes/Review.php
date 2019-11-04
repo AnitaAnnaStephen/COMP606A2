@@ -32,7 +32,7 @@ class Review{
             $estimateid= $row['EstimateId'];
           }
         }
-        echo $estimateid;
+       // echo $estimateid;
         $rid=0;
         $result = false;
         if($estimateid !=0){
