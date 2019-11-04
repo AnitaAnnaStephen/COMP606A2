@@ -1,10 +1,8 @@
-<!-- Page to get all expired estimates -->
+<!-- Page to get all expired jobs -->
 <?php
 require_once("headers.php");
 //Calling function to get all expired estimates posted by the tradesman
 $estimates = Estimate::findExpiredBytradesman($mysqli,$_GET['tid']);
-//var_dump($jobs);
-//echo $jobs->getJobId();
 require_once("footer.php");
 ?>
 <div class="container">
@@ -66,7 +64,7 @@ require_once("footer.php");
                                    <p>Cost Range: <b><?php echo $job->getCost(); ?></b></p>
                                    <p>Estimate Date: <b><?php echo $job->getEstimateDate(); ?></b></p>
                                    <p>Active Date: <b><?php echo $job->getActiveDate(); ?></b></p>
-                                   <?php echo  '<p id="bg-text" >'.$status.'</p>'; ?>
+                                   
                                    <p><b>Estimate Details</b></p>
                                    <p>Labour Cost: <b><?php echo $estimate->getLabourCost(); ?></b></p>
                                    <p>Material Cost: <b><?php echo $estimate->getMaterialCost(); ?></b></p>
@@ -77,14 +75,19 @@ require_once("footer.php");
                           
                                       <div class="panel-footer pviewestimate" style="text-align: center;">            
                                      <?php   
-                                      
+                                      $today=date('Y-m-d');
                                      
-                                      if($estimate->getIsAccepted() == 1 && $job->getIsClosed() == 0)
+                                      if($estimate->getIsAccepted() == 1 && $job->getIsClosed() == 0 )
                                       {
-                                        // echo "<a href=\"#\" class=\"btn btn-primary viewestimate\" disabled style=\"width: 100px;margin-left: 25px;background-color: green;\" >Accepted </a>";
                                         
-                                        echo "<a href=\"showClientDetails.php?uid=".$job->getUserId()."&jid=".$job->getJobId()."\"  style=\"background-color: green;\" class=\"btn btn-primary viewestimate\">Click here to view client review</a>";
-                                        // echo '<a data-toggle="modal" data-target="" class="btn btn-primary viewestimate" style="background-color: green;" name="viewestimate">Click here to view client details</a>';
+                                        echo "<a href=\"showUserReview.php?uid=".$job->getUserId()."&jid=".$job->getJobId()."\"  style=\"background-color: green;\" class=\"btn btn-primary viewestimate\">Click here to view client review</a>";
+                                        
+                                      }
+                                      else if($estimate->getIsAccepted() == 0 && $job->getIsClosed() == 0 && $job->getActiveDate()<$today)
+                                      {
+                                        
+                                        
+                                        echo "<a href=\"#\"  style=\"background-color: #337ab7;\" disabled class=\"btn btn-primary viewestimate\">Rejected Estimate</a>";
                                         
                                       }
                                       else if ($job->getIsClosed() == 1)
