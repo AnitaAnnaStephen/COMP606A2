@@ -11,10 +11,23 @@ require_once("footer.php");
 <div class="container">
 <div class="row">
     <?php 
-    // if((!$jobs)){
-    //   echo '<h1>No jobs to show</h1>';
-    // }
-    // else{
+     $count=0;
+     //echo $count;
+     foreach($jobs->getRecords() as $id => $job)
+     {
+        $count=$count+1;
+        //var_dump($job);
+       
+     }
+     //echo $count;
+     if($count ==0)
+     {
+      echo '<h3 style="font-style:italic;">No expired jobs to show</h3>';
+      
+      
+     }
+    
+    else{
     foreach($jobs->getRecords() as $id => $job){  ?>
 
 <div class="col-sm-4">
@@ -36,7 +49,7 @@ require_once("footer.php");
         </div>
       </div>
       </div>
-    <?php }
+    <?php }};
    ?>
 </div>
 </div>
