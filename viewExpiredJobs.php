@@ -1,12 +1,12 @@
 
 <!-- Page to call function to get all expired jobs for a user  -->
 <?php
-include("headers.php");
+require_once("headers.php");
+
+require_once("footer.php");
+session_start();
 //Calling function to get all expired jobs
 $jobs = Job::findExpiredByUser($mysqli,$_GET['uid']);
-//var_dump($jobs);
-//echo $jobs->getJobId();
-require_once("footer.php");
 ?>
 <style>
  @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
@@ -53,6 +53,17 @@ h1 { font-size: 1.5em; margin: 10px; }
   </style>
 <div class="container">
 <div class="row">
+<?php 
+  if(isset($_SESSION["success"])&&($_SESSION["success"]=="post")){
+    ?>
+    
+<div class="alert alert-success div1" align="center">
+  <strong>Rating Success!</strong>
+</div>
+<?php
+  unset($_SESSION["success"]);
+  }
+  ?>
     <?php 
     // if((!$jobs)){
     //   echo '<h1>No jobs to show</h1>';
@@ -80,3 +91,8 @@ h1 { font-size: 1.5em; margin: 10px; }
    ?>
 </div>
 </div>
+<script>
+  $(document).ready(function() {
+    $(".div1").fadeOut(3000);
+  });
+</script>
