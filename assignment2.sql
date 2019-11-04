@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2019 at 12:41 AM
+-- Generation Time: Nov 04, 2019 at 03:29 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -103,7 +103,8 @@ CREATE TABLE `reviewdetails` (
 --
 
 INSERT INTO `reviewdetails` (`rid`, `EstimateId`, `Comment`, `Rating`) VALUES
-(7, 73, 'Preety good', 4);
+(12, 73, 'it was preety good', 3),
+(13, 72, 'excelent', 5);
 
 -- --------------------------------------------------------
 
@@ -214,7 +215,7 @@ ALTER TABLE `jobdetails`
 -- AUTO_INCREMENT for table `reviewdetails`
 --
 ALTER TABLE `reviewdetails`
-  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tradesmandetails`
