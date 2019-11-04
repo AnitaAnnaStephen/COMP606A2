@@ -17,6 +17,7 @@ h1 { font-size: 1.5em; margin: 10px; }
 .rating { 
   border: none;
   float: left;
+  text-align:center;
 }
 
 .rating > input { display: none; } 
@@ -64,10 +65,10 @@ a:hover{
   </style>
 <form method="POST" action="reviewDB.php">
                 <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
+                <div class="modal-content" style="width:50%;margin-left: 350px;">
+                  <div class="modal-header" style="background-color:#337ab7;text-align:center;">
                     <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                    <h4 class="modal-title">Comment</h4>
+                    <h2 class="modal-title" >Post Review</h2>
                   </div>
                   <?php $r = Review::find($mysqli, $_GET['jid']); 
                     $five="";
@@ -79,7 +80,7 @@ a:hover{
                     ?>
                   <div class="modal-body" style="height:250px">
                   
-                  <textarea class="form-control" style="height:150px" name="comment"><?php if($r){echo trim($r->getComment());}?></textarea>
+                  
                     <p>
                     <!--star-->
                     
@@ -109,9 +110,9 @@ a:hover{
                     ?>
                         <input type="radio" id="star5" name="rating" value="5" <?php echo $five; ?>/><label class = "full" for="star5" title="Awesome - 5 stars"></label>
                         <input type="radio" id="star4" name="rating" value="4" <?php echo $four; ?>/><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                        <input type="radio" id="star3" name="rating" value="3" <?php echo $three; ?>/><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                        <input type="radio" id="star3" name="rating" value="3" <?php echo $three; ?>/><label class = "full" for="star3" title="Okay work - 3 stars"></label>
                         <input type="radio" id="star2" name="rating" value="2" <?php echo $two; ?>/><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                        <input type="radio" id="star1" name="rating" value="1" <?php echo $one; ?>/><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                        <input type="radio" id="star1" name="rating" value="1" <?php echo $one; ?>/><label class = "full" for="star1" title="Very bad - 1 star"></label>
                         
                       
                     </fieldset>
@@ -120,6 +121,7 @@ a:hover{
                     <!--start-->
 
                     </p>
+                    <textarea class="form-control" style="height:150px" placeholder="Add a comment..." name="comment"><?php if($r){echo trim($r->getComment());}?></textarea>
                   </div>
                   <div class="modal-footer">
                       <?php if(($rr==null)) {?>
