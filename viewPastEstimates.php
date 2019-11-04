@@ -83,7 +83,7 @@ require_once("footer.php");
                                       {
                                         // echo "<a href=\"#\" class=\"btn btn-primary viewestimate\" disabled style=\"width: 100px;margin-left: 25px;background-color: green;\" >Accepted </a>";
                                         
-                                        echo "<a href=\"showClientDetails.php?uid=".$job->getUserId()."\"  style=\"background-color: green;\" class=\"btn btn-primary viewestimate\">Click here to view client review</a>";
+                                        echo "<a href=\"showClientDetails.php?uid=".$job->getUserId()."&jid=".$job->getJobId()."\"  style=\"background-color: green;\" class=\"btn btn-primary viewestimate\">Click here to view client review</a>";
                                         // echo '<a data-toggle="modal" data-target="" class="btn btn-primary viewestimate" style="background-color: green;" name="viewestimate">Click here to view client details</a>';
                                         
                                       }

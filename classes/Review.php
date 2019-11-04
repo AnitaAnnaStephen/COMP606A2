@@ -23,15 +23,29 @@ class Review{
       public static function create($mysqli,$eid,$comment, $rating){
         // create a new review record in reviewdetails table and if successful 
         // create a review object and return it otherwise return false;
+
+        $sql1= sprintf("select * from estimatedetails where JobId=%s", $eid);
+        $qqresult = $mysqli->query($sql1);
+        if ($qqresult){
+          if ($qqresult->num_rows == 1){
+            $row = $qqresult->fetch_assoc();
+            $estimateid= $row['EstimateId'];
+          }
+        }
+
         $rid=0;
         $result = false;
-        $sql = sprintf("insert into reviewdetails(EstimateId,Comment, Rating) values('%s', '%s','%s')",  $eid,$comment,$rating);
+        $sql2= sprintf("select * from reviewdetails where EstimateId=%s", $estimateid);
+        $qqqresult = $mysqli->query($sql2);
+        if ($qqqresult->num_rows == 0){
+        $sql = sprintf("insert into reviewdetails(EstimateId,Comment, Rating) values('%s', '%s','%s')",  $estimateid,$comment,$rating);
         $qresult = $mysqli->query($sql);
         if ($qresult){
           $rid = $mysqli->insert_id;
           $review = new Review($rid,$eid,$comment, $rating);
           $result = $review;
         }
+      }
         return $result;
       }
 
@@ -40,14 +54,25 @@ class Review{
         // get that record and create review object 
         // return review object OR false if we cannot find it
         $result = false;
-        $sql = sprintf("select * from reviewdetails where EstimateId=%s", $eid);
+        $r = false;
+        $sql1= sprintf("select * from estimatedetails where JobId=%s", $eid);
+        $qqresult = $mysqli->query($sql1);
+        if ($qqresult){
+          if ($qqresult->num_rows == 1){
+            $row = $qqresult->fetch_assoc();
+            $estimateid= $row['EstimateId'];
+          }
+        }
+        $sql = sprintf("select * from reviewdetails where EstimateId=%s", $estimateid);
         $qresult = $mysqli->query($sql);
         if ($qresult){
           if ($qresult->num_rows == 1){
+            $r= new Collection();
             $row = $qresult->fetch_assoc();
-            $review = new Review($row['RId'],$row['EstimateId'], $row['Comment'],$row['Rating']);
+            $review = new Review($row['rid'],$row['EstimateId'], $row['Comment'],$row['Rating']);
             $result = $review;
             $_SESSION['eid']=$row['EstimateId'];
+            // $r->Add($row['rid'], $result);
           }
         }
         return $result;

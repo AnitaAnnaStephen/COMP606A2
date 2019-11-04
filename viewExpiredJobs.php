@@ -2,14 +2,68 @@
 <!-- Page to call function to get all expired jobs for a user  -->
 <?php
 require_once("headers.php");
+
+require_once("footer.php");
+session_start();
 //Calling function to get all expired jobs
 $jobs = Job::findExpiredByUser($mysqli,$_GET['uid']);
-//var_dump($jobs);
-//echo $jobs->getJobId();
-require_once("footer.php");
 ?>
+<style>
+ @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+  </style>
 <div class="container">
 <div class="row">
+<?php 
+  if(isset($_SESSION["success"])&&($_SESSION["success"]=="post")){
+    ?>
+    
+<div class="alert alert-success div1" align="center">
+  <strong>Rating Success!</strong>
+</div>
+<?php
+  unset($_SESSION["success"]);
+  }
+  ?>
     <?php 
      $count=0;
      //echo $count;
@@ -40,12 +94,9 @@ require_once("footer.php");
         <p>Date: <b><?php echo $job->getActiveDate(); ?></b></p>
         <p>Estimate Date: <b><?php echo $job->getEstimateDate(); ?></b></p>
         </div>
-        <div class="panel-footer pviewestimate">
-            <!-- <a href="showEstimate.php?id=<?php echo $job->getJobId(); ?>" class="btn btn-primary">View Estimates</a> -->
-            <input type="hidden" value="<?php echo $job->getJobId(); ?>" >
+        <div class="panel-footer pviewrate">
             <?php $estimate = Estimate::getAcceptedEstimatePerJob($mysqli, $job->getJobId()); ?>
-            <a data-toggle="modal" data-target="" class="btn btn-primary viewestimate" name="viewestimate">Rate the Tradesman</a>
-          
+            <a href="rate.php?jid=<?php echo $job->getJobId();?>&uid=<?php echo $_GET['uid'];?>" class="btn btn-primary viewrate" name="viewrate">Rate the Tradesman</a>
         </div>
       </div>
       </div>
@@ -53,4 +104,8 @@ require_once("footer.php");
    ?>
 </div>
 </div>
-
+<script>
+  $(document).ready(function() {
+    $(".div1").fadeOut(3000);
+  });
+</script>
