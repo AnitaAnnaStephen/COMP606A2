@@ -70,7 +70,7 @@ a:hover{
                     <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                     <h2 class="modal-title" >Post Review</h2>
                   </div>
-                  <?php $r = Review::find($mysqli, $_GET['jid']); 
+                  <?php $r = Review::find($mysqli, $_GET['jid'],$_GET['eid']); 
                     $five="";
                     $four="";
                     $three="";
@@ -85,6 +85,7 @@ a:hover{
                     <!--star-->
                     
                     <input type="hidden" value="<?php echo $_GET['jid']; ?>" name="jid" class="jid">
+                    <input type="hidden" value="<?php echo $_GET['eid'] ?>" name="eid" >
                     <input type="hidden" value="<?php echo $_GET['uid'] ?>" name="uid" >
                     <fieldset class="rating">
                     <?php

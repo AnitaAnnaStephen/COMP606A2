@@ -96,7 +96,7 @@ h1 { font-size: 1.5em; margin: 10px; }
         </div>
         <div class="panel-footer pviewrate">
             <?php $estimate = Estimate::getAcceptedEstimatePerJob($mysqli, $job->getJobId()); ?>
-            <a href="rate.php?jid=<?php echo $job->getJobId();?>&uid=<?php echo $_GET['uid'];?>" class="btn btn-primary viewrate" name="viewrate">Rate the Tradesman</a>
+            <a href="rate.php?jid=<?php echo $job->getJobId();?>&uid=<?php echo $_GET['uid'];?>&eid=<?php echo $estimate->getEstimateId();?>" class="btn btn-primary viewrate" name="viewrate">Rate the Tradesman</a>
         </div>
       </div>
       </div>

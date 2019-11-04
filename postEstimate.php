@@ -1,3 +1,4 @@
+<!-- Page to enter estimate details and save it to database -->
 <?php require_once("headers.php");?>
 
 <!DOCTYPE html>

@@ -20,11 +20,11 @@ class Review{
     $this->rating = $rating;
       }
 
-      public static function create($mysqli,$jid,$comment, $rating){
+      public static function create($mysqli,$jid,$comment, $rating,$eid){
         // create a new review record in reviewdetails table and if successful 
         // create a review object and return it otherwise return false;
-        $estimateid=0;
-        $sql1= sprintf("select * from estimatedetails where JobId=%s", $jid);
+        $estimateid=$eid;
+        $sql1= sprintf("select * from estimatedetails where EstimateId=%s", $eid);
         $qqresult = $mysqli->query($sql1);
         if ($qqresult){
           if ($qqresult->num_rows == 1){
@@ -32,7 +32,7 @@ class Review{
             $estimateid= $row['EstimateId'];
           }
         }
-        //echo $estimateid;
+        echo $estimateid;
         $rid=0;
         $result = false;
         if($estimateid !=0){
@@ -52,14 +52,14 @@ class Review{
         return $result;
       }
 
-      public static function find($mysqli, $jid){
+      public static function find($mysqli, $jid,$eid){
         // search reviewdetails table and locate record with id
         // get that record and create review object 
         // return review object OR false if we cannot find it
         $result = false;
         $r = false;
-        $estimateid=0;
-        $sql1= sprintf("select * from estimatedetails where JobId=%s", $jid);
+        $estimateid=$eid;
+        $sql1= sprintf("select * from estimatedetails where EstimateId=%s", $eid);
         //echo $sql1;
         $qqresult = $mysqli->query($sql1);
         if ($qqresult){
