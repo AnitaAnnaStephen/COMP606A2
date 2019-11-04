@@ -80,7 +80,7 @@ require_once("footer.php");
                                       if($estimate->getIsAccepted() == 1 && $job->getIsClosed() == 0 )
                                       {
                                         
-                                        echo "<a href=\"showUserReview.php?uid=".$job->getUserId()."&jid=".$job->getJobId()."\"  style=\"background-color: green;\" class=\"btn btn-primary viewestimate\">Click here to view client review</a>";
+                                        echo "<a href=\"showUserReview.php?uid=".$job->getUserId()."&jid=".$job->getJobId()."&eid=".$estimate->getEstimateId()."\"  style=\"background-color: green;\" class=\"btn btn-primary viewestimate\">Click here to view client review</a>";
                                         
                                       }
                                       else if($estimate->getIsAccepted() == 0 && $job->getIsClosed() == 0 && $job->getActiveDate()<$today)

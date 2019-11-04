@@ -146,7 +146,7 @@ a:hover{
                          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>   -->
                          <h4 class="modal-title"><b> Your Rating</b></h4>
                          </div>
-             <?php $r = Review::find($mysqli, $_GET['jid']);
+             <?php $r = Review::find($mysqli, $_GET['jid'],$_GET['eid']);
              
                          $five="";
                          $four="";
