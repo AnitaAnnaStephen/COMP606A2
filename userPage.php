@@ -4,8 +4,9 @@
 require_once("headers.php");
 
 require_once("footer.php");
-session_start();
+//session_start();
 ?>
+
 <div class="container" >
 <div class="row">
   <?php 
@@ -32,6 +33,8 @@ session_start();
   ?>
 <?php  $jobs=Job ::findByUser($mysqli,$_GET['uid']);
           $count=0;
+          //var_dump($jobs);
+
           //echo $count;
           foreach($jobs->getRecords() as $id => $job)
           {
