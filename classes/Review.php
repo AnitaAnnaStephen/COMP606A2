@@ -20,11 +20,11 @@ class Review{
     $this->rating = $rating;
       }
 
-      public static function create($mysqli,$eid,$comment, $rating){
+      public static function create($mysqli,$jid,$comment, $rating){
         // create a new review record in reviewdetails table and if successful 
         // create a review object and return it otherwise return false;
-
-        $sql1= sprintf("select * from estimatedetails where JobId=%s", $eid);
+        $estimateid=0;
+        $sql1= sprintf("select * from estimatedetails where JobId=%s", $jid);
         $qqresult = $mysqli->query($sql1);
         if ($qqresult){
           if ($qqresult->num_rows == 1){
@@ -32,35 +32,41 @@ class Review{
             $estimateid= $row['EstimateId'];
           }
         }
-
+        //echo $estimateid;
         $rid=0;
         $result = false;
-        $sql2= sprintf("select * from reviewdetails where EstimateId=%s", $estimateid);
+        if($estimateid !=0){
+          $sql2= sprintf("select * from reviewdetails where EstimateId=%s", $estimateid);
         $qqqresult = $mysqli->query($sql2);
         if ($qqqresult->num_rows == 0){
         $sql = sprintf("insert into reviewdetails(EstimateId,Comment, Rating) values('%s', '%s','%s')",  $estimateid,$comment,$rating);
         $qresult = $mysqli->query($sql);
         if ($qresult){
           $rid = $mysqli->insert_id;
-          $review = new Review($rid,$eid,$comment, $rating);
+          $review = new Review($rid,$estimateid,$comment, $rating);
           $result = $review;
         }
       }
+        }
+        
         return $result;
       }
 
-      public static function find($mysqli, $eid){
+      public static function find($mysqli, $jid){
         // search reviewdetails table and locate record with id
         // get that record and create review object 
         // return review object OR false if we cannot find it
         $result = false;
         $r = false;
-        $sql1= sprintf("select * from estimatedetails where JobId=%s", $eid);
+        $estimateid=0;
+        $sql1= sprintf("select * from estimatedetails where JobId=%s", $jid);
+        //echo $sql1;
         $qqresult = $mysqli->query($sql1);
         if ($qqresult){
           if ($qqresult->num_rows == 1){
             $row = $qqresult->fetch_assoc();
             $estimateid= $row['EstimateId'];
+            //echo $estimateid;
           }
         }
         $sql = sprintf("select * from reviewdetails where EstimateId=%s", $estimateid);
