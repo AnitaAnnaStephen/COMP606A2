@@ -64,7 +64,8 @@ session_start();
         <div class="panel-footer pviewestimate">
             <!-- <a href="showEstimate.php?id=<?php echo $job->getJobId(); ?>" class="btn btn-primary">View Estimates</a> -->
             <input type="hidden" value="<?php echo $job->getJobId(); ?>" >
-            <?php $estimates = Estimate::getAllEstimatePerJob($mysqli, $job->getJobId()); ?>
+            <?php $estimates = Estimate::getAllEstimatePerJob($mysqli, $job->getJobId()); 
+            ?>
             <a data-toggle="modal" data-target="" class="btn btn-primary viewestimate" name="viewestimate">View Estimates</a>
             <?php 
             echo "<a href=\"editJob.php?id=".$job->getJobId()."\"  style=\"width: 60px;margin-left: 25px;\" class=\"btn btn-primary\">Edit </a>";
