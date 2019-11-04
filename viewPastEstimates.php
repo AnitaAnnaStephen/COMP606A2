@@ -19,7 +19,7 @@ require_once("footer.php");
                                //Check if tradesman has posted any estimates'
                                 if($count ==0)
                                 {
-                                  echo "You do not have any expired estimates ....";
+                                  echo "<h3 style=\"font-style: italic;\" >You do not have any expired estimates ....</h3>";
                                 //   echo "<a href=\"viewJobs.php?tid=".$_GET['tid']."\" class=\"btn\" >Click here to view jobs</a> ";
                                  
                                 }
