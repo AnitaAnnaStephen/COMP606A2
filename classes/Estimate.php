@@ -199,7 +199,9 @@ class Estimate{
   public static function getAllEstimatePerJob($mysqli,$jid){
     // get all estimates based on jobid and return as a collection of estimate objects
     // returns false or a collection of estimate objects
-    $sql = sprintf("select * from estimatedetails where isdeleted=0 and jobid=%s",$jid);
+    $today=date('Y-m-d');
+    $sql = sprintf("select * from estimatedetails where ExpirationDate>='%s' and isdeleted=0 and jobid=%s",$today,$jid);
+    //echo $sql;
     $result = $mysqli->query($sql);    
     $estimates = false;
     if ($result){
